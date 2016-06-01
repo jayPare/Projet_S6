@@ -8,14 +8,14 @@
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		 version="2.5">
 
-	<display-name>opusLaboratoire</display-name>
+	<display-name>opus</display-name>
 
 	<welcome-file-list>
-		<welcome-file>opusLaboratoire.jsp</welcome-file>
+		<welcome-file>opus.jsp</welcome-file>
 	</welcome-file-list>
 
 	<listener>
-		<listener-class>ca.uSherbrooke.gegi.opusLaboratoire.server.guice.GuiceServletConfig</listener-class>
+		<listener-class>ca.uSherbrooke.gegi.opus.server.guice.GuiceServletConfig</listener-class>
 	</listener>
 
 	<filter>
