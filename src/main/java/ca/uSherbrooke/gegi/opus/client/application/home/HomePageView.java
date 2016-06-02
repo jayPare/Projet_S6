@@ -26,6 +26,11 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
 
     private final Widget widget;
 
+    @Override
+    public void setUiHandlers(HomePageUiHandlers homePageUiHandlers) {
+
+    }
+
     public interface Binder extends UiBinder<Widget, HomePageView> {
     }
 
@@ -53,6 +58,14 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
 
     public void setUsersInfos(List<UserInfosData> objListUserInfos){
         lblPrenom.setText(objListUserInfos.get(0).getFirstName());
+        /*
+         for (ReleaseEntity a : users ) {
+            System.out.println("Prenom de la table user : "
+                    +" prenom :"+ a.getFirstName()+" nom "+ a.getLastName()+ " departement "+ a.getDepartementNom()
+                    +" num de stage "+ a.getNumeroStage() +"concept " + a.getConceptNom() + " competence " + a.getNiveauSur5Competence()
+                    + " interet " + a.getNiveauSur5Interet() );
+        }
+         */
     }
 
     @UiHandler("anchorCheck")

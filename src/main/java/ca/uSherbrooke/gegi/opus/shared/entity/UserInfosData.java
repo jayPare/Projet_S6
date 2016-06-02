@@ -4,6 +4,7 @@ package ca.uSherbrooke.gegi.opus.shared.entity;
 import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by tomaslopinto on 01/06/16.
@@ -17,7 +18,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "release", schema = "public", catalog = "opus")
-public class UserInfosData {
+public class UserInfosData implements Data {
     private String firstName;
     private String lastName;
     private String departementNom;
@@ -76,7 +77,6 @@ public class UserInfosData {
         this.conceptNom = conceptNom;
     }
 
-    @Id
     @Basic
     @Column(name = "niveau_sur_5_competence")
     public int getNiveauSur5Competence() {
@@ -126,5 +126,28 @@ public class UserInfosData {
         result = 31 * result + niveauSur5Competence;
         result = 31 * result + niveauSur5Interet;
         return result;
+    }
+
+    public void setUserId(Integer userId)
+    {
+    };
+
+    public Integer getUserId(){return null;};
+
+    @Id
+    public Integer getId(){
+        return null;
+    };
+
+    public void setId(Integer nId){}
+
+    public String getLabel(){return "";};
+
+    public void setLabel(String strLabel){};
+
+    private String id;
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -1,14 +1,14 @@
-/*
+package ca.uSherbrooke.gegi.opus.server.guice;/*
  * Copyright 2015, 2016 Département de Génie Électrique et Génie Informatique (GEGI) de l'Université de Sherbrooke (UdeS).
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.server.guice;
 
+import ca.uSherbrooke.gegi.opus.server.dispatch.UserInfosActionHandler;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
 import com.gwtplatform.dispatch.rpc.server.guice.HandlerModule;
 
 public class ServerModule extends HandlerModule {
     @Override
-    protected void configureHandlers() {
-    }
+    protected void configureHandlers() {bindHandler(GetUserInfos.class, UserInfosActionHandler.class);}
 }
