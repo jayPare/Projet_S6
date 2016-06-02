@@ -26,7 +26,6 @@ public class UserInfosData {
     private int niveauSur5Competence;
     private int niveauSur5Interet;
 
-    @Id
     @Basic
     @Column(name = "first_name")
     public String getFirstName() {
@@ -77,6 +76,7 @@ public class UserInfosData {
         this.conceptNom = conceptNom;
     }
 
+    @Id
     @Basic
     @Column(name = "niveau_sur_5_competence")
     public int getNiveauSur5Competence() {
