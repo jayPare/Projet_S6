@@ -57,7 +57,7 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
     Anchor anchorClose;
 
     public void setUsersInfos(List<UserInfosData> objListUserInfos){
-        lblPrenom.setText(objListUserInfos.get(0).getFirstName());
+        lblPrenom.setText("aaaaa");
         /*
          for (ReleaseEntity a : users ) {
             System.out.println("Prenom de la table user : "

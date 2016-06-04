@@ -4,7 +4,6 @@ package ca.uSherbrooke.gegi.opus.shared.entity;
 import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created by tomaslopinto on 01/06/16.
@@ -12,7 +11,7 @@ import java.io.Serializable;
 @NamedNativeQueries({
         @NamedNativeQuery(name = "get_all_stagiaires", // exists only for test purposes
                 query = "SELECT first_name, last_name, departement_nom,numero_stage,concept_nom,niveau_sur_5_competence,niveau_sur_5_interet FROM release",
-                resultClass = UserInfosData.class),
+                resultClass = UserInfosData.class)
 })
 
 
