@@ -23,18 +23,18 @@
     <!-- <module>ca.uSherbrooke.gegi.opusPinboard.OpusPinboard</module> -->
 
     <groupId>ca.uSherbrooke.gegi</groupId>
-    <artifactId>opusLaboratoire</artifactId>
+    <artifactId>opus</artifactId>
     <version>0.0.1</version>
     <packaging>war</packaging>
-    <name>opusLaboratoire</name>
+    <name>opus</name>
 
     <properties>
         <!-- variable à modifier -->
         <skipTest>true</skipTest>
         <skipCompileGWT>false</skipCompileGWT>
         <hostNamePort>localhost:8444</hostNamePort>
-        <warName>opusLaboratoire</warName>
-        <module>ca.uSherbrooke.gegi.opusLaboratoire.opusLaboratoire</module>
+        <warName>opus</warName>
+        <module>ca.uSherbrooke.gegi.opus.opus</module>
 
         <!-- client -->
         <skipTest>true</skipTest>
