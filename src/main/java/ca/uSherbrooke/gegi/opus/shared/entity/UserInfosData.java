@@ -16,7 +16,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "release", schema = "public", catalog = "opus")
+@Table(name = "public.release", schema = "public", catalog = "opus")
 public class UserInfosData implements Data {
     private String firstName;
     private String lastName;
@@ -25,6 +25,23 @@ public class UserInfosData implements Data {
     private String conceptNom;
     private int niveauSur5Competence;
     private int niveauSur5Interet;
+
+
+    public UserInfosData(String firstName, String lastName, String departementNom, int numeroStage, int niveauSur5Competence, String conceptNom, int niveauSur5Interet, String id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.departementNom = departementNom;
+        this.numeroStage = numeroStage;
+        this.niveauSur5Competence = niveauSur5Competence;
+        this.conceptNom = conceptNom;
+        this.niveauSur5Interet = niveauSur5Interet;
+        this.id = id;
+    }
+
+    public UserInfosData()
+    {
+
+    }
 
     @Basic
     @Column(name = "first_name")
@@ -76,6 +93,7 @@ public class UserInfosData implements Data {
         this.conceptNom = conceptNom;
     }
 
+    @Id
     @Basic
     @Column(name = "niveau_sur_5_competence")
     public int getNiveauSur5Competence() {
@@ -133,7 +151,6 @@ public class UserInfosData implements Data {
 
     public Integer getUserId(){return null;};
 
-    @Id
     public Integer getId(){
         return null;
     };
