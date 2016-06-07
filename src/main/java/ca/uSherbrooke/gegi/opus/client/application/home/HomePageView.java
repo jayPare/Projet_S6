@@ -6,10 +6,12 @@
 package ca.uSherbrooke.gegi.opus.client.application.home;
 
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
+import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -57,7 +59,13 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
     Anchor anchorClose;
 
     public void setUsersInfos(List<UserInfosData> objListUserInfos){
+
         lblPrenom.setText(objListUserInfos.get(0).getFirstName());
+        lblNom.setText(objListUserInfos.get(0).getLastName());
+        lblProgrammeEtude.setText(objListUserInfos.get(0).getDepartementNom());
+        lblStage.setText(Integer.toString(objListUserInfos.get(0).getNumeroStage()));
+        lblCompetences.setText(objListUserInfos.get(0).getConceptNom());
+        lblInteretsObjectifs.setText(objListUserInfos.get(0).getDepartementNom());
         /*
          for (ReleaseEntity a : users ) {
             System.out.println("Prenom de la table user : "

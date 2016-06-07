@@ -27,12 +27,8 @@ public class UserService {
     }
 
     public List<UserInfosData> getUserInfos(GetUserInfos action) throws UserSessionActionException{
-        List<Object> parameters = new ArrayList<Object>();
         List<UserInfosData> listResult = new ArrayList<UserInfosData>();
-
-        parameters.add(null);
-
-        listResult = (List<UserInfosData>)this.dao.getNamedResultList("get_all_stagiaires", parameters);
+        listResult = (List<UserInfosData>)this.dao.getNamedResultList("get_all_stagiaires");
         return listResult;
     }
 }

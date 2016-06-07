@@ -4,7 +4,6 @@ package ca.uSherbrooke.gegi.opus.shared.entity;
 import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created by tomaslopinto on 01/06/16.
@@ -12,12 +11,12 @@ import java.io.Serializable;
 @NamedNativeQueries({
         @NamedNativeQuery(name = "get_all_stagiaires", // exists only for test purposes
                 query = "SELECT first_name, last_name, departement_nom,numero_stage,concept_nom,niveau_sur_5_competence,niveau_sur_5_interet FROM release",
-                resultClass = UserInfosData.class),
+                resultClass = UserInfosData.class)
 })
 
 
 @Entity
-@Table(name = "release", schema = "public", catalog = "opus")
+@Table(name = "public.release", schema = "public", catalog = "opus")
 public class UserInfosData implements Data {
     private String firstName;
     private String lastName;
@@ -26,6 +25,27 @@ public class UserInfosData implements Data {
     private String conceptNom;
     private int niveauSur5Competence;
     private int niveauSur5Interet;
+
+    //TODO
+    // Compétences-CompetenceNiveaeuSur5 doit être une liste parce qu'il peut y avoir plusieurs compétences
+    // Manque InteretNom
+    // Interet-InteretNiveauSur5 doit être une liste parce qu'il peut y avoir plusieurs intérêts
+
+    public UserInfosData(String firstName, String lastName, String departementNom, int numeroStage, int niveauSur5Competence, String conceptNom, int niveauSur5Interet, String id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.departementNom = departementNom;
+        this.numeroStage = numeroStage;
+        this.niveauSur5Competence = niveauSur5Competence;
+        this.conceptNom = conceptNom;
+        this.niveauSur5Interet = niveauSur5Interet;
+        this.id = id;
+    }
+
+    public UserInfosData()
+    {
+
+    }
 
     @Basic
     @Column(name = "first_name")
@@ -77,6 +97,7 @@ public class UserInfosData implements Data {
         this.conceptNom = conceptNom;
     }
 
+    @Id
     @Basic
     @Column(name = "niveau_sur_5_competence")
     public int getNiveauSur5Competence() {
@@ -134,7 +155,6 @@ public class UserInfosData implements Data {
 
     public Integer getUserId(){return null;};
 
-    @Id
     public Integer getId(){
         return null;
     };
