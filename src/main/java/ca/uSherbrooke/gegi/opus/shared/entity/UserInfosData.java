@@ -26,6 +26,10 @@ public class UserInfosData implements Data {
     private int niveauSur5Competence;
     private int niveauSur5Interet;
 
+    //TODO
+    // Compétences-CompetenceNiveaeuSur5 doit être une liste parce qu'il peut y avoir plusieurs compétences
+    // Manque InteretNom
+    // Interet-InteretNiveauSur5 doit être une liste parce qu'il peut y avoir plusieurs intérêts
 
     public UserInfosData(String firstName, String lastName, String departementNom, int numeroStage, int niveauSur5Competence, String conceptNom, int niveauSur5Interet, String id) {
         this.firstName = firstName;
