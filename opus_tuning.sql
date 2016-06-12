@@ -89,6 +89,7 @@ CREATE OR REPLACE VIEW public.release AS
     users.last_name,
     departement.departement_nom,
     stagiaire.numero_stage,
+	stagiaire.stagiaire_id,
     concept.concept_nom,
     concept_competence_stagiaire.niveau_sur_5 AS niveau_sur_5_competence,
     concept_interet_stagiaire.niveau_sur_5 AS niveau_sur_5_interet

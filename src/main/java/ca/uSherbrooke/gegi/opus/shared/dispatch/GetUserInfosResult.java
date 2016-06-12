@@ -12,21 +12,21 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class GetUserInfosResult implements Result {
 
-    private List<UserInfosData> objListUserInfoData;
+    private UserInfosData objUserInfoData;
 
     public GetUserInfosResult() {
     }
 
-    public GetUserInfosResult(List<UserInfosData> objListUserInfoData) {
-        this.objListUserInfoData = objListUserInfoData;
+    public GetUserInfosResult(UserInfosData objUserInfoData) {
+        this.objUserInfoData = objUserInfoData;
     }
 
-    public void setUserInfosObject(List<UserInfosData> objListUserInfoData) {
-        this.objListUserInfoData = objListUserInfoData;
+    public void setUserInfosObject(UserInfosData objUserInfoData) {
+        this.objUserInfoData = objUserInfoData;
     }
 
-    public List<UserInfosData> getUserInfosObject() {
-        return this.objListUserInfoData;
+    public UserInfosData getUserInfosObject() {
+        return this.objUserInfoData;
     }
 
 }

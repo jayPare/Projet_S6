@@ -44,7 +44,7 @@ public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomeP
     }
 
     public interface MyView extends View, HasUiHandlers<HomePageUiHandlers> {
-        public void setUsersInfos(List<UserInfosData> objListUserInfos);
+        public void setUsersInfos(UserInfosData objListUserInfos);
     }
 
     @ProxyStandard

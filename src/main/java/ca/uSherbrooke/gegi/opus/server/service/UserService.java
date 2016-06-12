@@ -7,6 +7,7 @@ package ca.uSherbrooke.gegi.opus.server.service;
 import ca.uSherbrooke.gegi.commons.core.server.utils.UserSession;
 import ca.uSherbrooke.gegi.commons.core.shared.utils.UserSessionActionException;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
+import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
 import ca.uSherbrooke.gegi.persist.dao.Dao;
 import ca.uSherbrooke.gegi.persist.dao.Opus;
@@ -26,9 +27,11 @@ public class UserService {
         this.dao = dao;
     }
 
-    public List<UserInfosData> getUserInfos(GetUserInfos action) throws UserSessionActionException{
-        List<UserInfosData> listResult = new ArrayList<UserInfosData>();
-        listResult = (List<UserInfosData>)this.dao.getNamedResultList("get_all_stagiaires");
+    public UserInfosData getUserInfos(GetUserInfos action) throws UserSessionActionException{
+        UserInfosData listResult = new UserInfosData();
+        listResult = (UserInfosData)this.dao.getNamedSingleResult("get_all_stagiaires");
+        listResult.setCompetence((List<ConceptData>)this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID",listResult.getStagiaireID()).getResultList());
+        listResult.setInteret((List<ConceptData>)this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID",listResult.getStagiaireID()).getResultList());
         return listResult;
     }
 }

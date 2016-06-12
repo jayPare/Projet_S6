@@ -27,7 +27,7 @@ public class TestJPA {
 
         for (UserInfosData a : users ) {
             System.out.println("Prenom de la table user : "
-                    +" prenom :"+ a.getFirstName()+" nom "+ a.getLastName()+ " departement "+ a.getDepartementNom() +" num de stage "+ a.getNumeroStage() +"concept " + a.getConceptNom() + " competence " + a.getNiveauSur5Competence() + " interet " + a.getNiveauSur5Interet() );
+                    +" prenom :"+ a.getFirstName()+" nom "+ a.getLastName()+ " departement "+ a.getDepartementNom() +" num de stage "+ a.getNumeroStage() +"concept " );
         }
 
 

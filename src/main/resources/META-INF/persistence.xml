@@ -26,6 +26,7 @@
 		<class>ca.uSherbrooke.gegi.commons.core.shared.entity.EmployeeData</class>
 		<class>ca.uSherbrooke.gegi.commons.core.shared.entity.StudentData</class>
 		<class>ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.ConceptData</class>
 
 		<properties>
 			<!-- Disable the second-level cache -->

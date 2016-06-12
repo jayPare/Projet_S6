@@ -58,14 +58,14 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
     @UiField
     Anchor anchorClose;
 
-    public void setUsersInfos(List<UserInfosData> objListUserInfos){
+    public void setUsersInfos(UserInfosData objListUserInfos){
 
-        lblPrenom.setText(objListUserInfos.get(0).getFirstName());
-        lblNom.setText(objListUserInfos.get(0).getLastName());
-        lblProgrammeEtude.setText(objListUserInfos.get(0).getDepartementNom());
-        lblStage.setText(Integer.toString(objListUserInfos.get(0).getNumeroStage()));
-        lblCompetences.setText(objListUserInfos.get(0).getConceptNom());
-        lblInteretsObjectifs.setText(objListUserInfos.get(0).getDepartementNom());
+        lblPrenom.setText(objListUserInfos.getFirstName());
+        lblNom.setText(objListUserInfos.getLastName());
+        lblProgrammeEtude.setText(objListUserInfos.getDepartementNom());
+        lblStage.setText(Integer.toString(objListUserInfos.getNumeroStage()));
+        lblCompetences.setText("changed");
+        lblInteretsObjectifs.setText(objListUserInfos.getDepartementNom());
         /*
          for (ReleaseEntity a : users ) {
             System.out.println("Prenom de la table user : "
