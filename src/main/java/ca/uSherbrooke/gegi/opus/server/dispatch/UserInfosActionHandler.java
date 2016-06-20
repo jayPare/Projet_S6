@@ -9,6 +9,8 @@ import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
+import static com.google.gwt.query.client.GQuery.console;
+
 public class UserInfosActionHandler implements ActionHandler<GetUserInfos, GetUserInfosResult> {
 
     @Inject

@@ -7,7 +7,7 @@ import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
  * Created by Fabul on 2016-05-31.
  */
 
-public class GetUserInfos extends ActionImpl<GetUserInfosResult> {
+public class GetUserInfos extends ActionImpl<GetUserInfosResult>  {
 
     String strCIP = "";
     boolean bRetriveUserInfos = false;
@@ -21,5 +21,9 @@ public class GetUserInfos extends ActionImpl<GetUserInfosResult> {
 
     public void setRetriveUserInfos(boolean bRetriveUserInfos) {
         this.bRetriveUserInfos = bRetriveUserInfos;
+    }
+
+    public boolean isSecured() {
+        return false;
     }
 }
