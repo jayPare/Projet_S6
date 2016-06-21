@@ -1,5 +1,7 @@
 package ca.uSherbrooke.gegi.opus.shared.entity;
 
+import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
+
 import javax.persistence.*;
 
 /**
@@ -11,13 +13,13 @@ import javax.persistence.*;
 @NamedNativeQueries({
         @NamedNativeQuery(name = "get_all_recruteur", // exists only for test purposes
                 query = "SELECT * FROM public.recruteur LIMIT 1",
-                resultClass = RecruteurEntity.class)
+                resultClass = EmployerData.class)
 })
 
 
 @Entity
 @Table(name = "recruteur", schema = "public", catalog = "opus")
-public class RecruteurEntity {
+public class EmployerData implements Data {
     private int recruteurId;
     private String entrepriseSommaire;
     private String entrepriseNature;
@@ -25,10 +27,8 @@ public class RecruteurEntity {
     private String entrepriseTechnologies;
     private String entrepriseExigences;
 
-
-
-
     @Id
+    @Basic
     @Column(name = "recruteur_id")
     public int getRecruteurId() {
         return recruteurId;
@@ -93,7 +93,7 @@ public class RecruteurEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RecruteurEntity that = (RecruteurEntity) o;
+        EmployerData that = (EmployerData) o;
 
         if (recruteurId != that.recruteurId) return false;
         if (entrepriseSommaire != null ? !entrepriseSommaire.equals(that.entrepriseSommaire) : that.entrepriseSommaire != null)
@@ -120,4 +120,27 @@ public class RecruteurEntity {
         result = 31 * result + (entrepriseExigences != null ? entrepriseExigences.hashCode() : 0);
         return result;
     }
+
+    public void setUserId(Integer userId)
+    {
+    };
+
+    public Integer getUserId(){return null;};
+
+    public Integer getId(){
+        return null;
+    };
+
+    public void setId(Integer nId){}
+
+    public String getLabel(){return "";};
+
+    public void setLabel(String strLabel){};
+
+    private String id;
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

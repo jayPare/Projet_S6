@@ -10,7 +10,7 @@ import java.util.List;
  * Created by tomaslopinto on 20/06/16.
  */
 
-public class Test_Recruteur {
+public class TestEmployer {
 
     public static void main (String[] args){
 
@@ -21,10 +21,10 @@ public class Test_Recruteur {
 
 
         Query q = entitymanager.createNamedQuery("get_all_recruteur");
-        List<RecruteurEntity> users = q.getResultList();
+        List<EmployerData> users = q.getResultList();
 
 
-        for (RecruteurEntity a : users ) {
+        for (EmployerData a : users ) {
             System.out.println("sommaiiiiire : "+  a.getEntrepriseSommaire() );
         }
 

@@ -27,8 +27,8 @@
 		<class>ca.uSherbrooke.gegi.commons.core.shared.entity.StudentData</class>
 		<class>ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData</class>
 		<class>ca.uSherbrooke.gegi.opus.shared.entity.ConceptData</class>
-		<class>ca.uSherbrooke.gegi.opus.shared.entity.RecruteurEntity</class>
-		<class>ca.uSherbrooke.gegi.opus.shared.entity.Test_Recruteur</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.EmployerData</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.TestEmployer</class>
 
 		<properties>
 			<!-- Disable the second-level cache -->
