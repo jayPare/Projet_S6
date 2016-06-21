@@ -4,11 +4,16 @@ package ca.uSherbrooke.gegi.opus.server.guice;/*
  */
 
 
+import ca.uSherbrooke.gegi.opus.server.dispatch.EmployerInfosActionHandler;
 import ca.uSherbrooke.gegi.opus.server.dispatch.UserInfosActionHandler;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
 import com.gwtplatform.dispatch.rpc.server.guice.HandlerModule;
 
 public class ServerModule extends HandlerModule {
     @Override
-    protected void configureHandlers() {bindHandler(GetUserInfos.class, UserInfosActionHandler.class);}
+    protected void configureHandlers() {
+        bindHandler(GetEmployerInfos.class, EmployerInfosActionHandler.class);
+        bindHandler(GetUserInfos.class, UserInfosActionHandler.class);
+    }
 }

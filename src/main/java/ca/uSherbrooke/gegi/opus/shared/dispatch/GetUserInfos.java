@@ -1,6 +1,5 @@
 package ca.uSherbrooke.gegi.opus.shared.dispatch;
 
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfosResult;
 import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 
 /**
@@ -10,17 +9,12 @@ import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 public class GetUserInfos extends ActionImpl<GetUserInfosResult>  {
 
     String strCIP = "";
-    boolean bRetriveUserInfos = false;
 
     public GetUserInfos() {
     }
 
     public void setCIP(String strCIP) {
         this.strCIP = strCIP;
-    }
-
-    public void setRetriveUserInfos(boolean bRetriveUserInfos) {
-        this.bRetriveUserInfos = bRetriveUserInfos;
     }
 
     public boolean isSecured() {

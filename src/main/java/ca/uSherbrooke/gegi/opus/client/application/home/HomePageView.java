@@ -5,24 +5,18 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.home;
 
+import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.IntegerBox;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.FormLabel;
-import com.gwtplatform.mvp.client.UiHandlers;
-import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-
-import java.util.List;
 
 public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
 
@@ -58,28 +52,38 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
     @UiField
     Anchor anchorClose;
 
-    public void setUsersInfos(UserInfosData objListUserInfos){
+    UserInfosData objUserInfos;
+    EmployerData objEmployerInfos;
 
-        lblPrenom.setText(objListUserInfos.getFirstName());
-        lblNom.setText(objListUserInfos.getLastName());
-        lblProgrammeEtude.setText(objListUserInfos.getDepartementNom());
-        lblStage.setText(Integer.toString(objListUserInfos.getNumeroStage()));
+    public void setUserInfosObject(UserInfosData objUserInfos)
+    {
+        this.objUserInfos = objUserInfos;
+    }
+
+    public void setEmployerInfosObject(EmployerData objEmployerInfos)
+    {
+        this.objEmployerInfos = objEmployerInfos;
+    }
+
+    public void setUserInfos(){
+        lblPrenom.setText(objUserInfos.getFirstName());
+        lblNom.setText(objUserInfos.getLastName());
+        lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
+        lblStage.setText(Integer.toString(objUserInfos.getNumeroStage()));
         lblCompetences.setText("changed");
-        lblInteretsObjectifs.setText(objListUserInfos.getDepartementNom());
-        /*
-         for (ReleaseEntity a : users ) {
-            System.out.println("Prenom de la table user : "
-                    +" prenom :"+ a.getFirstName()+" nom "+ a.getLastName()+ " departement "+ a.getDepartementNom()
-                    +" num de stage "+ a.getNumeroStage() +"concept " + a.getConceptNom() + " competence " + a.getNiveauSur5Competence()
-                    + " interet " + a.getNiveauSur5Interet() );
-        }
-         */
+        lblInteretsObjectifs.setText(objUserInfos.getDepartementNom());
+    }
+
+    public void setEmployerInfos(){
+        lblPrenom.setHTML("employer sommaire = " +objEmployerInfos.getEntrepriseSommaire());
+        lblNom.setText("employer nature = " +objEmployerInfos.getEntrepriseNature());
+        lblProgrammeEtude.setText("employer fonction = " +objEmployerInfos.getEntrepriseFonction());
+        lblStage.setText("employer technologies = " +objEmployerInfos.getEntrepriseTechnologies());
     }
 
     @UiHandler("anchorCheck")
     public void onCheck(ClickEvent event){
     }
-
 
     @Inject
     public HomePageView(final Binder binder) {

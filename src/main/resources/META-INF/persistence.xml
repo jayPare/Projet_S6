@@ -27,6 +27,8 @@
 		<class>ca.uSherbrooke.gegi.commons.core.shared.entity.StudentData</class>
 		<class>ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData</class>
 		<class>ca.uSherbrooke.gegi.opus.shared.entity.ConceptData</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.EmployerData</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.TestEmployer</class>
 
 		<properties>
 			<!-- Disable the second-level cache -->
@@ -53,6 +55,10 @@
 			<property name="eclipselink.query-results-cache" value="false"/>
 			<property name="eclipselink.refresh" value="true"/>
 			<property name="eclipselink.jdbc.cache-statements" value="false"/>
+			<property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/opus"/>
+			<property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
+			<property name="eclipselink.jdbc.user" value="superopus"/>
+			<property name="eclipselink.jdbc.password" value="superopus"/>
 		</properties>
 	</persistence-unit>
 </persistence>

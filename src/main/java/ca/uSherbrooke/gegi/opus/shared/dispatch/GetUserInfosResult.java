@@ -13,6 +13,7 @@ import java.util.List;
 public class GetUserInfosResult implements Result {
 
     private UserInfosData objUserInfoData;
+    private boolean bSaveSuccess = false;
 
     public GetUserInfosResult() {
     }
@@ -29,4 +30,11 @@ public class GetUserInfosResult implements Result {
         return this.objUserInfoData;
     }
 
+    public void setSaveSuccess(boolean bSaveSuccess){
+        this.bSaveSuccess = bSaveSuccess;
+    }
+
+    public boolean getSaveSuccess(){
+        return this.bSaveSuccess;
+    }
 }
