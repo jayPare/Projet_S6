@@ -75,10 +75,10 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
     }
 
     public void setEmployerInfos(){
-        lblPrenom.setHTML("employer sommaire = " +objEmployerInfos.getEntrepriseSommaire());
-        lblNom.setText("employer nature = " +objEmployerInfos.getEntrepriseNature());
-        lblProgrammeEtude.setText("employer fonction = " +objEmployerInfos.getEntrepriseFonction());
-        lblStage.setText("employer technologies = " +objEmployerInfos.getEntrepriseTechnologies());
+        lblPrenom.setHTML("employer sommaire = " +objEmployerInfos.getEmployerName());
+        lblNom.setText("employer nature = " +objEmployerInfos.getEmployerDomain());
+        lblProgrammeEtude.setText("employer fonction = " +objEmployerInfos.getEmployerSummary());
+        lblStage.setText("employer technologies = " +objEmployerInfos.getEmployerAddress());
     }
 
     @UiHandler("anchorCheck")

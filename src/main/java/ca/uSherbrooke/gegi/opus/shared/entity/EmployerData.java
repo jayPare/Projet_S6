@@ -12,82 +12,86 @@ import javax.persistence.*;
 
 @NamedNativeQueries({
         @NamedNativeQuery(name = "get_all_recruteur", // exists only for test purposes
-                query = "SELECT * FROM public.recruteur LIMIT 1",
+                query = "SELECT * FROM recrusimple.employeur LIMIT 1",
                 resultClass = EmployerData.class)
 })
 
 
 @Entity
-@Table(name = "recruteur", schema = "public", catalog = "opus")
+@Table(name = "recrusimple.employeur", schema = "recrusimple.", catalog = "opus")
 public class EmployerData implements Data {
-    private int recruteurId;
-    private String entrepriseSommaire;
-    private String entrepriseNature;
-    private String entrepriseFonction;
-    private String entrepriseTechnologies;
-    private String entrepriseExigences;
+    private int nEmployerId;
+    private int nUserId;
+    private String strName;
+    private String strDomain;
+    private String strAddress;
+    private String strSummary;
 
     @Id
     @Basic
-    @Column(name = "recruteur_id")
-    public int getRecruteurId() {
-        return recruteurId;
+    @Column(name = "employeur_id")
+    public int getEmployerId() {
+        return nEmployerId;
     }
 
-    public void setRecruteurId(int recruteurId) {
-        this.recruteurId = recruteurId;
+    public void setEmployerId(int nEmployerId) {
+        this.nEmployerId = nEmployerId;
     }
 
-    @Basic
-    @Column(name = "entreprise_sommaire")
-    public String getEntrepriseSommaire() {
-        return entrepriseSommaire;
-    }
+    @Override
+    public void setUserId(Integer integer) {
 
-    public void setEntrepriseSommaire(String entrepriseSommaire) {
-        this.entrepriseSommaire = entrepriseSommaire;
     }
 
     @Basic
-    @Column(name = "entreprise_nature")
-    public String getEntrepriseNature() {
-        return entrepriseNature;
+    @Column(name = "user_id")
+    public Integer getUserId() {
+        return nUserId;
     }
 
-    public void setEntrepriseNature(String entrepriseNature) {
-        this.entrepriseNature = entrepriseNature;
-    }
-
-    @Basic
-    @Column(name = "entreprise_fonction")
-    public String getEntrepriseFonction() {
-        return entrepriseFonction;
-    }
-
-    public void setEntrepriseFonction(String entrepriseFonction) {
-        this.entrepriseFonction = entrepriseFonction;
+    public void setUserId(int nUserId) {
+        this.nUserId = nUserId;
     }
 
     @Basic
-    @Column(name = "entreprise_technologies")
-    public String getEntrepriseTechnologies() {
-        return entrepriseTechnologies;
+    @Column(name = "nom")
+    public String getEmployerName() {
+        return strName;
     }
 
-    public void setEntrepriseTechnologies(String entrepriseTechnologies) {
-        this.entrepriseTechnologies = entrepriseTechnologies;
+    public void setEmployerName(String strName) {
+        this.strName = strName;
     }
 
     @Basic
-    @Column(name = "entreprise_exigences")
-    public String getEntrepriseExigences() {
-        return entrepriseExigences;
+    @Column(name = "sommaire")
+    public String getEmployerSummary() {
+        return strSummary;
     }
 
-    public void setEntrepriseExigences(String entrepriseExigences) {
-        this.entrepriseExigences = entrepriseExigences;
+    public void setEmployerSummary(String strSummary) {
+        this.strSummary = strSummary;
     }
 
+    @Basic
+    @Column(name = "domaine")
+    public String getEmployerDomain() {
+        return strDomain;
+    }
+
+    public void setEmployerDomain(String strDomain) {
+        this.strDomain = strDomain;
+    }
+
+    @Basic
+    @Column(name = "lieu")
+    public String getEmployerAddress() {
+        return strAddress;
+    }
+
+    public void setEmployerAddress(String strAddress) {
+        this.strAddress = strAddress;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,16 +99,15 @@ public class EmployerData implements Data {
 
         EmployerData that = (EmployerData) o;
 
-        if (recruteurId != that.recruteurId) return false;
-        if (entrepriseSommaire != null ? !entrepriseSommaire.equals(that.entrepriseSommaire) : that.entrepriseSommaire != null)
+        if (nEmployerId != that.nEmployerId) return false;
+        if (nUserId != that.nUserId) return false;
+        if (strName != null ? !strName.equals(that.strName) : that.strName != null)
             return false;
-        if (entrepriseNature != null ? !entrepriseNature.equals(that.entrepriseNature) : that.entrepriseNature != null)
+        if (strDomain != null ? !strDomain.equals(that.strDomain) : that.strDomain != null)
             return false;
-        if (entrepriseFonction != null ? !entrepriseFonction.equals(that.entrepriseFonction) : that.entrepriseFonction != null)
+        if (strAddress != null ? !strAddress.equals(that.strAddress) : that.strAddress != null)
             return false;
-        if (entrepriseTechnologies != null ? !entrepriseTechnologies.equals(that.entrepriseTechnologies) : that.entrepriseTechnologies != null)
-            return false;
-        if (entrepriseExigences != null ? !entrepriseExigences.equals(that.entrepriseExigences) : that.entrepriseExigences != null)
+        if (strSummary != null ? !strSummary.equals(that.strSummary) : that.strSummary != null)
             return false;
 
         return true;
@@ -112,20 +115,14 @@ public class EmployerData implements Data {
 
     @Override
     public int hashCode() {
-        int result = recruteurId;
-        result = 31 * result + (entrepriseSommaire != null ? entrepriseSommaire.hashCode() : 0);
-        result = 31 * result + (entrepriseNature != null ? entrepriseNature.hashCode() : 0);
-        result = 31 * result + (entrepriseFonction != null ? entrepriseFonction.hashCode() : 0);
-        result = 31 * result + (entrepriseTechnologies != null ? entrepriseTechnologies.hashCode() : 0);
-        result = 31 * result + (entrepriseExigences != null ? entrepriseExigences.hashCode() : 0);
+        int result = nEmployerId;
+        result = result + nUserId;
+        result = 31 * result + (strName != null ? strName.hashCode() : 0);
+        result = 31 * result + (strDomain != null ? strDomain.hashCode() : 0);
+        result = 31 * result + (strAddress != null ? strAddress.hashCode() : 0);
+        result = 31 * result + (strSummary != null ? strSummary.hashCode() : 0);
         return result;
     }
-
-    public void setUserId(Integer userId)
-    {
-    };
-
-    public Integer getUserId(){return null;};
 
     public Integer getId(){
         return null;

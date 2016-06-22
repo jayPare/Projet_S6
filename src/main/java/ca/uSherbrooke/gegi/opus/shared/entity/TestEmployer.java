@@ -25,7 +25,7 @@ public class TestEmployer {
 
 
         for (EmployerData a : users ) {
-            System.out.println("sommaiiiiire : "+  a.getEntrepriseSommaire() );
+            System.out.println("sommaiiiiire : "+  a.getEmployerName() );
         }
 
 

@@ -9,23 +9,23 @@ import javax.persistence.*;
  */
 @NamedNativeQueries({
         @NamedNativeQuery(name = "get_competences", // exists only for test purposes
-                query = "SELECT C.concept_id, C.concept_nom, CCS.niveau_sur_5 FROM concept AS C " +
-                        " LEFT JOIN concept_competence_stagiaire AS CCS ON C.concept_id = CCS.concept_id" +
+                query = "SELECT C.concept_id, C.concept_nom, CCS.niveau_sur_5 FROM recrusimple.concept AS C " +
+                        " LEFT JOIN recrusimple.concept_competence_stagiaire AS CCS ON C.concept_id = CCS.concept_id" +
                         " WHERE CCS.stagiaire_id = #stagiaireID",
                 resultClass = ConceptData.class),
         @NamedNativeQuery(name = "get_interets", // exists only for test purposes
-                query = "SELECT C.concept_id, C.concept_nom, CIS.niveau_sur_5 FROM concept AS C " +
-                        " LEFT JOIN concept_interet_stagiaire AS CIS ON C.concept_id = CIS.concept_id" +
+                query = "SELECT C.concept_id, C.concept_nom, CIS.niveau_sur_5 FROM recrusimple.concept AS C " +
+                        " LEFT JOIN recrusimple.concept_interet_stagiaire AS CIS ON C.concept_id = CIS.concept_id" +
                         " WHERE CIS.stagiaire_id = #stagiaireID",
                 resultClass = ConceptData.class)
 })
 
 @Entity
-@Table(name = "public.concept", schema = "public", catalog = "opus")
+@Table(name = "recrusimple.concept", schema = "recrusimple", catalog = "opus")
 @SecondaryTables({
-        @SecondaryTable(name="concept_competence_stagiaire",
+        @SecondaryTable(name="recrusimple.concept_competence_stagiaire",
                 pkJoinColumns=@PrimaryKeyJoinColumn(name="concept_id")),
-        @SecondaryTable(name="concept_interet_stagiaire",
+        @SecondaryTable(name="recrusimple.concept_interet_stagiaire",
                 pkJoinColumns=@PrimaryKeyJoinColumn(name="concept_id"))
 })
 public class ConceptData implements Data {

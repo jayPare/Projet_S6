@@ -11,13 +11,13 @@ import java.util.List;
  */
 @NamedNativeQueries({
         @NamedNativeQuery(name = "get_all_stagiaires", // exists only for test purposes
-                query = "SELECT stagiaire_id, first_name, last_name, departement_nom,numero_stage FROM release LIMIT 1",
+                query = "SELECT stagiaire_id, first_name, last_name, departement_nom,numero_stage FROM recrusimple.release_stagiaire LIMIT 1",
                 resultClass = UserInfosData.class)
 })
 
 
 @Entity
-@Table(name = "public.release", schema = "public", catalog = "opus")
+@Table(name = "recrusimple.release_stagiaire", schema = "recrusimple", catalog = "opus")
 public class UserInfosData implements Data {
     private int stagiaireID = 0;
     private String firstName = "";
