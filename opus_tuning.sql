@@ -83,6 +83,9 @@ INSERT INTO public.concept_interet_stagiaire(niveau_sur_5, stagiaire_id, concept
 INSERT INTO public.concept_interet_stagiaire(niveau_sur_5, stagiaire_id, concept_id) VALUES (4, 1, 3);
 INSERT INTO public.concept_interet_stagiaire(niveau_sur_5, stagiaire_id, concept_id) VALUES (5, 1, 5);
 
+  ------------------------------------------------------------
+-- Vue: User
+------------------------------------------------------------
 CREATE OR REPLACE VIEW public.release AS 
  SELECT
     users.first_name,
@@ -105,4 +108,20 @@ CREATE OR REPLACE VIEW public.release AS
   AND concept.concept_id = concept_competence_stagiaire.concept_id 
   AND concept.concept_id = concept_interet_stagiaire.concept_id 
   AND concept_interet_stagiaire.stagiaire_id = stagiaire.stagiaire_id;
+
+  ------------------------------------------------------------
+-- Vue: Recruteur
+------------------------------------------------------------
+CREATE TABLE public.recruteur
+(
+  recruteur_id SERIAL NOT NULL,
+  entreprise_sommaire VARCHAR (2000) ,
+  entreprise_nature VARCHAR (2000) ,
+  entreprise_fonction VARCHAR (2000) ,
+  entreprise_technologies VARCHAR (2000) ,
+  entreprise_exigences VARCHAR (2000) ,
+  CONSTRAINT prk_constraint_recruteur PRIMARY KEY (recruteur_id)
+)
+
+INSERT INTO public.Recruteur(recruteur_id, entreprise_sommaire, entreprise_nature, entreprise_fonction, entreprise_technologies, entreprise_exigences) VALUES (0,'sommaire','nature','fonction','technologies','exigences');
 
