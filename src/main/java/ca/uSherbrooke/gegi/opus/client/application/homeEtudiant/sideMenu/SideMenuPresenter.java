@@ -3,12 +3,10 @@
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.home.sideMenu;
+package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant.sideMenu;
 
-import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
 import ca.uSherbrooke.gegi.commons.core.shared.utils.Sort;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -16,7 +14,6 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SideMenuPresenter extends PresenterWidget<SideMenuPresenter.MyView> implements SideMenuUiHandlers {

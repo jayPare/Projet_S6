@@ -5,9 +5,11 @@
 
 package ca.uSherbrooke.gegi.opus.client.place;
 
-public class NameTokens {
-    public static final String home = "/home";
+import com.gwtplatform.mvp.client.annotations.NameToken;
 
+public class NameTokens {
+    public static final String EMPLOYEUR = "/homeEmployeur";
+    public static final String home = "/homeEtudiant";
     public static String getHome() {
         return home;
     }

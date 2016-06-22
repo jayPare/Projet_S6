@@ -3,14 +3,14 @@
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.home;
+package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant;
 
 import javax.inject.Inject;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 
-import ca.uSherbrooke.gegi.opus.client.application.home.sideMenu.SideMenuPresenter;
+import ca.uSherbrooke.gegi.opus.client.application.homeEtudiant.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
@@ -35,7 +35,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import static com.google.gwt.query.client.GQuery.console;
 
-public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomePagePresenter.MyProxy> implements HomePageUiHandlers{
+public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresenter.MyView, HomeEtudiantPagePresenter.MyProxy> implements HomeEtudiantPageUiHandlers {
 
     public static final Slot SLOT_USERS = new Slot();
     @Inject SideMenuPresenter sideMenuPresenter;
@@ -45,7 +45,7 @@ public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomeP
     public void displayUserInfo(Integer groupId) {
     }
 
-    public interface MyView extends View, HasUiHandlers<HomePageUiHandlers> {
+    public interface MyView extends View, HasUiHandlers<HomeEtudiantPageUiHandlers> {
         public void setUserInfosObject(UserInfosData objUserInfos);
         public void setEmployerInfosObject(EmployerData objEmployerInfos);
         public void setUserInfos();
@@ -55,11 +55,11 @@ public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomeP
     @ProxyStandard
     @NameToken(NameTokens.home)
 	/*@UseGatekeeper(AuthenticationGatekeeper.class)*/
-    public interface MyProxy extends ProxyPlace<HomePagePresenter> {
+    public interface MyProxy extends ProxyPlace<HomeEtudiantPagePresenter> {
     }
 
     @Inject
-    public HomePagePresenter(EventBus eventBus, MyView view, MyProxy proxy) {
+    public HomeEtudiantPagePresenter(EventBus eventBus, MyView view, MyProxy proxy) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
         getView().setUiHandlers(this);
     }

@@ -1,12 +1,14 @@
-/*
+package ca.uSherbrooke.gegi.opus.client.application.homeEmployeur;/*
  * Copyright 2015, 2016 Département de Génie Électrique et Génie Informatique (GEGI) de l'Université de Sherbrooke (UdeS).
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.home.sideMenu;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 
-public interface SideMenuUiHandlers extends UiHandlers {
-	public void refreshList();
+/**
+ * Created by maip2202 on 2016-05-04.
+ */
+public interface HomeEmployeurPageUiHandlers extends UiHandlers {
+    public void displayUserInfo(Integer groupId);
 }
