@@ -3,7 +3,7 @@
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.home;
+package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant;
 
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
@@ -18,16 +18,16 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.FormLabel;
 
-public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
+public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePresenter.MyView {
 
     private final Widget widget;
 
     @Override
-    public void setUiHandlers(HomePageUiHandlers homePageUiHandlers) {
+    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers) {
 
     }
 
-    public interface Binder extends UiBinder<Widget, HomePageView> {
+    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView> {
     }
 
     public interface checkUiHandlers extends UiHandlers {
@@ -74,11 +74,11 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
         lblInteretsObjectifs.setText(objUserInfos.getDepartementNom());
     }
 
-    public void setEmployerInfos(){
+    public void setEmployerInfos(){/*
         lblPrenom.setHTML("employer sommaire = " +objEmployerInfos.getEmployerName());
         lblNom.setText("employer nature = " +objEmployerInfos.getEmployerDomain());
         lblProgrammeEtude.setText("employer fonction = " +objEmployerInfos.getEmployerSummary());
-        lblStage.setText("employer technologies = " +objEmployerInfos.getEmployerAddress());
+        lblStage.setText("employer technologies = " +objEmployerInfos.getEmployerAddress());*/
     }
 
     @UiHandler("anchorCheck")
@@ -86,7 +86,7 @@ public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
     }
 
     @Inject
-    public HomePageView(final Binder binder) {
+    public HomeEtudiantPageView(final Binder binder) {
         widget = binder.createAndBindUi(this);
     }
 

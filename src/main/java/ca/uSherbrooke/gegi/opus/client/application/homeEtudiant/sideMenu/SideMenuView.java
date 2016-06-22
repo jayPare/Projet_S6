@@ -3,7 +3,7 @@
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.home.sideMenu;
+package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant.sideMenu;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
