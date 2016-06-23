@@ -18,69 +18,61 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.FormLabel;
 
-public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPagePresenter.MyView {
+public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPagePresenter.MyView
+{
 
     private final Widget widget;
 
     @Override
-    public void setUiHandlers(HomeEmployeurPageUiHandlers homePageUiHandlers) {
+    public void setUiHandlers(HomeEmployeurPageUiHandlers homePageUiHandlers)
+    {
 
     }
 
-    public interface Binder extends UiBinder<Widget, HomeEmployeurPageView> {
+    public interface Binder extends UiBinder<Widget, HomeEmployeurPageView>
+    {
     }
 
-    public interface checkUiHandlers extends UiHandlers {
+    public interface checkUiHandlers extends UiHandlers
+    {
         void onCheck();
     }
     @UiField
-    FormLabel lblPrenom;
+    FormLabel lblNomEntreprise;
     @UiField
-    FormLabel lblNom;
+    FormLabel lblDomaine;
     @UiField
-    FormLabel lblProgrammeEtude;
+    FormLabel lblDescription;
     @UiField
-    FormLabel lblStage;
+    FormLabel lblAdresse;
     @UiField
-    FormLabel lblEcole;
+    FormLabel lblSommaire;
     @UiField
-    FormLabel lblCompetences;
+    FormLabel lblNature;
     @UiField
-    FormLabel lblInteretsObjectifs;
+    FormLabel lblFonctions;
+    @UiField
+    FormLabel lblTechnologies;
+    @UiField
+    FormLabel lblExigences;
     @UiField
     Anchor anchorCheck;
     @UiField
     Anchor anchorClose;
 
-    UserInfosData objUserInfos;
     EmployerData objEmployerInfos;
 
-    public void setUserInfosObject(UserInfosData objUserInfos)
-    {
-        this.objUserInfos = objUserInfos;
-    }
 
     public void setEmployerInfosObject(EmployerData objEmployerInfos)
     {
         this.objEmployerInfos = objEmployerInfos;
     }
 
-    public void setUserInfos(){
-        /*
-        lblPrenom.setText(objUserInfos.getFirstName());
-        lblNom.setText(objUserInfos.getLastName());
-        lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
-        lblStage.setText(Integer.toString(objUserInfos.getNumeroStage()));
-        lblCompetences.setText("changed");
-        lblInteretsObjectifs.setText(objUserInfos.getDepartementNom());
-        */
-    }
-
     public void setEmployerInfos(){
-        lblPrenom.setHTML("employer sommaire = " +objEmployerInfos.getEmployerName());
-        lblNom.setText("employer nature = " +objEmployerInfos.getEmployerDomain());
-        lblProgrammeEtude.setText("employer fonction = " +objEmployerInfos.getEmployerSummary());
-        lblStage.setText("employer technologies = " +objEmployerInfos.getEmployerAddress());
+        lblNomEntreprise.setHTML(objEmployerInfos.getEmployerName());
+        lblDomaine.setText(objEmployerInfos.getEmployerDomain());
+        lblDescription.setText(objEmployerInfos.getEmployerSummary());
+        lblAdresse.setText(objEmployerInfos.getEmployerAddress());
     }
 
     @UiHandler("anchorCheck")

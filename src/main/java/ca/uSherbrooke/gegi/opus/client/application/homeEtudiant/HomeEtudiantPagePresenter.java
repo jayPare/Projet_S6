@@ -47,9 +47,7 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
 
     public interface MyView extends View, HasUiHandlers<HomeEtudiantPageUiHandlers> {
         public void setUserInfosObject(UserInfosData objUserInfos);
-        public void setEmployerInfosObject(EmployerData objEmployerInfos);
         public void setUserInfos();
-        public void setEmployerInfos();
     }
 
     @ProxyStandard
@@ -74,10 +72,6 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         GetUserInfos objUserInfo = new GetUserInfos();
         objUserInfo.setCIP("degs2601");
         dispatchAsync.execute(objUserInfo, getUserInfosAsyncCallback);
-        
-        GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
-        objEmployerInfo.setEmployerID(123);
-        dispatchAsync.execute(objEmployerInfo, getEmployerInfosAsyncCallback);
     }
 
     private AsyncCallback<GetUserInfosResult> getUserInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
@@ -91,6 +85,7 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'utilisateur est inaccessible.");
         }
     };
+
     private AsyncCallback<GetUserInfosResult> setUserInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
         @Override
         public void onSuccess(GetUserInfosResult result) {
@@ -103,33 +98,6 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         @Override
         public void onFailure(Throwable throwable) {
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'utilisateur n'a bien été enregistrées...");
-        }
-    };
-
-    private AsyncCallback<GetEmployerInfosResult> getEmployerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
-        @Override
-        public void onSuccess(GetEmployerInfosResult result) {
-            getView().setEmployerInfosObject(result.getEmployerInfosObject());
-            getView().setEmployerInfos();
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'employeur est inaccessible.");
-        }
-    };
-
-    private AsyncCallback<GetEmployerInfosResult> setEmployerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
-        @Override
-        public void onSuccess(GetEmployerInfosResult result) {
-            if(result.getSaveSuccess() == true){
-                console.log("Enregistrement effectuée avec succès");
-            }else{
-                console.log("Enregistrement échouée");
-            }
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'employeur n'a bien été enregistrées...");
         }
     };
 }

@@ -5,7 +5,6 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant;
 
-import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -18,7 +17,8 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.FormLabel;
 
-public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePresenter.MyView {
+public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePresenter.MyView
+{
 
     private final Widget widget;
 
@@ -53,16 +53,10 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     Anchor anchorClose;
 
     UserInfosData objUserInfos;
-    EmployerData objEmployerInfos;
 
     public void setUserInfosObject(UserInfosData objUserInfos)
     {
         this.objUserInfos = objUserInfos;
-    }
-
-    public void setEmployerInfosObject(EmployerData objEmployerInfos)
-    {
-        this.objEmployerInfos = objEmployerInfos;
     }
 
     public void setUserInfos(){
@@ -72,13 +66,6 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
         lblStage.setText(Integer.toString(objUserInfos.getNumeroStage()));
         lblCompetences.setText("changed");
         lblInteretsObjectifs.setText(objUserInfos.getDepartementNom());
-    }
-
-    public void setEmployerInfos(){/*
-        lblPrenom.setHTML("employer sommaire = " +objEmployerInfos.getEmployerName());
-        lblNom.setText("employer nature = " +objEmployerInfos.getEmployerDomain());
-        lblProgrammeEtude.setText("employer fonction = " +objEmployerInfos.getEmployerSummary());
-        lblStage.setText("employer technologies = " +objEmployerInfos.getEmployerAddress());*/
     }
 
     @UiHandler("anchorCheck")
