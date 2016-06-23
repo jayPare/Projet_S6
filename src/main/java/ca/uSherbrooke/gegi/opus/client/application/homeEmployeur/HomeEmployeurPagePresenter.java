@@ -41,9 +41,7 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
     }
 
     public interface MyView extends View, HasUiHandlers<HomeEmployeurPageUiHandlers> {
-        public void setUserInfosObject(UserInfosData objUserInfos);
         public void setEmployerInfosObject(EmployerData objEmployerInfos);
-        public void setUserInfos();
         public void setEmployerInfos();
     }
 
@@ -65,41 +63,11 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
 
         sideMenuPresenter.getView().addToApplicationPresenter();
         sideMenuPresenter.refreshList();
-
-        GetUserInfos objUserInfo = new GetUserInfos();
-        objUserInfo.setCIP("degs2601");
-        dispatchAsync.execute(objUserInfo, getUserInfosAsyncCallback);
         
         GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
         objEmployerInfo.setEmployerID(123);
         dispatchAsync.execute(objEmployerInfo, getEmployerInfosAsyncCallback);
     }
-
-    private AsyncCallback<GetUserInfosResult> getUserInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
-        @Override
-        public void onSuccess(GetUserInfosResult result) {
-            getView().setUserInfosObject(result.getUserInfosObject());
-            getView().setUserInfos();
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'utilisateur est inaccessible.");
-        }
-    };
-    private AsyncCallback<GetUserInfosResult> setUserInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
-        @Override
-        public void onSuccess(GetUserInfosResult result) {
-            if(result.getSaveSuccess() == true){
-                console.log("Enregistrement effectuée avec succès");
-            }else{
-                console.log("Enregistrement échouée");
-            }
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'utilisateur n'a bien été enregistrées...");
-        }
-    };
 
     private AsyncCallback<GetEmployerInfosResult> getEmployerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
         @Override
