@@ -19,9 +19,11 @@ import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
  * See more on setting up the PlaceManager on <a
  * href="// See more on: https://github.com/ArcBees/GWTP/wiki/PlaceManager">DefaultModule's > DefaultPlaceManager</a>
  */
-public class ClientModule extends AbstractPresenterModule {
+public class ClientModule extends AbstractPresenterModule
+{
     @Override
-    protected void configure() {
+    protected void configure()
+    {
         install(new DefaultModule.Builder().placeManager(DefaultPlaceManager.class).tokenFormatter(RouteTokenFormatter.class).build());
 		install(new RpcDispatchAsyncModule());
         install(new ca.uSherbrooke.gegi.commons.core.client.gin.ClientModule());
