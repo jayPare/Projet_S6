@@ -12,8 +12,14 @@ import java.util.List;
 @NamedNativeQueries({
         @NamedNativeQuery(name = "get_all_stagiaires", // exists only for test purposes
                 query = "SELECT stagiaire_id, first_name, last_name, departement_nom,numero_stage FROM recrusimple.release_stagiaire LIMIT 1",
-                resultClass = UserInfosData.class)
+                resultClass = UserInfosData.class),
+
+        @NamedNativeQuery(name = "set_stagiaire_infos", // exists only for test purposes
+                query = "INSERT INTO recrusimple.stagiaire (stagiaire_id, numero_stage,stagiaire_cv,user_id,departement_id) VALUES (#stagiaireID, '4523323','mozzzzn cvv','1','1') ON CONFLICT ( stagiaire_id ) DO UPDATE SET stagiaire_id = '99'")
+
 })
+
+
 
 
 @Entity
@@ -23,6 +29,7 @@ public class UserInfosData implements Data {
     private String firstName = "";
     private String lastName = "";
     private String departementNom = "";
+    private String CV = "";
     private int numeroStage = 0;
     private List<ConceptData> interet = null;
     private List<ConceptData> competence = null;
@@ -60,6 +67,18 @@ public class UserInfosData implements Data {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+
+    @Basic
+    @Column(name = "CV")
+    public String getCV() {
+        return CV;
+    }
+
+    public void setCV(String CV) {
+        this.CV = CV;
+    }
+
 
     @Basic
     @Column(name = "last_name")

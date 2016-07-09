@@ -21,3 +21,4 @@ public class GetUserInfos extends ActionImpl<GetUserInfosResult>  {
         return false;
     }
 }
+
