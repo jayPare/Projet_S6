@@ -41,6 +41,7 @@ public class ConceptData implements Data {
 
     public ConceptData()
     {
+
     }
 
     @Id
