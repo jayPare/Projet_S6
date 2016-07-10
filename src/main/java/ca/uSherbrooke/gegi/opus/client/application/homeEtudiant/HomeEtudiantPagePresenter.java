@@ -70,11 +70,10 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         sideMenuPresenter.refreshList();
 
         GetUserInfos objUserInfo = new GetUserInfos();
-        objUserInfo.setCIP("degs2601");
-        dispatchAsync.execute(objUserInfo, getUserInfosAsyncCallback);
+        dispatchAsync.execute(objUserInfo, userInfosAsyncCallback);
     }
 
-    private AsyncCallback<GetUserInfosResult> getUserInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
+    private AsyncCallback<GetUserInfosResult> userInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
         @Override
         public void onSuccess(GetUserInfosResult result) {
             getView().setUserInfosObject(result.getUserInfosObject());
@@ -82,23 +81,9 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         }
         @Override
         public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'utilisateur est inaccessible.");
+            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
         }
     };
 
-    private AsyncCallback<GetUserInfosResult> setUserInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
-        @Override
-        public void onSuccess(GetUserInfosResult result) {
-            if(result.getSaveSuccess() == true){
-                console.log("Enregistrement effectuée avec succès");
-            }else{
-                console.log("Enregistrement échouée");
-            }
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'utilisateur n'a bien été enregistrées...");
-        }
-    };
 }
 

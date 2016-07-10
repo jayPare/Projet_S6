@@ -65,11 +65,10 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
         sideMenuPresenter.refreshList();
         
         GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
-        objEmployerInfo.setEmployerID(123);
-        dispatchAsync.execute(objEmployerInfo, getEmployerInfosAsyncCallback);
+        dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
 
-    private AsyncCallback<GetEmployerInfosResult> getEmployerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
+    private AsyncCallback<GetEmployerInfosResult> employerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
         @Override
         public void onSuccess(GetEmployerInfosResult result) {
             getView().setEmployerInfosObject(result.getEmployerInfosObject());
@@ -77,22 +76,7 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
         }
         @Override
         public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'employeur est inaccessible.");
-        }
-    };
-
-    private AsyncCallback<GetEmployerInfosResult> setEmployerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
-        @Override
-        public void onSuccess(GetEmployerInfosResult result) {
-            if(result.getSaveSuccess() == true){
-                console.log("Enregistrement effectuée avec succès");
-            }else{
-                console.log("Enregistrement échouée");
-            }
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'employeur n'a bien été enregistrées...");
+            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
         }
     };
 }
