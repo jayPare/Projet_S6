@@ -16,6 +16,7 @@ import ca.uSherbrooke.gegi.persist.dao.Dao;
 import ca.uSherbrooke.gegi.persist.dao.Opus;
 import com.google.inject.Inject;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class UserService {
@@ -30,6 +31,7 @@ public class UserService {
     }
 
     public boolean insertUserInfos(GetUserInfos user) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_user")
                 .setParameter("stageNumber", user.m_nNumeroStage)
                 .setParameter("stagiaireCV", user.m_strCV)
@@ -37,10 +39,12 @@ public class UserService {
                 .setParameter("deptID", user.m_nDepartementID).executeUpdate();
         user.setStagiaireID((int) this.dao.getNamedSingleResult("get_last_id"));
         setConcepts(user);
+        this.dao.commitTransaction();
         return true;
     }
 
     public boolean updateUserInfos(GetUserInfos user) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("update_user")
                 .setParameter("stageNumber", user.m_nNumeroStage)
                 .setParameter("stagiaireCV", user.m_strCV)
@@ -48,14 +52,17 @@ public class UserService {
                 .setParameter("deptID", user.m_nDepartementID)
                 .setParameter("stagiaireID", user.getStagiaireID()).executeUpdate();
         setConcepts(user);
+        this.dao.commitTransaction();
         return true;
     }
 
     public UserInfosData getUserInfos(GetUserInfos user) throws UserSessionActionException {
+        this.dao.beginTransaction();
         UserInfosData objResult = (UserInfosData)(this.dao.getEntityManager().createNamedQuery("get_user")
                 .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
         objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+        this.dao.commitTransaction();
         return objResult;
     }
 
@@ -64,16 +71,19 @@ public class UserService {
     }
 
     public boolean insertEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_employer")
                 .setParameter("userID", employer.m_nUserID)
                 .setParameter("name", employer.m_strName)
                 .setParameter("domain", employer.m_strDomain)
                 .setParameter("location", employer.m_strLocation)
                 .setParameter("summary", employer.m_strSummary).executeUpdate();
+        this.dao.commitTransaction();
         return true;
     }
 
     public boolean updateEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("update_employer")
                 .setParameter("userID", employer.m_nUserID)
                 .setParameter("name", employer.m_strName)
@@ -81,12 +91,16 @@ public class UserService {
                 .setParameter("location", employer.m_strLocation)
                 .setParameter("summary", employer.m_strSummary)
                 .setParameter("employerID", employer.getEmployerID()).executeUpdate();
+        this.dao.commitTransaction();
         return true;
     }
 
     public EmployerData getEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
-        return (EmployerData)(this.dao.getEntityManager().createNamedQuery("get_employer")
+        this.dao.beginTransaction();
+        EmployerData objResult = (EmployerData)(this.dao.getEntityManager().createNamedQuery("get_employer")
                 .setParameter("employerID", employer.getEmployerID()).getSingleResult());
+        this.dao.commitTransaction();
+        return objResult;
     }
 
     public EmployerData getNextEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
