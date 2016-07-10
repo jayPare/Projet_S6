@@ -30,11 +30,11 @@ public class GetUserInfosResult implements Result {
         return this.objUserInfoData;
     }
 
-    public void setSaveSuccess(boolean bSaveSuccess){
+    public void setSaveSuccess(boolean bSaveSuccess) {
         this.bSaveSuccess = bSaveSuccess;
     }
 
-    public boolean getSaveSuccess(){
+    public boolean getSaveSuccess() {
         return this.bSaveSuccess;
     }
 }

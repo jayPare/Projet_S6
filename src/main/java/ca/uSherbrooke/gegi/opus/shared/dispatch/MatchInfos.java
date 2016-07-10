@@ -8,6 +8,7 @@ import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 public class MatchInfos extends ActionImpl<MatchInfosResult> {
     private int m_nEmployerID = -1;
     private int m_nStagiaireID = -1;
+    private boolean m_bInteret = false;
     private boolean m_bSaveStudentMatch = false;
     private boolean m_bSaveEmployerMatch = false;
     private boolean m_bGetMatchStudent = false;
@@ -48,16 +49,26 @@ public class MatchInfos extends ActionImpl<MatchInfosResult> {
         return this.m_nEmployerID;
     }
 
-    public void saveStudentMatch(boolean bSaveStudentMatch, int nEmployerID, int nStagiaireID) {
+    public void setInteret(boolean bInteret) {
+        this.m_bInteret = bInteret;
+    }
+
+    public boolean getInteret() {
+        return this.m_bInteret;
+    }
+
+    public void saveStudentMatch(boolean bSaveStudentMatch, int nEmployerID, int nStagiaireID, boolean bInteret) {
         this.m_bSaveStudentMatch = bSaveStudentMatch;
         setEmployerID(nEmployerID);
         setStagiaireID(nStagiaireID);
+        setInteret(bInteret);
     }
 
-    public void saveEmployerMatch(boolean bSaveEmployerMatch, int nEmployerID, int nStagiaireID) {
+    public void saveEmployerMatch(boolean bSaveEmployerMatch, int nEmployerID, int nStagiaireID, boolean bInteret) {
         this.m_bSaveEmployerMatch = bSaveEmployerMatch;
         setEmployerID(nEmployerID);
         setStagiaireID(nStagiaireID);
+        setInteret(bInteret);
     }
 
     public void getMatchStudent(int nStagiaireID, boolean bGetMatchStudent) {

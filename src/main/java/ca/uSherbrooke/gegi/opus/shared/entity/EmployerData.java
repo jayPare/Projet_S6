@@ -9,7 +9,6 @@ import javax.persistence.*;
  */
 
 
-
 @NamedNativeQueries({
         @NamedNativeQuery(name = "save_employer", // exists only for test purposes
                 query = "INSERT INTO recrusimple.employeur (user_id, nom,domaine,lieu,sommaire,taches) " +
@@ -118,6 +117,7 @@ public class EmployerData implements Data {
     public void setEmployerAddress(String strAddress) {
         this.strAddress = strAddress;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -150,15 +150,25 @@ public class EmployerData implements Data {
         return result;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return null;
-    };
+    }
 
-    public void setId(Integer nId){}
+    ;
 
-    public String getLabel(){return "";};
+    public void setId(Integer nId) {
+    }
 
-    public void setLabel(String strLabel){};
+    public String getLabel() {
+        return "";
+    }
+
+    ;
+
+    public void setLabel(String strLabel) {
+    }
+
+    ;
 
     private String id;
 

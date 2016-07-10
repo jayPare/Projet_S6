@@ -103,11 +103,33 @@ public class UserService {
         return objResult;
     }
 
-   /* public MatchData getMatchEmployer(MatchInfos match) throws UserSessionActionException {
-        MatchData objResult = (MatchData)(this.dao.getEntityManager().createNamedQuery("get_match_employer")
-                .setParameter("employerID", match.getEmployerID()).getSingleResult());
+    public List<MatchData> getMatchEmployer(MatchInfos match) throws UserSessionActionException {
+        List<MatchData> objResult = (List<MatchData>)(this.dao.getEntityManager().createNamedQuery("get_match_employer")
+                .setParameter("employerID", match.getEmployerID()).getResultList());
         return objResult;
-    }*/
+    }
+
+    public List<MatchData> getMatchStagiaire(MatchInfos match) throws UserSessionActionException {
+        List<MatchData> objResult = (List<MatchData>)(this.dao.getEntityManager().createNamedQuery("get_match_stagiaire")
+                .setParameter("stagiaireID", match.getStagiaireID()).getResultList());
+        return objResult;
+    }
+
+    public boolean saveMatchStagiaire(MatchInfos match) throws UserSessionActionException {
+        this.dao.getEntityManager().createNamedQuery("save_match_employer")
+                .setParameter("stagiaireID", match.getStagiaireID())
+                .setParameter("employerID", match.getEmployerID())
+                .setParameter("interet", match.getInteret()).executeUpdate();
+        return true;
+    }
+
+    public boolean saveMatchEmployer(MatchInfos match) throws UserSessionActionException {
+        this.dao.getEntityManager().createNamedQuery("save_match_stagiaire")
+                .setParameter("stagiaireID", match.getStagiaireID())
+                .setParameter("employerID", match.getEmployerID())
+                .setParameter("interet", match.getInteret()).executeUpdate();
+        return true;
+    }
 
     public void setConcepts(GetUserInfos user) {
         this.dao.getEntityManager().createNamedQuery("delete_competences").executeUpdate(); // Only way to do that is to delete all entries first
