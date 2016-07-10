@@ -5,12 +5,22 @@ import javax.persistence.*;
 /**
  * Created by tomaslopinto on 10/07/16.
  */
+
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "save_match_employer",
+                query = "INSERT INTO recrusimple.employe_interesse_par_stagiaire (stagiaire_id, employeur_id, interet) " +
+                        "VALUES (#stagiaireID, " +
+                        "        #employerID, " +
+                        "        #interet) ")
+})
+
 @Entity
-@Table(name = "match", schema = "recrusimple", catalog = "opus")
-@IdClass(MatchEntityPK.class)
-public class MatchEntity {
+@Table(name = "employeur_interesse_par_stagiaire", schema = "recrusimple", catalog = "opus")
+@IdClass(EmployeurInteresseParStagiaireDataPK.class)
+public class EmployeurInteresseParStagiaireData {
     private int stagiaireId;
     private int employeurId;
+    private char interet;
 
     @Id
     @Column(name = "stagiaire_id")
@@ -32,15 +42,26 @@ public class MatchEntity {
         this.employeurId = employeurId;
     }
 
+    @Basic
+    @Column(name = "interet")
+    public char getInteret() {
+        return interet;
+    }
+
+    public void setInteret(char interet) {
+        this.interet = interet;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MatchEntity that = (MatchEntity) o;
+        EmployeurInteresseParStagiaireData that = (EmployeurInteresseParStagiaireData) o;
 
         if (stagiaireId != that.stagiaireId) return false;
         if (employeurId != that.employeurId) return false;
+        if (interet != that.interet) return false;
 
         return true;
     }
@@ -49,6 +70,7 @@ public class MatchEntity {
     public int hashCode() {
         int result = stagiaireId;
         result = 31 * result + employeurId;
+        result = 31 * result + (int) interet;
         return result;
     }
 }

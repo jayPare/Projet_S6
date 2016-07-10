@@ -1,25 +1,31 @@
 package ca.uSherbrooke.gegi.opus.shared.entity;
 
+import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
+
 import javax.persistence.*;
 
 /**
  * Created by tomaslopinto on 10/07/16.
  */
-
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "insert_employe_interesse_par_stagiaire",
-                query = "INSERT INTO recrusimple.employeur (user_id, nom,domaine,lieu,sommaire,taches) ")
+        @NamedNativeQuery(name = "get_match_employer",
+                query = "SELECT * " +
+                        "FROM recrusimple.match " +
+                        "WHERE employeur_id = #employerID",
+                resultClass = MatchData.class),
+        @NamedNativeQuery(name = "get_match_stagiaire",
+                query = "SELECT * " +
+                        "FROM recrusimple.match " +
+                        "WHERE stagiaire_id = #stagiaireID",
+                resultClass = MatchData.class)
 })
 
-
-
 @Entity
-@Table(name = "employeur_interesse_par_stagiaire", schema = "recrusimple", catalog = "opus")
-@IdClass(EmployeurInteresseParStagiaireEntityPK.class)
-public class EmployeurInteresseParStagiaireEntity {
+@Table(name = "match", schema = "recrusimple", catalog = "opus")
+@IdClass(MatchDataPK.class)
+public class MatchData implements Data {
     private int stagiaireId;
     private int employeurId;
-    private char interet;
 
     @Id
     @Column(name = "stagiaire_id")
@@ -41,26 +47,15 @@ public class EmployeurInteresseParStagiaireEntity {
         this.employeurId = employeurId;
     }
 
-    @Basic
-    @Column(name = "interet")
-    public char getInteret() {
-        return interet;
-    }
-
-    public void setInteret(char interet) {
-        this.interet = interet;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EmployeurInteresseParStagiaireEntity that = (EmployeurInteresseParStagiaireEntity) o;
+        MatchData that = (MatchData) o;
 
         if (stagiaireId != that.stagiaireId) return false;
         if (employeurId != that.employeurId) return false;
-        if (interet != that.interet) return false;
 
         return true;
     }
@@ -69,7 +64,27 @@ public class EmployeurInteresseParStagiaireEntity {
     public int hashCode() {
         int result = stagiaireId;
         result = 31 * result + employeurId;
-        result = 31 * result + (int) interet;
         return result;
+    }
+
+    public void setUserId(Integer userId) {
+    }
+
+    public Integer getUserId() {
+        return null;
+    }
+
+    public Integer getId() {
+        return null;
+    }
+
+    public void setId(Integer nId) {
+    }
+
+    public String getLabel() {
+        return "";
+    }
+
+    public void setLabel(String strLabel) {
     }
 }

@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by tomaslopinto on 10/07/16.
  */
-public class MatchEntityPK implements Serializable {
+public class StagiaireInteresseParEmployeurDataPK implements Serializable {
     private int stagiaireId;
     private int employeurId;
 
@@ -36,7 +36,7 @@ public class MatchEntityPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MatchEntityPK that = (MatchEntityPK) o;
+        StagiaireInteresseParEmployeurDataPK that = (StagiaireInteresseParEmployeurDataPK) o;
 
         if (stagiaireId != that.stagiaireId) return false;
         if (employeurId != that.employeurId) return false;

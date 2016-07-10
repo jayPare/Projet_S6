@@ -32,9 +32,16 @@ import javax.persistence.*;
                 query = "SELECT * " +
                         "FROM recrusimple.employeur " +
                         "WHERE employeur_id = #employerID",
+                resultClass = EmployerData.class),
+        @NamedNativeQuery(name = "get_next_employer", // exists only for test purposes
+                query = "SELECT * " +
+                        "FROM recrusimple.employeur AS emp " +
+                        "WHERE NOT EXISTS " +
+                        "    (SELECT 1 " +
+                        "     FROM recrusimple.employeur_interesse_par_stagiaire AS EIS " +
+                        "     WHERE emp.employeur_id = EIS.employeur_id) LIMIT 1",
                 resultClass = EmployerData.class)
 })
-
 
 @Entity
 @Table(name = "recrusimple.employeur", schema = "recrusimple.", catalog = "opus")
