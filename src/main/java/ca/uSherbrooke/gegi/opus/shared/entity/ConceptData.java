@@ -13,11 +13,33 @@ import javax.persistence.*;
                         " LEFT JOIN recrusimple.concept_competence_stagiaire AS CCS ON C.concept_id = CCS.concept_id" +
                         " WHERE CCS.stagiaire_id = #stagiaireID",
                 resultClass = ConceptData.class),
+        @NamedNativeQuery(name = "delete_competences", // exists only for test purposes
+                query = "DELETE " +
+                        "FROM recrusimple.concept_competence_stagiaire " +
+                        "WHERE stagiaire_id <> #stagiaireID"),
+        @NamedNativeQuery(name = "save_competence", // exists only for test purposes
+                query = "INSERT INTO recrusimple.concept_competence_stagiaire (stagiaire_id, niveau_sur_5,concept_id) " +
+                        "VALUES (#stagiaireID," +
+                        "        #niveau5," +
+                        "        #conceptID)"),
         @NamedNativeQuery(name = "get_interets", // exists only for test purposes
                 query = "SELECT C.concept_id, C.concept_nom, CIS.niveau_sur_5 FROM recrusimple.concept AS C " +
                         " LEFT JOIN recrusimple.concept_interet_stagiaire AS CIS ON C.concept_id = CIS.concept_id" +
                         " WHERE CIS.stagiaire_id = #stagiaireID",
-                resultClass = ConceptData.class)
+                resultClass = ConceptData.class),
+        @NamedNativeQuery(name = "delete_interets", // exists only for test purposes
+                query = "DELETE " +
+                        "FROM recrusimple.concept_interet_stagiaire " +
+                        "WHERE stagiaire_id <> #stagiaireID"),
+        @NamedNativeQuery(name = "save_interet", // exists only for test purposes
+                query = "INSERT INTO recrusimple.concept_interet_stagiaire (stagiaire_id,niveau_sur_5, concept_id) " +
+                        "VALUES (#stagiaireID," +
+                        "        #niveau5," +
+                        "        #conceptID)")
+
+       /* INSERT INTO distributors (did, dname)
+        VALUES (5, 'Gizmo Transglobal'), (6, 'Associated Computing, Inc')
+        ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname;*/
 })
 
 @Entity

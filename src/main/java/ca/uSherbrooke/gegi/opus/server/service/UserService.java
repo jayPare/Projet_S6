@@ -15,6 +15,7 @@ import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
 import ca.uSherbrooke.gegi.persist.dao.Dao;
 import ca.uSherbrooke.gegi.persist.dao.Opus;
 import com.google.inject.Inject;
+
 import java.util.List;
 
 public class UserService {
@@ -28,38 +29,84 @@ public class UserService {
         this.dao = dao;
     }
 
-    public UserInfosData getUserInfos(GetUserInfos action) throws UserSessionActionException{
-        UserInfosData objResult;
+    public boolean insertUserInfos(GetUserInfos user) throws UserSessionActionException {
+        this.dao.getEntityManager().createNamedQuery("save_user")
+                .setParameter("stageNumber", user.m_nNumeroStage)
+                .setParameter("stagiaireCV", user.m_strCV)
+                .setParameter("userID", user.m_nUserID)
+                .setParameter("deptID", user.m_nDepartementID).executeUpdate();
+        user.setStagiaireID((int) this.dao.getNamedSingleResult("get_last_id"));
+        setConcepts(user);
+        return true;
+    }
 
-        objResult = (UserInfosData)this.dao.getNamedSingleResult("set_stagiaire_infos");
+    public boolean updateUserInfos(GetUserInfos user) throws UserSessionActionException {
+        this.dao.getEntityManager().createNamedQuery("update_user")
+                .setParameter("stageNumber", user.m_nNumeroStage)
+                .setParameter("stagiaireCV", user.m_strCV)
+                .setParameter("userID", user.m_nUserID)
+                .setParameter("deptID", user.m_nDepartementID)
+                .setParameter("stagiaireID", user.getStagiaireID()).executeUpdate();
+        setConcepts(user);
+        return true;
+    }
 
-        this.dao.getEntityManager().createNamedQuery("set_stagiaire_infos").setParameter("stagiaireID",3384).getResultList();
-
-
-
-        objResult = (UserInfosData)this.dao.getNamedSingleResult("get_all_stagiaires");
-
-        //INSERT INTO recrusimple.departement (departement_id, departement_nom) VALUES ('44', 'oui') ON CONFLICT ( departement_id ) DO UPDATE SET departement_nom = '44';
-
-        objResult.setCompetence((List<ConceptData>)this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID",objResult.getStagiaireID()).getResultList());
-
-        objResult.setInteret((List<ConceptData>)this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID",objResult.getStagiaireID()).getResultList());
+    public UserInfosData getUserInfos(GetUserInfos user) throws UserSessionActionException {
+        UserInfosData objResult = (UserInfosData)(this.dao.getEntityManager().createNamedQuery("get_user")
+                .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
+        objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+        objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         return objResult;
     }
 
-    public EmployerData getEmployerInfos(GetEmployerInfos action) throws UserSessionActionException{
-        EmployerData objResult;
-        objResult = (EmployerData)this.dao.getNamedSingleResult("get_all_recruteur");
-        return objResult;
+    public UserInfosData getNextUserInfos(GetUserInfos user) throws UserSessionActionException {
+        return new UserInfosData();     ////TODO
     }
 
-
-    public UserInfosData setUserInfos(setUserInfos action) throws UserSessionActionException{
-        UserInfosData objResult;
-        objResult = (UserInfosData)this.dao.getNamedSingleResult("insert_test");
-        return objResult;
+    public boolean insertEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+        this.dao.getEntityManager().createNamedQuery("save_employer")
+                .setParameter("userID", employer.m_nUserID)
+                .setParameter("name", employer.m_strName)
+                .setParameter("domain", employer.m_strDomain)
+                .setParameter("location", employer.m_strLocation)
+                .setParameter("summary", employer.m_strSummary).executeUpdate();
+        return true;
     }
 
+    public boolean updateEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+        this.dao.getEntityManager().createNamedQuery("update_employer")
+                .setParameter("userID", employer.m_nUserID)
+                .setParameter("name", employer.m_strName)
+                .setParameter("domain", employer.m_strDomain)
+                .setParameter("location", employer.m_strLocation)
+                .setParameter("summary", employer.m_strSummary)
+                .setParameter("employerID", employer.getEmployerID()).executeUpdate();
+        return true;
+    }
 
+    public EmployerData getEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+        return (EmployerData)(this.dao.getEntityManager().createNamedQuery("get_employer")
+                .setParameter("employerID", employer.getEmployerID()).getSingleResult());
+    }
 
+    public EmployerData getNextEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+        return new EmployerData(); /////TODO
+    }
+
+    public void setConcepts(GetUserInfos user) {
+        this.dao.getEntityManager().createNamedQuery("delete_competences").executeUpdate(); // Only way to do that is to delete all entries first
+        for (ConceptData concept : user.m_objListCompetence) {
+            this.dao.getEntityManager().createNamedQuery("save_competence")
+                    .setParameter("stagiaireID", user.getStagiaireID())
+                    .setParameter("niveau_sur_5 ", concept.getNiveauSur5())
+                    .setParameter("concept_id", concept.getConceptID()).executeUpdate();
+        }
+        this.dao.getEntityManager().createNamedQuery("delete_interets").executeUpdate(); // Only way to do that is to delete all entries first
+        for (ConceptData concept : user.m_objListInteret) {
+            this.dao.getEntityManager().createNamedQuery("save_interet")
+                    .setParameter("stagiaireID", user.getStagiaireID())
+                    .setParameter("niveau_sur_5 ", concept.getNiveauSur5())
+                    .setParameter("concept_id", concept.getConceptID()).executeUpdate();
+        }
+    }
 }

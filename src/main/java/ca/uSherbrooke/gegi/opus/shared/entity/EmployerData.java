@@ -11,8 +11,27 @@ import javax.persistence.*;
 
 
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "get_all_recruteur", // exists only for test purposes
-                query = "SELECT * FROM recrusimple.employeur LIMIT 1",
+        @NamedNativeQuery(name = "save_employer", // exists only for test purposes
+                query = "INSERT INTO recrusimple.employeur (user_id, nom,domaine,lieu,sommaire,taches) " +
+                        "VALUES (#userID," +
+                        "        #name," +
+                        "        #domain," +
+                        "        #location," +
+                        "        #summary," +
+                        "        #tasks)"),
+        @NamedNativeQuery(name = "update_employer", // exists only for test purposes
+                query = "UPDATE recrusimple.employeur " +
+                        "SET user_id = #userID," +
+                        "    nom = #name," +
+                        "    domaine = #domain," +
+                        "    lieu = #location," +
+                        "    sommaire = #summary," +
+                        "    taches = #tasks " +
+                        "WHERE employeur_id = #employerID"),
+        @NamedNativeQuery(name = "get_employer", // exists only for test purposes
+                query = "SELECT * " +
+                        "FROM recrusimple.employeur " +
+                        "WHERE employeur_id = #employerID",
                 resultClass = EmployerData.class)
 })
 
