@@ -60,8 +60,9 @@ public class UserService {
         this.dao.beginTransaction();
         UserInfosData objResult = (UserInfosData)(this.dao.getEntityManager().createNamedQuery("get_user")
                 .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
-        objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
-        objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+        System.out.printf("STAGIAIRE after");
+        objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
+        objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
         this.dao.commitTransaction();
         return objResult;
     }
