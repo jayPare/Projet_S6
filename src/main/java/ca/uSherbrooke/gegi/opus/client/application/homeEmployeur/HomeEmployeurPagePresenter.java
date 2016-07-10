@@ -65,6 +65,7 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
         sideMenuPresenter.refreshList();
         
         GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
+        objEmployerInfo.getEmployer(1,true);
         dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
 
