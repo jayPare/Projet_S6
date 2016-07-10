@@ -70,6 +70,7 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         sideMenuPresenter.refreshList();
 
         GetUserInfos objUserInfo = new GetUserInfos();
+        objUserInfo.getStudent(1, true);
         dispatchAsync.execute(objUserInfo, userInfosAsyncCallback);
     }
 

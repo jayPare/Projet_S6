@@ -43,10 +43,10 @@ public class UserInfosActionHandler implements ActionHandler<GetUserInfos, GetUs
             bSuccess = true;
         } else if (user.getGetStudent() == true) {
             if (user.getStagiaireID() == -1) {
-                userResult = new GetUserInfosResult(userService.getUserInfos(user));
+                userResult = new GetUserInfosResult(userService.getNextUserInfos(user));
                 bSuccess = true;
             } else if (user.getStagiaireID() >= 0) {
-                userResult = new GetUserInfosResult(userService.getNextUserInfos(user));
+                userResult = new GetUserInfosResult(userService.getUserInfos(user));
                 bSuccess = true;
             } else {
                 //Error
