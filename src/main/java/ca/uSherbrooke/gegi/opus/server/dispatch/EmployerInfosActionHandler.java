@@ -37,10 +37,10 @@ public class EmployerInfosActionHandler implements ActionHandler<GetEmployerInfo
             }
         } else if (employer.getGetEmployer() == true) {
             if (employer.getEmployerID() == -1) {
-                employerResult = new GetEmployerInfosResult(userService.getEmployerInfos(employer));
+                employerResult = new GetEmployerInfosResult(userService.getNextEmployerInfos(employer));
                 bSuccess = true;
             } else if (employer.getEmployerID() >= 0) {
-                employerResult = new GetEmployerInfosResult(userService.getNextEmployerInfos(employer));
+                employerResult = new GetEmployerInfosResult(userService.getEmployerInfos(employer));
                 bSuccess = true;
             } else {
                 //Error
