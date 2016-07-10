@@ -10,8 +10,29 @@ import java.util.List;
  * Created by tomaslopinto on 01/06/16.
  */
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "get_all_stagiaires", // exists only for test purposes
-                query = "SELECT stagiaire_id, first_name, last_name, departement_nom,numero_stage FROM recrusimple.release_stagiaire LIMIT 1",
+        @NamedNativeQuery(name = "get_last_id",
+                query = "SELECT LASTVAL()"),
+        @NamedNativeQuery(name = "save_user",
+                query = "INSERT INTO recrusimple.stagiaire (numero_stage,stagiaire_cv,user_id,departement_id)" +
+                        "VALUES (#stageNumber," +
+                        "        #stagiaireCV," +
+                        "        #userID," +
+                        "        #deptID)"),
+        @NamedNativeQuery(name = "update_user",
+                query = "UPDATE recrusimple.stagiaire " +
+                        "SET numero_stage = #stageNumber," +
+                        "    stagiaire_cv = #stagiaireCV," +
+                        "    departement_id = #deptID," +
+                        "    user_id = #userID " +
+                        "WHERE stagiaire_id = #stagiaireID"),
+        @NamedNativeQuery(name = "get_user",
+                query = "SELECT stagiaire_id," +
+                        "       first_name," +
+                        "       last_name," +
+                        "       departement_nom," +
+                        "       numero_stage " +
+                        "FROM recrusimple.release_stagiaire " +
+                        "WHERE stagiaire_id = #stagiaireID LIMIT 1",
                 resultClass = UserInfosData.class)
 })
 
@@ -23,6 +44,7 @@ public class UserInfosData implements Data {
     private String firstName = "";
     private String lastName = "";
     private String departementNom = "";
+    private String CV = "";
     private int numeroStage = 0;
     private List<ConceptData> interet = null;
     private List<ConceptData> competence = null;
@@ -36,8 +58,7 @@ public class UserInfosData implements Data {
         this.id = id;
     }
 
-    public UserInfosData()
-    {
+    public UserInfosData() {
     }
 
     @Id
@@ -60,6 +81,18 @@ public class UserInfosData implements Data {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+
+    @Basic
+    @Column(name = "CV")
+    public String getCV() {
+        return CV;
+    }
+
+    public void setCV(String CV) {
+        this.CV = CV;
+    }
+
 
     @Basic
     @Column(name = "last_name")
@@ -95,13 +128,16 @@ public class UserInfosData implements Data {
     public List<ConceptData> getInteret() {
         return interet;
     }
+
     public void setInteret(List<ConceptData> interet) {
         this.interet = interet;
     }
+
     @OneToMany
     public List<ConceptData> getCompetence() {
         return competence;
     }
+
     public void setCompetence(List<ConceptData> competence) {
         this.competence = competence;
     }
@@ -131,21 +167,36 @@ public class UserInfosData implements Data {
         return result;
     }
 
-    public void setUserId(Integer userId)
-    {
-    };
+    public void setUserId(Integer userId) {
+    }
 
-    public Integer getUserId(){return null;};
+    ;
 
-    public Integer getId(){
+    public Integer getUserId() {
         return null;
-    };
+    }
 
-    public void setId(Integer nId){}
+    ;
 
-    public String getLabel(){return "";};
+    public Integer getId() {
+        return null;
+    }
 
-    public void setLabel(String strLabel){};
+    ;
+
+    public void setId(Integer nId) {
+    }
+
+    public String getLabel() {
+        return "";
+    }
+
+    ;
+
+    public void setLabel(String strLabel) {
+    }
+
+    ;
 
     private String id;
 
