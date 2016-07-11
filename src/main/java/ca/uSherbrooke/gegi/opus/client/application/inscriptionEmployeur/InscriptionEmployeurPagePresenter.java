@@ -7,11 +7,11 @@ package ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-import ca.uSherbrooke.gegi.opus.client.application.homeEtudiant.sideMenu.SideMenuPresenter;
+import ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
-import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
+import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -25,12 +25,11 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import javax.inject.Inject;
 
-import static com.google.gwt.query.client.GQuery.console;
-
 public class InscriptionEmployeurPagePresenter extends Presenter<InscriptionEmployeurPagePresenter.MyView, InscriptionEmployeurPagePresenter.MyProxy> implements InscriptionEmployeurPageUiHandlers {
 
     public static final Slot SLOT_USERS = new Slot();
-    @Inject SideMenuPresenter sideMenuPresenter;
+    @Inject
+    SideMenuPresenter sideMenuPresenter;
     @Inject DispatchAsync dispatchAsync;
 
     @Override
@@ -38,12 +37,11 @@ public class InscriptionEmployeurPagePresenter extends Presenter<InscriptionEmpl
     }
 
     public interface MyView extends View, HasUiHandlers<InscriptionEmployeurPageUiHandlers> {
-        public void setEmployerInfosObject(EmployerData objEmployerInfos);
-        public void setEmployerInfos();
+        public void insertNewEmployer();
     }
 
     @ProxyStandard
-    @NameToken(NameTokens.EMPLOYEUR_INSCRIPTION)
+    @NameToken(NameTokens.EMPLOYEUR_EDIT)
 	/*@UseGatekeeper(AuthenticationGatekeeper.class)*/
     public interface MyProxy extends ProxyPlace<InscriptionEmployeurPagePresenter> {
     }
@@ -68,12 +66,12 @@ public class InscriptionEmployeurPagePresenter extends Presenter<InscriptionEmpl
     private AsyncCallback<GetEmployerInfosResult> employerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
         @Override
         public void onSuccess(GetEmployerInfosResult result) {
-            getView().setEmployerInfosObject(result.getEmployerInfosObject());
-            getView().setEmployerInfos();
+            getView().insertNewEmployer();
         }
         @Override
         public void onFailure(Throwable throwable) {
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
         }
     };
+
 }

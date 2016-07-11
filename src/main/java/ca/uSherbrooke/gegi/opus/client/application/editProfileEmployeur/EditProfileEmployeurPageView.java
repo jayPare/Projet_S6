@@ -5,7 +5,7 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur;
 
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
+import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -23,49 +23,55 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
     private final Widget widget;
 
     @Override
-    public void setUiHandlers(EditProfileEmployeurPageUiHandlers homePageUiHandlers) {
+    public void setUiHandlers(EditProfileEmployeurPageUiHandlers homePageUiHandlers)
+    {
 
     }
 
-    public interface Binder extends UiBinder<Widget, EditProfileEmployeurPageView> {
+    public interface Binder extends UiBinder<Widget, EditProfileEmployeurPageView>
+    {
     }
 
-    public interface checkUiHandlers extends UiHandlers {
+    public interface checkUiHandlers extends UiHandlers
+    {
         void onCheck();
     }
     @UiField
-    FormLabel lblPrenom;
+    FormLabel lblNomEntreprise;
     @UiField
-    FormLabel lblNom;
+    FormLabel lblDomaine;
     @UiField
-    FormLabel lblProgrammeEtude;
+    FormLabel lblDescription;
     @UiField
-    FormLabel lblStage;
+    FormLabel lblAdresse;
     @UiField
-    FormLabel lblEcole;
+    FormLabel lblSommaire;
     @UiField
-    FormLabel lblCompetences;
+    FormLabel lblNature;
     @UiField
-    FormLabel lblInteretsObjectifs;
+    FormLabel lblFonctions;
+    @UiField
+    FormLabel lblTechnologies;
+    @UiField
+    FormLabel lblExigences;
     @UiField
     Anchor anchorCheck;
     @UiField
     Anchor anchorClose;
 
-    UserInfosData objUserInfos;
+    EmployerData objEmployerInfos;
 
-    public void setUserInfosObject(UserInfosData objUserInfos)
+
+    public void setEmployerInfosObject(EmployerData objEmployerInfos)
     {
-        this.objUserInfos = objUserInfos;
+        this.objEmployerInfos = objEmployerInfos;
     }
 
-    public void setUserInfos(){
-        lblPrenom.setText(objUserInfos.getFirstName());
-        lblNom.setText(objUserInfos.getLastName());
-        lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
-        lblStage.setText(Integer.toString(objUserInfos.getNumeroStage()));
-        lblCompetences.setText("changed");
-        lblInteretsObjectifs.setText(objUserInfos.getDepartementNom());
+    public void setEmployerInfos(){
+        lblNomEntreprise.setHTML(objEmployerInfos.getEmployerName());
+        lblDomaine.setText(objEmployerInfos.getEmployerDomain());
+        lblDescription.setText(objEmployerInfos.getEmployerSummary());
+        lblAdresse.setText(objEmployerInfos.getEmployerAddress());
     }
 
     @UiHandler("anchorCheck")

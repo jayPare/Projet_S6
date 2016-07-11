@@ -7,11 +7,11 @@ package ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-import ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur.sideMenu.SideMenuPresenter;
+import ca.uSherbrooke.gegi.opus.client.application.homeEtudiant.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfosResult;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
+import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -25,13 +25,10 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import javax.inject.Inject;
 
-import static com.google.gwt.query.client.GQuery.console;
-
 public class EditProfileEmployeurPagePresenter extends Presenter<EditProfileEmployeurPagePresenter.MyView, EditProfileEmployeurPagePresenter.MyProxy> implements EditProfileEmployeurPageUiHandlers {
 
     public static final Slot SLOT_USERS = new Slot();
-    @Inject
-    SideMenuPresenter sideMenuPresenter;
+    @Inject SideMenuPresenter sideMenuPresenter;
     @Inject DispatchAsync dispatchAsync;
 
     @Override
@@ -39,12 +36,12 @@ public class EditProfileEmployeurPagePresenter extends Presenter<EditProfileEmpl
     }
 
     public interface MyView extends View, HasUiHandlers<EditProfileEmployeurPageUiHandlers> {
-        public void setUserInfosObject(UserInfosData objUserInfos);
-        public void setUserInfos();
+        public void setEmployerInfosObject(EmployerData objEmployerInfos);
+        public void setEmployerInfos();
     }
 
     @ProxyStandard
-    @NameToken(NameTokens.EMPLOYEUR_EDIT)
+    @NameToken(NameTokens.EMPLOYEUR_INSCRIPTION)
 	/*@UseGatekeeper(AuthenticationGatekeeper.class)*/
     public interface MyProxy extends ProxyPlace<EditProfileEmployeurPagePresenter> {
     }
@@ -62,20 +59,19 @@ public class EditProfileEmployeurPagePresenter extends Presenter<EditProfileEmpl
         sideMenuPresenter.getView().addToApplicationPresenter();
         sideMenuPresenter.refreshList();
 
-        GetUserInfos objUserInfo = new GetUserInfos();
-        dispatchAsync.execute(objUserInfo, userInfosAsyncCallback);
+        GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
+        dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
 
-    private AsyncCallback<GetUserInfosResult> userInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
+    private AsyncCallback<GetEmployerInfosResult> employerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
         @Override
-        public void onSuccess(GetUserInfosResult result) {
-            getView().setUserInfosObject(result.getUserInfosObject());
-            getView().setUserInfos();
+        public void onSuccess(GetEmployerInfosResult result) {
+            getView().setEmployerInfosObject(result.getEmployerInfosObject());
+            getView().setEmployerInfos();
         }
         @Override
         public void onFailure(Throwable throwable) {
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
         }
     };
-
 }
