@@ -11,8 +11,8 @@ import javax.persistence.*;
 
 @NamedNativeQueries({
         @NamedNativeQuery(name = "save_employer", // exists only for test purposes
-                query = "INSERT INTO recrusimple.employeur (user_id, nom,domaine,lieu,sommaire,taches) " +
-                        "VALUES (#userID," +
+                query = "INSERT INTO recrusimple.employeur (administrative_user_id, nom,domaine,lieu,sommaire,taches) " +
+                        "VALUES (#strCIP," +
                         "        #name," +
                         "        #domain," +
                         "        #location," +
@@ -20,7 +20,7 @@ import javax.persistence.*;
                         "        #tasks)"),
         @NamedNativeQuery(name = "update_employer", // exists only for test purposes
                 query = "UPDATE recrusimple.employeur " +
-                        "SET user_id = #userID," +
+                        "SET administrative_user_id = #strCIP," +
                         "    nom = #name," +
                         "    domaine = #domain," +
                         "    lieu = #location," +
@@ -31,6 +31,11 @@ import javax.persistence.*;
                 query = "SELECT * " +
                         "FROM recrusimple.employeur " +
                         "WHERE employeur_id = #employerID",
+                resultClass = EmployerData.class),
+        @NamedNativeQuery(name = "get_employer_with_cip", // exists only for test purposes
+                query = "SELECT * " +
+                        "FROM recrusimple.employeur " +
+                        "WHERE administrative_user_id = #strCIP",
                 resultClass = EmployerData.class),
         @NamedNativeQuery(name = "get_next_employer", // exists only for test purposes
                 query = "SELECT * " +
@@ -46,7 +51,7 @@ import javax.persistence.*;
 @Table(name = "recrusimple.employeur", schema = "recrusimple.", catalog = "opus")
 public class EmployerData implements Data {
     private int nEmployerId;
-    private int nUserId;
+    private String strCIP;
     private String strName;
     private String strDomain;
     private String strAddress;
@@ -63,19 +68,14 @@ public class EmployerData implements Data {
         this.nEmployerId = nEmployerId;
     }
 
-    @Override
-    public void setUserId(Integer integer) {
-
-    }
-
     @Basic
-    @Column(name = "user_id")
-    public Integer getUserId() {
-        return nUserId;
+    @Column(name = "administrative_user_id")
+    public String getCIP() {
+        return strCIP;
     }
 
-    public void setUserId(int nUserId) {
-        this.nUserId = nUserId;
+    public void setCIP(String strCIP) {
+        this.strCIP = strCIP;
     }
 
     @Basic
@@ -126,8 +126,9 @@ public class EmployerData implements Data {
         EmployerData that = (EmployerData) o;
 
         if (nEmployerId != that.nEmployerId) return false;
-        if (nUserId != that.nUserId) return false;
         if (strName != null ? !strName.equals(that.strName) : that.strName != null)
+            return false;
+        if (strCIP != null ? !strCIP.equals(that.strCIP) : that.strCIP != null)
             return false;
         if (strDomain != null ? !strDomain.equals(that.strDomain) : that.strDomain != null)
             return false;
@@ -142,7 +143,7 @@ public class EmployerData implements Data {
     @Override
     public int hashCode() {
         int result = nEmployerId;
-        result = result + nUserId;
+        result = 31 * result + (strCIP != null ? strCIP.hashCode() : 0);
         result = 31 * result + (strName != null ? strName.hashCode() : 0);
         result = 31 * result + (strDomain != null ? strDomain.hashCode() : 0);
         result = 31 * result + (strAddress != null ? strAddress.hashCode() : 0);
@@ -154,9 +155,16 @@ public class EmployerData implements Data {
         return null;
     }
 
-    ;
-
     public void setId(Integer nId) {
+    }
+
+    @Override
+    public void setUserId(Integer integer) {
+    }
+
+    @Override
+    public Integer getUserId() {
+        return null;
     }
 
     public String getLabel() {

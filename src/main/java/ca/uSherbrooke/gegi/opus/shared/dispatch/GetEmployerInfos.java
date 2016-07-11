@@ -18,7 +18,7 @@ public class GetEmployerInfos extends ActionImpl<GetEmployerInfosResult> {
     public String m_strDomain = "";
     public String m_strLocation = "";
     public String m_strSummary = "";
-    public int m_nUserID = -1;
+    public String m_strCIP = "";
 
     public GetEmployerInfos() {
     }
@@ -55,6 +55,10 @@ public class GetEmployerInfos extends ActionImpl<GetEmployerInfosResult> {
     //Set nEmployerID to -1 to get a non-seen employer
     public void getEmployer(int nEmployerID, boolean bGetEmployer) {
         this.m_nEmployerID = nEmployerID;
+        this.m_bGetEmployer = bGetEmployer;
+    }
+    public void getEmployerWithCIP(String strCIP, boolean bGetEmployer) {
+        this.m_strCIP = strCIP;
         this.m_bGetEmployer = bGetEmployer;
     }
 

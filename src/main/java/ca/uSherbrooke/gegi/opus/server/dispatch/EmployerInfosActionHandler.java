@@ -36,10 +36,13 @@ public class EmployerInfosActionHandler implements ActionHandler<GetEmployerInfo
                 bSuccess = true;
             }
         } else if (employer.getGetEmployer() == true) {
-            if (employer.getEmployerID() == -1) {
+            if (employer.getEmployerID() == -1 && employer.m_strCIP != "") { // get with cip
+                employerResult = new GetEmployerInfosResult(userService.getEmployerInfosWithCIP(employer));
+                bSuccess = true;
+            } else if (employer.getEmployerID() == -1 && employer.m_strCIP == "") { // get next
                 employerResult = new GetEmployerInfosResult(userService.getNextEmployerInfos(employer));
                 bSuccess = true;
-            } else if (employer.getEmployerID() >= 0) {
+            } else if (employer.getEmployerID() >= 0) { //get with employer id
                 employerResult = new GetEmployerInfosResult(userService.getEmployerInfos(employer));
                 bSuccess = true;
             } else {

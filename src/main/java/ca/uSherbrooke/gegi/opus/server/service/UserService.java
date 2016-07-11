@@ -80,7 +80,7 @@ public class UserService {
 
     public boolean insertEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
         this.dao.getEntityManager().createNamedQuery("save_employer")
-                .setParameter("userID", employer.m_nUserID)
+                .setParameter("strCIP", employer.m_strCIP)
                 .setParameter("name", employer.m_strName)
                 .setParameter("domain", employer.m_strDomain)
                 .setParameter("location", employer.m_strLocation)
@@ -90,7 +90,7 @@ public class UserService {
 
     public boolean updateEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
         this.dao.getEntityManager().createNamedQuery("update_employer")
-                .setParameter("userID", employer.m_nUserID)
+                .setParameter("strCIP", employer.m_strCIP)
                 .setParameter("name", employer.m_strName)
                 .setParameter("domain", employer.m_strDomain)
                 .setParameter("location", employer.m_strLocation)
@@ -102,6 +102,12 @@ public class UserService {
     public EmployerData getEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
         EmployerData objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer")
                 .setParameter("employerID", employer.getEmployerID()).getSingleResult());
+        return objResult;
+    }
+
+    public EmployerData getEmployerInfosWithCIP(GetEmployerInfos employer) throws UserSessionActionException {
+        EmployerData objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
+                .setParameter("strCIP", employer.m_strCIP).getSingleResult());
         return objResult;
     }
 
