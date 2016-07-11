@@ -23,7 +23,7 @@ public class GetUserInfos extends ActionImpl<GetUserInfosResult> {
     public int m_nDepartementID = -1;
     public String m_strCV = "";
     public int m_nNumeroStage = -1;
-    public int m_nUserID = -1;
+    public String m_strCIP = "";
     public List<ConceptData> m_objListInteret = null;
     public List<ConceptData> m_objListCompetence = null;
 
@@ -62,6 +62,10 @@ public class GetUserInfos extends ActionImpl<GetUserInfosResult> {
     //Set nStagiaireID to -1 to get a non-seen student
     public void getStudent(int nStagiaireID, boolean bGetStudent) {
         this.m_nStagiaireID = nStagiaireID;
+        this.m_bGetStudent = bGetStudent;
+    }
+    public void getStudentWithCIP(String strCIP, boolean bGetStudent) {
+        this.m_strCIP = strCIP;
         this.m_bGetStudent = bGetStudent;
     }
 

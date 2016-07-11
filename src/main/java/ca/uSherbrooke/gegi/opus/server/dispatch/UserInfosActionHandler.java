@@ -42,10 +42,13 @@ public class UserInfosActionHandler implements ActionHandler<GetUserInfos, GetUs
             }
             bSuccess = true;
         } else if (user.getGetStudent() == true) {
-            if (user.getStagiaireID() == -1) {
+            if (user.getStagiaireID() == -1 && user.m_strCIP != "") { // get with cip
+                userResult = new GetUserInfosResult(userService.getUserInfosWithCIP(user));
+                bSuccess = true;
+            }else if (user.getStagiaireID() == -1 && user.m_strCIP == "") { // get next
                 userResult = new GetUserInfosResult(userService.getNextUserInfos(user));
                 bSuccess = true;
-            } else if (user.getStagiaireID() >= 0) {
+            } else if (user.getStagiaireID() >= 0) { // get with stagiaire ID
                 userResult = new GetUserInfosResult(userService.getUserInfos(user));
                 bSuccess = true;
             } else {

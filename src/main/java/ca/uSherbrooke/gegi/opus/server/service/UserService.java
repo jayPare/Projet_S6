@@ -36,7 +36,7 @@ public class UserService {
         this.dao.getEntityManager().createNamedQuery("save_user")
                 .setParameter("stageNumber", user.m_nNumeroStage)
                 .setParameter("stagiaireCV", user.m_strCV)
-                .setParameter("userID", user.m_nUserID)
+                .setParameter("strCIP", user.m_strCIP)
                 .setParameter("deptID", user.m_nDepartementID).executeUpdate();
         user.setStagiaireID((int) this.dao.getNamedSingleResult("get_last_id"));
         setConcepts(user);
@@ -47,7 +47,7 @@ public class UserService {
         this.dao.getEntityManager().createNamedQuery("update_user")
                 .setParameter("stageNumber", user.m_nNumeroStage)
                 .setParameter("stagiaireCV", user.m_strCV)
-                .setParameter("userID", user.m_nUserID)
+                .setParameter("strCIP", user.m_strCIP)
                 .setParameter("deptID", user.m_nDepartementID)
                 .setParameter("stagiaireID", user.getStagiaireID()).executeUpdate();
         setConcepts(user);
@@ -59,6 +59,14 @@ public class UserService {
                 .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
         objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
         objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
+        return objResult;
+    }
+
+    public UserInfosData getUserInfosWithCIP(GetUserInfos user) throws UserSessionActionException {
+        UserInfosData objResult = (UserInfosData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
+                .setParameter("strCIP", user.m_strCIP).getSingleResult());
+        objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+        objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         return objResult;
     }
 

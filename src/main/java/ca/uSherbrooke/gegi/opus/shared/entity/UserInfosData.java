@@ -13,17 +13,17 @@ import java.util.List;
         @NamedNativeQuery(name = "get_last_id",
                 query = "SELECT LASTVAL()"),
         @NamedNativeQuery(name = "save_user",
-                query = "INSERT INTO recrusimple.stagiaire (numero_stage,stagiaire_cv,user_id,departement_id)" +
+                query = "INSERT INTO recrusimple.stagiaire (numero_stage,stagiaire_cv,administrative_user_id,departement_id)" +
                         "VALUES (#stageNumber," +
                         "        #stagiaireCV," +
-                        "        #userID," +
+                        "        #srCIP," +
                         "        #deptID)"),
         @NamedNativeQuery(name = "update_user",
                 query = "UPDATE recrusimple.stagiaire " +
                         "SET numero_stage = #stageNumber," +
                         "    stagiaire_cv = #stagiaireCV," +
                         "    departement_id = #deptID," +
-                        "    user_id = #userID " +
+                        "    administrative_user_id = #srCIP " +
                         "WHERE stagiaire_id = #stagiaireID"),
         @NamedNativeQuery(name = "get_user",
                 query = "SELECT stagiaire_id," +
@@ -33,6 +33,15 @@ import java.util.List;
                         "       numero_stage " +
                         "FROM recrusimple.release_stagiaire " +
                         "WHERE stagiaire_id = #stagiaireID LIMIT 1",
+                resultClass = UserInfosData.class),
+        @NamedNativeQuery(name = "get_user_with_cip",
+                query = "SELECT stagiaire_id," +
+                        "       first_name," +
+                        "       last_name," +
+                        "       departement_nom," +
+                        "       numero_stage " +
+                        "FROM recrusimple.release_stagiaire " +
+                        "WHERE administrative_user_id = #strCIP LIMIT 1",
                 resultClass = UserInfosData.class),
         @NamedNativeQuery(name = "get_next_user",
                 query = "SELECT * " +
@@ -53,6 +62,7 @@ public class UserInfosData implements Data {
     private String lastName = "";
     private String departementNom = "";
     private String CV = "";
+    private String strCIP = "";
     private int numeroStage = 0;
     private List<ConceptData> interet = null;
     private List<ConceptData> competence = null;
@@ -78,6 +88,16 @@ public class UserInfosData implements Data {
 
     public void setStagiaireID(int stagiaireID) {
         this.stagiaireID = stagiaireID;
+    }
+
+    @Basic
+    @Column(name = "administrative_user_id")
+    public String getCIP() {
+        return strCIP;
+    }
+
+    public void setCIP(String strCIP) {
+        this.strCIP = strCIP;
     }
 
     @Basic

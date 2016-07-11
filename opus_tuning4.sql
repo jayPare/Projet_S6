@@ -1,4 +1,4 @@
-#Étape 1: éxécuter les lignes suivantes
+﻿#Étape 1: éxécuter les lignes suivantes
 ALTER TABLE public.users
 ADD CONSTRAINT unique_administrative_user_id UNIQUE (administrative_user_id);
 
@@ -32,8 +32,9 @@ CREATE OR REPLACE VIEW recrusimple.release_stagiaire AS
     users.last_name,
     departement.departement_nom,
     stagiaire.numero_stage,
-	stagiaire.stagiaire_id,
+    stagiaire.stagiaire_id,
     concept.concept_nom,
+    stagiaire.administrative_user_id,
     concept_competence_stagiaire.niveau_sur_5 AS niveau_sur_5_competence,
     concept_interet_stagiaire.niveau_sur_5 AS niveau_sur_5_interet
    FROM public.users,
