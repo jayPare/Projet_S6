@@ -5,17 +5,12 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur;
 
-import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
-import com.google.gwt.event.dom.client.ClickEvent;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewImpl;
-import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.FormLabel;
 
 public class InscriptionEmployeurPageView extends ViewImpl implements InscriptionEmployeurPagePresenter.MyView
 {
@@ -23,59 +18,36 @@ public class InscriptionEmployeurPageView extends ViewImpl implements Inscriptio
     private final Widget widget;
 
     @Override
-    public void setUiHandlers(InscriptionEmployeurPageUiHandlers homePageUiHandlers)
+    public void setUiHandlers(InscriptionEmployeurPageUiHandlers homePageUiHandlers) {
+
+    }
+
+    public interface Binder extends UiBinder<Widget, InscriptionEmployeurPageView> {
+    }
+
+    @UiField
+    org.gwtbootstrap3.client.ui.TextBox tbNomEntreprise;
+    @UiField
+    org.gwtbootstrap3.client.ui.TextBox tbDomaine;
+    @UiField
+    org.gwtbootstrap3.client.ui.TextBox tbLieu;
+    @UiField
+    org.gwtbootstrap3.client.ui.TextBox tbTechnologies;
+    @UiField
+    org.gwtbootstrap3.client.ui.TextBox tbSommaire;
+
+    GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
+
+    public void insertNewEmployer()
     {
+        objEmployerInfo.m_strName = tbNomEntreprise.getText();
+        objEmployerInfo.m_strDomain =tbDomaine.getText();
+        objEmployerInfo.m_strLocation =tbLieu.getText();
+        //TODO: ajouter ces champ là à l'objet GetEmployerInfos
+        //objEmployerInfo.m_strTechnologies =tbTechnologies.getText();
+        //objEmployerInfo.m_strSommaire =tbSommaire.getText();
 
-    }
-
-    public interface Binder extends UiBinder<Widget, InscriptionEmployeurPageView>
-    {
-    }
-
-    public interface checkUiHandlers extends UiHandlers
-    {
-        void onCheck();
-    }
-    @UiField
-    FormLabel lblNomEntreprise;
-    @UiField
-    FormLabel lblDomaine;
-    @UiField
-    FormLabel lblDescription;
-    @UiField
-    FormLabel lblAdresse;
-    @UiField
-    FormLabel lblSommaire;
-    @UiField
-    FormLabel lblNature;
-    @UiField
-    FormLabel lblFonctions;
-    @UiField
-    FormLabel lblTechnologies;
-    @UiField
-    FormLabel lblExigences;
-    @UiField
-    Anchor anchorCheck;
-    @UiField
-    Anchor anchorClose;
-
-    EmployerData objEmployerInfos;
-
-
-    public void setEmployerInfosObject(EmployerData objEmployerInfos)
-    {
-        this.objEmployerInfos = objEmployerInfos;
-    }
-
-    public void setEmployerInfos(){
-        lblNomEntreprise.setHTML(objEmployerInfos.getEmployerName());
-        lblDomaine.setText(objEmployerInfos.getEmployerDomain());
-        lblDescription.setText(objEmployerInfos.getEmployerSummary());
-        lblAdresse.setText(objEmployerInfos.getEmployerAddress());
-    }
-
-    @UiHandler("anchorCheck")
-    public void onCheck(ClickEvent event){
+        objEmployerInfo.insertNewEmployer(true);
     }
 
     @Inject

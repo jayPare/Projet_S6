@@ -38,7 +38,7 @@
                     <b:TabListItem dataTarget="#tab2" text="Intérêts et objectifs"/>
                 </b:NavTabs>
                 <b:TabContent>
-                    <b:TabPane fade="true" in="true" active="true" id="tab1">
+                    <b:TabPane fade="true" in="true" active="true" b:id="tab1">
                         <b:Form ui:field="form2">
                             <b:FormGroup>
                                 <b:FormLabel text="Competences: "/>
@@ -46,7 +46,7 @@
                             </b:FormGroup>
                         </b:Form>
                     </b:TabPane>
-                    <b:TabPane fade="true" id="tab2">
+                    <b:TabPane fade="true" b:id="tab2">
                         <b:Form ui:field="form3">
                             <b:FormGroup>
                                 <b:FormLabel text="Interets et objectifs: "/>

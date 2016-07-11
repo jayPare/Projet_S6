@@ -5,15 +5,13 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur;
 
-import ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur.sideMenu.SideMenuModule;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-public class EditProfileEmployeurModule extends AbstractPresenterModule {
+public class EditProfileEmployeurModule extends AbstractPresenterModule
+{
     @Override
-    protected void configure() {
-        install(new SideMenuModule());
-
-        bindPresenter(EditProfileEmployeurPagePresenter.class, EditProfileEmployeurPagePresenter.MyView.class, EditProfileEmployeurPageView.class,
-                EditProfileEmployeurPagePresenter.MyProxy.class);
+    protected void configure()
+    {
+        bindPresenter(EditProfileEmployeurPagePresenter.class, EditProfileEmployeurPagePresenter.MyView.class, EditProfileEmployeurPageView.class, EditProfileEmployeurPagePresenter.MyProxy.class);
     }
 }

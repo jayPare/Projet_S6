@@ -3,7 +3,7 @@
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur.sideMenu;
+package ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur.sideMenu;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
