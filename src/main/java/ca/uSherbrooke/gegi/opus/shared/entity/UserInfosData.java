@@ -33,6 +33,14 @@ import java.util.List;
                         "       numero_stage " +
                         "FROM recrusimple.release_stagiaire " +
                         "WHERE stagiaire_id = #stagiaireID LIMIT 1",
+                resultClass = UserInfosData.class),
+        @NamedNativeQuery(name = "get_next_user",
+                query = "SELECT * " +
+                        "FROM recrusimple.stagiaire AS stagiaire " +
+                        "WHERE NOT EXISTS " +
+                        "    (SELECT 1 " +
+                        "     FROM recrusimple.stagiaire_interesse_par_employeur AS SIE " +
+                        "     WHERE stagiaire.stagiaire_id = SIE.stagiaire_id) LIMIT 1",
                 resultClass = UserInfosData.class)
 })
 
@@ -170,19 +178,13 @@ public class UserInfosData implements Data {
     public void setUserId(Integer userId) {
     }
 
-    ;
-
     public Integer getUserId() {
         return null;
     }
 
-    ;
-
     public Integer getId() {
         return null;
     }
-
-    ;
 
     public void setId(Integer nId) {
     }
@@ -191,12 +193,8 @@ public class UserInfosData implements Data {
         return "";
     }
 
-    ;
-
     public void setLabel(String strLabel) {
     }
-
-    ;
 
     private String id;
 

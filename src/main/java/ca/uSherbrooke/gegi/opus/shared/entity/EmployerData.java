@@ -9,7 +9,6 @@ import javax.persistence.*;
  */
 
 
-
 @NamedNativeQueries({
         @NamedNativeQuery(name = "save_employer", // exists only for test purposes
                 query = "INSERT INTO recrusimple.employeur (user_id, nom,domaine,lieu,sommaire,taches) " +
@@ -32,9 +31,16 @@ import javax.persistence.*;
                 query = "SELECT * " +
                         "FROM recrusimple.employeur " +
                         "WHERE employeur_id = #employerID",
+                resultClass = EmployerData.class),
+        @NamedNativeQuery(name = "get_next_employer", // exists only for test purposes
+                query = "SELECT * " +
+                        "FROM recrusimple.employeur AS emp " +
+                        "WHERE NOT EXISTS " +
+                        "    (SELECT 1 " +
+                        "     FROM recrusimple.employeur_interesse_par_stagiaire AS EIS " +
+                        "     WHERE emp.employeur_id = EIS.employeur_id) LIMIT 1",
                 resultClass = EmployerData.class)
 })
-
 
 @Entity
 @Table(name = "recrusimple.employeur", schema = "recrusimple.", catalog = "opus")
@@ -111,6 +117,7 @@ public class EmployerData implements Data {
     public void setEmployerAddress(String strAddress) {
         this.strAddress = strAddress;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -143,15 +150,25 @@ public class EmployerData implements Data {
         return result;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return null;
-    };
+    }
 
-    public void setId(Integer nId){}
+    ;
 
-    public String getLabel(){return "";};
+    public void setId(Integer nId) {
+    }
 
-    public void setLabel(String strLabel){};
+    public String getLabel() {
+        return "";
+    }
+
+    ;
+
+    public void setLabel(String strLabel) {
+    }
+
+    ;
 
     private String id;
 
