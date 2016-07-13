@@ -19,6 +19,7 @@ public class GetEmployerInfos extends ActionImpl<GetEmployerInfosResult> {
     public String m_strLocation = "";
     public String m_strSummary = "";
     public String m_strCIP = "";
+    public String m_strTechnologies = "";
 
     public GetEmployerInfos() {
     }
@@ -43,7 +44,8 @@ public class GetEmployerInfos extends ActionImpl<GetEmployerInfosResult> {
         this.m_nEmployerID = nEmployerID;
     }
 
-    public void insertNewEmployer(boolean bSaveEmployer) {
+    public void insertNewEmployer(String strCIP, boolean bSaveEmployer) {
+        this.m_strCIP = strCIP;
         this.m_bSaveEmployer = bSaveEmployer;
     }
 
@@ -57,6 +59,7 @@ public class GetEmployerInfos extends ActionImpl<GetEmployerInfosResult> {
         this.m_nEmployerID = nEmployerID;
         this.m_bGetEmployer = bGetEmployer;
     }
+
     public void getEmployerWithCIP(String strCIP, boolean bGetEmployer) {
         this.m_strCIP = strCIP;
         this.m_bGetEmployer = bGetEmployer;

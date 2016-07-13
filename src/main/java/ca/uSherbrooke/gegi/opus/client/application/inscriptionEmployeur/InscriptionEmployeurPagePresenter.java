@@ -30,14 +30,12 @@ public class InscriptionEmployeurPagePresenter extends Presenter<InscriptionEmpl
     public static final Slot SLOT_USERS = new Slot();
     @Inject
     SideMenuPresenter sideMenuPresenter;
-    @Inject DispatchAsync dispatchAsync;
 
     @Override
     public void displayUserInfo(Integer groupId) {
     }
 
     public interface MyView extends View, HasUiHandlers<InscriptionEmployeurPageUiHandlers> {
-        public void insertNewEmployer();
     }
 
     @ProxyStandard
@@ -58,20 +56,5 @@ public class InscriptionEmployeurPagePresenter extends Presenter<InscriptionEmpl
 
         sideMenuPresenter.getView().addToApplicationPresenter();
         sideMenuPresenter.refreshList();
-
-        GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
-        dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
-
-    private AsyncCallback<GetEmployerInfosResult> employerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
-        @Override
-        public void onSuccess(GetEmployerInfosResult result) {
-            getView().insertNewEmployer();
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
-        }
-    };
-
 }

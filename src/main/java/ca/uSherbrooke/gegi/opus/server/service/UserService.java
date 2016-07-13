@@ -33,6 +33,7 @@ public class UserService {
     }
 
     public boolean insertUserInfos(GetUserInfos user) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_user")
                 .setParameter("stageNumber", user.m_nNumeroStage)
                 .setParameter("stagiaireCV", user.m_strCV)
@@ -40,16 +41,19 @@ public class UserService {
                 .setParameter("deptID", user.m_nDepartementID).executeUpdate();
         user.setStagiaireID((int) this.dao.getNamedSingleResult("get_last_id"));
         setConcepts(user);
+        this.dao.commitTransaction();
         return true;
     }
 
     public boolean updateUserInfos(GetUserInfos user) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("update_user")
                 .setParameter("stageNumber", user.m_nNumeroStage)
                 .setParameter("stagiaireCV", user.m_strCV)
                 .setParameter("strCIP", user.m_strCIP)
                 .setParameter("deptID", user.m_nDepartementID)
                 .setParameter("stagiaireID", user.getStagiaireID()).executeUpdate();
+        this.dao.commitTransaction();
         setConcepts(user);
         return true;
     }
@@ -79,16 +83,19 @@ public class UserService {
     }
 
     public boolean insertEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_employer")
                 .setParameter("strCIP", employer.m_strCIP)
                 .setParameter("name", employer.m_strName)
                 .setParameter("domain", employer.m_strDomain)
                 .setParameter("location", employer.m_strLocation)
                 .setParameter("summary", employer.m_strSummary).executeUpdate();
+        this.dao.commitTransaction();
         return true;
     }
 
     public boolean updateEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("update_employer")
                 .setParameter("strCIP", employer.m_strCIP)
                 .setParameter("name", employer.m_strName)
@@ -96,6 +103,7 @@ public class UserService {
                 .setParameter("location", employer.m_strLocation)
                 .setParameter("summary", employer.m_strSummary)
                 .setParameter("employerID", employer.getEmployerID()).executeUpdate();
+        this.dao.commitTransaction();
         return true;
     }
 
@@ -130,18 +138,22 @@ public class UserService {
     }
 
     public boolean saveMatchStagiaire(MatchInfos match) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_match_employer")
                 .setParameter("stagiaireID", match.getStagiaireID())
                 .setParameter("employerID", match.getEmployerID())
                 .setParameter("interet", match.getInteret()).executeUpdate();
+        this.dao.commitTransaction();
         return true;
     }
 
     public boolean saveMatchEmployer(MatchInfos match) throws UserSessionActionException {
+        this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_match_stagiaire")
                 .setParameter("stagiaireID", match.getStagiaireID())
                 .setParameter("employerID", match.getEmployerID())
                 .setParameter("interet", match.getInteret()).executeUpdate();
+        this.dao.commitTransaction();
         return true;
     }
 

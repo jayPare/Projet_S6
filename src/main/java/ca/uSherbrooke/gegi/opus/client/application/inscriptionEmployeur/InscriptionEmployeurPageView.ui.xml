@@ -34,7 +34,7 @@
                             <b:TextBox ui:field="tbTechnologies" b:id="formTechnologies"/>
                         </b:FormGroup>
 
-                        <b:Button>S'inscrire</b:Button>
+                        <b:Button ui:field="btnSubscribe">S'inscrire</b:Button>
 
                     </b:FieldSet>
                 </b:Form>
