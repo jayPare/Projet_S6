@@ -3,12 +3,11 @@
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur.sideMenu;
+package ca.uSherbrooke.gegi.opus.client.application.sideMenu;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
 import ca.uSherbrooke.gegi.commons.core.shared.utils.Sort;
-import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -66,7 +65,6 @@ public class SideMenuView extends ViewWithUiHandlers<SideMenuUiHandlers> impleme
 			for(Data d : listData){
 				a = new AnchorListItem();
 				a.setText(d.getLabel());
-				a.setTargetHistoryToken(NameTokens.home.replace("{dataId}", d.getId().toString())); // TODO : replace with right nameToken and path parameter or delete if unnecessary
 
 				ulMenuContent.add(a);
 			}

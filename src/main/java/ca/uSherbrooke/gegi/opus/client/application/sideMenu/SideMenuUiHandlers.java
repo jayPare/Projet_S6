@@ -3,7 +3,7 @@
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.editProfileEtudiant.sideMenu;
+package ca.uSherbrooke.gegi.opus.client.application.sideMenu;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 

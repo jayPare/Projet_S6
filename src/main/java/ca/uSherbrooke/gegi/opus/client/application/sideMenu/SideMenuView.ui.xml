@@ -29,7 +29,7 @@
         </g:HTMLPanel>
         <!-- End interior panel of the side menu -->
 		<b_html:UnorderedList ui:field="ulSidebar" b:id="sidebar">
-			<b:AnchorListItem icon="GLOBE" title="Tous les data" targetHistoryToken="/nameToken" />
+			<b:AnchorListItem icon="GLOBE" title="Tous les data" targetHistoryToken="/homeEtudiant" />
 		</b_html:UnorderedList>
     </g:HTMLPanel>
 </ui:UiBinder>

@@ -5,13 +5,12 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.editProfileEtudiant;
 
-import ca.uSherbrooke.gegi.opus.client.application.editProfileEtudiant.sideMenu.SideMenuModule;
+import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuModule;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class EditProfileEtudiantModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        install(new SideMenuModule());
 
         bindPresenter(EditProfileEtudiantPagePresenter.class, EditProfileEtudiantPagePresenter.MyView.class, EditProfileEtudiantPageView.class,
                 EditProfileEtudiantPagePresenter.MyProxy.class);

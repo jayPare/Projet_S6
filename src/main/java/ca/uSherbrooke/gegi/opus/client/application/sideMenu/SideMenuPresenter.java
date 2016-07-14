@@ -3,7 +3,7 @@
  * Tous droits réservés / All rights reserved.
  */
 
-package ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur.sideMenu;
+package ca.uSherbrooke.gegi.opus.client.application.sideMenu;
 
 import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
 import ca.uSherbrooke.gegi.commons.core.shared.utils.Sort;
@@ -19,7 +19,7 @@ import java.util.List;
 public class SideMenuPresenter extends PresenterWidget<SideMenuPresenter.MyView> implements SideMenuUiHandlers {
 
 	@Inject DispatchAsync dispatchAsync;
-
+	
 	public interface MyView extends View, HasUiHandlers<SideMenuUiHandlers> {
 		public void setList(List<Data> listData);
 		public Sort getSort();

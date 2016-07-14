@@ -7,7 +7,7 @@ package ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-import ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur.sideMenu.SideMenuPresenter;
+import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
