@@ -66,7 +66,7 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
 
         lblSommaire.setText(objEmployerInfos.getEmployerSummary());
 
-        //TODO: Finish this part
+        //TODO: Ajouter ces champs dans l'objet employeur
         //lblNature.setText(objEmployerInfos.getEmployerNature());
         //lblTechnologies.setText(objEmployerInfos.getEmployerTechs());
     }

@@ -23,7 +23,10 @@ import com.gwtplatform.mvp.client.proxy.AsyncCallSucceedHandler;
 public class InscriptionEmployeurPageView extends ViewImpl implements InscriptionEmployeurPagePresenter.MyView
 {
 
+    //TODO: Refaire le style pour la page d'inscription des employeurs
+
     private final Widget widget;
+
     @javax.inject.Inject
     DispatchAsync dispatchAsync;
 
