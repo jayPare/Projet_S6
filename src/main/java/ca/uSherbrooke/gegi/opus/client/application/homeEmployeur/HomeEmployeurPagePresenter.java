@@ -11,10 +11,7 @@ import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfosResult;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -27,8 +24,6 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import javax.inject.Inject;
-
-import static com.google.gwt.query.client.GQuery.console;
 
 public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePresenter.MyView, HomeEmployeurPagePresenter.MyProxy> implements HomeEmployeurPageUiHandlers {
 
