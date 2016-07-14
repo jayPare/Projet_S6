@@ -39,7 +39,7 @@ public class InscriptionEmployeurPagePresenter extends Presenter<InscriptionEmpl
     }
 
     @ProxyStandard
-    @NameToken(NameTokens.EMPLOYEUR_EDIT)
+    @NameToken(NameTokens.EMPLOYEUR_INSCRIPTION)
 	/*@UseGatekeeper(AuthenticationGatekeeper.class)*/
     public interface MyProxy extends ProxyPlace<InscriptionEmployeurPagePresenter> {
     }

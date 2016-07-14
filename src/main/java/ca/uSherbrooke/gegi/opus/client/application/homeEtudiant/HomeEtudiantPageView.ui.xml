@@ -15,13 +15,11 @@
                     </b:Column>
 
                     <b:Column size="MD_3">
-                        <b:FormGroup>
-                            <b:FormControlStatic ui:field="lblNom" text=" Erreur de chargement du nom"></b:FormControlStatic>
+                            <b:Heading size="H3"  ui:field="lblNom" text=" Erreur de chargement du nom"/>
 
-                            <b:FormControlStatic ui:field="lblProgrammeEtude" text="Erreur de chargement du programme"></b:FormControlStatic>
+                            <html:Paragraph ui:field="lblProgrammeEtude" text="Erreur de chargement du programme"/>
 
-                            <b:FormControlStatic ui:field="lblStage" text="Erreur de chargement du stage"></b:FormControlStatic>
-                        </b:FormGroup>
+                            <html:Paragraph ui:field="lblStage" text="Erreur de chargement du stage"/>
                     </b:Column>
 
                     <b:Column size="MD_2" marginTop="10">

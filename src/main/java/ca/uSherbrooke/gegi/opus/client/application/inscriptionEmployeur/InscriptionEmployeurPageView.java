@@ -49,7 +49,10 @@ public class InscriptionEmployeurPageView extends ViewImpl implements Inscriptio
     org.gwtbootstrap3.client.ui.TextBox tbSommaire;
 
     @UiHandler("btnSubscribe")
-    public void onClick(ClickEvent event){ insertNewEmployer(); }
+    public void onClick(ClickEvent event)
+    {
+        insertNewEmployer();
+    }
 
     public void insertNewEmployer()
     {
