@@ -19,6 +19,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
 {
 
     private final Widget widget;
+    
     @UiField
     org.gwtbootstrap3.client.ui.PanelGroup panelMatches;
 
@@ -31,11 +32,6 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
     public interface Binder extends UiBinder<Widget, ViewMatchesPageView>
     {
     }
-
-    /*public interface checkUiHandlers extends UiHandlers
-    {
-        void onCheck();
-    }*/
 
     List<MatchData> objMatchData;
 
@@ -53,13 +49,9 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
         panelMatches.add(panel);
         panelMatches.add(panelHeader);
 
-        //TODO: objMatchData contient les données
+        //TODO: Trouver un moyen de fetcher les données de objMatchData et de les faire afficher
 
     }
-
-    //@UiHandler("anchorCheck")
-    //public void onCheck(ClickEvent event){
-    //}
 
     @Inject
     public ViewMatchesPageView(final Binder binder)

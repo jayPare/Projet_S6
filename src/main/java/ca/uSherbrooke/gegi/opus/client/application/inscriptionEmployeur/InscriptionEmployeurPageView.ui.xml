@@ -2,7 +2,6 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 
-
     <g:HTMLPanel>
         <b:PageHeader text="Modification de votre profil" subText="Opus"/>
         <div style="width: 100%; height: 80%; border: 2px solid black; padding: 5px;">
