@@ -61,7 +61,7 @@ public class InscriptionEmployeurPageView extends ViewImpl implements Inscriptio
         objEmployerInfo.m_strLocation = tbLieu.getText();
         objEmployerInfo.m_strTechnologies =tbTechnologies.getText();
         objEmployerInfo.m_strSummary = tbSommaire.getText();
-
+        //TODO: Ajouter le CIP de l'employeur déja connecté.
         objEmployerInfo.insertNewEmployer("degs2601",true);
         dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }

@@ -52,6 +52,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
 
         panelMatches.add(panel);
         panelMatches.add(panelHeader);
+
         //TODO: objMatchData contient les données
 
     }
@@ -61,12 +62,14 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
     //}
 
     @Inject
-    public ViewMatchesPageView(final Binder binder) {
+    public ViewMatchesPageView(final Binder binder)
+    {
         widget = binder.createAndBindUi(this);
     }
 
     @Override
-    public Widget asWidget() {
+    public Widget asWidget()
+    {
         return widget;
     }
 }

@@ -47,7 +47,7 @@
 
             </b:Form>
 
-            <b:Button marginLeft="10" marginBottom="10">Modifier mon profil</b:Button>
+            <b:Button ui:field="btnModifier" marginLeft="10" marginBottom="10">Modifier mon profil</b:Button>
 
         </b:Panel>
 
