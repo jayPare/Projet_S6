@@ -37,28 +37,19 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     {
         void onCheck();
     }
+
     @UiField
-    FormLabel lblNomEntreprise;
+    org.gwtbootstrap3.client.ui.Heading lblNomEntreprise;
     @UiField
-    FormLabel lblDomaine;
+    org.gwtbootstrap3.client.ui.html.Paragraph lblDomaine;
     @UiField
-    FormLabel lblDescription;
+    org.gwtbootstrap3.client.ui.html.Paragraph lblAdresse;
     @UiField
-    FormLabel lblAdresse;
+    org.gwtbootstrap3.client.ui.html.Paragraph lblSommaire;
     @UiField
-    FormLabel lblSommaire;
+    org.gwtbootstrap3.client.ui.html.Paragraph lblNature;
     @UiField
-    FormLabel lblNature;
-    @UiField
-    FormLabel lblFonctions;
-    @UiField
-    FormLabel lblTechnologies;
-    @UiField
-    FormLabel lblExigences;
-    @UiField
-    Anchor anchorCheck;
-    @UiField
-    Anchor anchorClose;
+    org.gwtbootstrap3.client.ui.html.Paragraph lblTechnologies;
 
     EmployerData objEmployerInfos;
 
@@ -67,16 +58,22 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
         this.objEmployerInfos = objEmployerInfos;
     }
 
-    public void setEmployerInfos(){
-        lblNomEntreprise.setHTML(objEmployerInfos.getEmployerName());
+    public void setEmployerInfos()
+    {
+        lblNomEntreprise.setText(objEmployerInfos.getEmployerName());
         lblDomaine.setText(objEmployerInfos.getEmployerDomain());
-        lblDescription.setText(objEmployerInfos.getEmployerSummary());
         lblAdresse.setText(objEmployerInfos.getEmployerAddress());
+
+        lblSommaire.setText(objEmployerInfos.getEmployerSummary());
+
+        //TODO: Finish this part
+        //lblNature.setText(objEmployerInfos.getEmployerNature());
+        //lblTechnologies.setText(objEmployerInfos.getEmployerTechs());
     }
 
-    @UiHandler("anchorCheck")
-    public void onCheck(ClickEvent event){
-    }
+    //@UiHandler("anchorCheck")
+    //public void onCheck(ClickEvent event){
+    //}
 
     @Inject
     public HomeEmployeurPageView(final Binder binder) {

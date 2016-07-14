@@ -38,15 +38,17 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
     }
 
     @UiField
-    org.gwtbootstrap3.client.ui.TextBox tbNomEntreprise;
+    org.gwtbootstrap3.client.ui.TextBox tbNom;
     @UiField
     org.gwtbootstrap3.client.ui.TextBox tbDomaine;
     @UiField
-    org.gwtbootstrap3.client.ui.TextBox tbLieu;
+    org.gwtbootstrap3.client.ui.TextBox tbVille;
     @UiField
-    org.gwtbootstrap3.client.ui.TextBox tbTechnologies;
+    org.gwtbootstrap3.client.ui.TextArea tbTechnologies;
     @UiField
-    org.gwtbootstrap3.client.ui.TextBox tbSommaire;
+    org.gwtbootstrap3.client.ui.TextArea tbSommaire;
+    @UiField
+    org.gwtbootstrap3.client.ui.TextArea tbNature;
 
     EmployerData objEmployerInfos;
 

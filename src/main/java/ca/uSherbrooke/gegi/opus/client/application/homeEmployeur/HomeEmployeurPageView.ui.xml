@@ -1,93 +1,57 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:html="urn:import:org.gwtbootstrap3.client.ui.html">
 
     <g:HTMLPanel>
-        <b:PageHeader text="Page employeur" subText="Opus"/>
-        <div style="width: 100%; height: 80%; border: 2px solid black; padding: 5px;">
-            <div style="float: left; width: 20%; height:auto; padding: 5px;">
-                <b:Form ui:field="form">
-                    <b:FormGroup>
-                        <b:FormLabel ui:field="lblNomEntreprise" text="info goes here"/>
-                    </b:FormGroup>
-                    <b:FormGroup>
-                        <b:FormLabel ui:field="lblDomaine" text="info goes here"/>
-                    </b:FormGroup>
-                    <b:FormGroup>
-                        <b:FormLabel ui:field="lblDescription" text="info goes here"/>
-                    </b:FormGroup>
-                    <b:FormGroup>
-                        <b:FormLabel ui:field="lblAdresse" text="info goes here"/>
-                    </b:FormGroup>
-                </b:Form>
-            </div>
-            <div style="float: left; width: 5vw; border: 2px solid black; padding: 5px;">
 
-                <div style="float: left; width: 2vw; height: 2vw; border: 2px solid black; padding: 5px;">
-                        <b:Anchor ui:field="anchorClose" icon="CLOSE"/>
-                </div>
-                <div style="float: left; width: 2vw; height: 2vw; border: 2px solid black; padding: 5px;">
-                    <b:Anchor ui:field="anchorCheck" icon="CHECK"/>
-                </div>
-            </div>
-            <div style="clear:left; width: 100%; padding: 5px;">
-                <b:NavTabs>
-                    <b:TabListItem active="true" dataTarget="#tab1" text="Sommaire"/>
-                    <b:TabListItem dataTarget="#tab2" text="Nature de l'entreprise"/>
-                    <b:TabListItem dataTarget="#tab3" text="Fonctions"/>
-                    <b:TabListItem dataTarget="#tab4" text="Technologies"/>
-                    <b:TabListItem dataTarget="#tab5" text="Exigences"/>
-                </b:NavTabs>
+        <b:PageHeader text="Consulter des profils d'employeurs" subText="Opus"/>
 
-                <b:TabContent>
-                    <b:TabPane fade="true" in="true" active="true" b:id="tab1">
-                        <b:Form ui:field="form2">
-                            <b:FormGroup>
-                                <b:FormLabel text="Sommaire: "/>
-                                <b:FormLabel ui:field="lblSommaire" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
+        <b:Panel >
+            <b:Row marginTop="10" marginLeft="0">
 
-                    <b:TabPane fade="true" b:id="tab2">
-                        <b:Form ui:field="form3">
-                            <b:FormGroup>
-                                <b:FormLabel text="Nature de l'entreprise: "/>
-                                <b:FormLabel ui:field="lblNature" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
+                <b:Column size="MD_4">
 
-                    <b:TabPane fade="true" b:id="tab3">
-                        <b:Form ui:field="form5">
-                            <b:FormGroup>
-                                <b:FormLabel text="Fonctions"/>
-                                <b:FormLabel ui:field="lblFonctions" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
+                        <b:Heading size="H3" ui:field="lblNomEntreprise" text="Erreur de chargement du nom de l'entreprise."/>
 
-                    <b:TabPane fade="true" b:id="tab4">
-                        <b:Form ui:field="form6">
-                            <b:FormGroup>
-                                <b:FormLabel text="Technologies"/>
-                                <b:FormLabel ui:field="lblTechnologies" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
+                        <html:Paragraph ui:field="lblDomaine" text="Erreur de chargement du domaine."/>
 
-                    <b:TabPane fade="true" b:id="tab5">
-                        <b:Form ui:field="form7">
-                            <b:FormGroup>
-                                <b:FormLabel text="Exigences: "/>
-                                <b:FormLabel ui:field="lblExigences" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
+                        <html:Paragraph ui:field="lblAdresse" text="Erreur de chargement d'adresse."/>
 
-                </b:TabContent>
+                </b:Column>
 
-            </div>
-        </div>
+                <b:Column size="MD_2" marginTop="10">
+                    <b:Button ui:field="btnLike" size="LARGE" marginRight="10" type="SUCCESS" text="Intérêt"/>
+                    <b:Button ui:field="btnDislike" size="LARGE" type="DANGER" text="Pas d'intérêt"/>
+                </b:Column>
+            </b:Row>
+
+            <b:NavTabs marginLeft="10" marginRight="20">
+                <b:TabListItem active="true" dataTarget="#tab1" text="Sommaire"/>
+                <b:TabListItem dataTarget="#tab2" text="Nature de l'entreprise"/>
+                <b:TabListItem dataTarget="#tab4" text="Technologies"/>
+            </b:NavTabs>
+
+            <b:TabContent marginLeft="10" marginBottom="10" marginRight="20">
+                <b:TabPane fade="true" in="true" active="true" b:id="tab1">
+                    <html:Paragraph marginTop="10" marginLeft="10" ui:field="lblSommaire" text="Erreur de chargement du sommaire."></html:Paragraph>
+                </b:TabPane>
+
+                <b:TabPane fade="true" b:id="tab2">
+                    <html:Paragraph marginTop="10" marginLeft="10" ui:field="lblNature" text="Erreur de chargement de la nature."></html:Paragraph>
+                </b:TabPane>
+
+                <b:TabPane fade="true" b:id="tab4">
+                    <html:Paragraph marginTop="10" marginLeft="10" ui:field="lblTechnologies" text="Erreur de chergement des technologies"></html:Paragraph>
+                </b:TabPane>
+
+
+
+            </b:TabContent>
+
+
+        </b:Panel>
+
+
+
     </g:HTMLPanel>
 </ui:UiBinder>

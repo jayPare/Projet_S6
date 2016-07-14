@@ -41,11 +41,11 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     //}
 
     @UiField
-    org.gwtbootstrap3.client.ui.FormControlStatic lblNom;
+    org.gwtbootstrap3.client.ui.Heading lblNom;
     @UiField
-    org.gwtbootstrap3.client.ui.FormControlStatic lblProgrammeEtude;
+    org.gwtbootstrap3.client.ui.html.Paragraph lblProgrammeEtude;
     @UiField
-    org.gwtbootstrap3.client.ui.FormControlStatic lblStage;
+    org.gwtbootstrap3.client.ui.html.Paragraph lblStage;
     @UiField
     org.gwtbootstrap3.client.ui.html.Paragraph taCompetences;
     @UiField
