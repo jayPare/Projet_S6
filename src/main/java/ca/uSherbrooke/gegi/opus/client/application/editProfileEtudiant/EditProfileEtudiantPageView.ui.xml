@@ -49,7 +49,7 @@
                     </b:TabPane>
                 </b:TabContent>
 
-                <b:Button marginLeft="10" marginBottom="10">Modifier mon profil</b:Button>
+                <b:Button ui:field="btnUpdate" marginLeft="10" marginBottom="10">Modifier mon profil</b:Button>
 
             </b:Panel>
         </b:Form>
