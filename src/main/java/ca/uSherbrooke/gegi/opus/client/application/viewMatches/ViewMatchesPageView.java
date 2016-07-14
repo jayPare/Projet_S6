@@ -5,22 +5,22 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.viewMatches;
 
-import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
+import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewImpl;
-import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.FormLabel;
+
+import java.util.List;
 
 public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePresenter.MyView
 {
 
     private final Widget widget;
+    @UiField
+    org.gwtbootstrap3.client.ui.PanelGroup panelMatches;
 
     @Override
     public void setUiHandlers(ViewMatchesPageUiHandlers homePageUiHandlers)
@@ -32,51 +32,33 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
     {
     }
 
-    public interface checkUiHandlers extends UiHandlers
+    /*public interface checkUiHandlers extends UiHandlers
     {
         void onCheck();
-    }
-    @UiField
-    FormLabel lblNomEntreprise;
-    @UiField
-    FormLabel lblDomaine;
-    @UiField
-    FormLabel lblDescription;
-    @UiField
-    FormLabel lblAdresse;
-    @UiField
-    FormLabel lblSommaire;
-    @UiField
-    FormLabel lblNature;
-    @UiField
-    FormLabel lblFonctions;
-    @UiField
-    FormLabel lblTechnologies;
-    @UiField
-    FormLabel lblExigences;
-    @UiField
-    Anchor anchorCheck;
-    @UiField
-    Anchor anchorClose;
+    }*/
 
-    EmployerData objEmployerInfos;
+    List<MatchData> objMatchData;
 
-
-    public void setEmployerInfosObject(EmployerData objEmployerInfos)
+    public void setMatchesObject(List<MatchData> listMatches)
     {
-        this.objEmployerInfos = objEmployerInfos;
+        this.objMatchData = listMatches;
     }
 
-    public void setEmployerInfos(){
-        lblNomEntreprise.setHTML(objEmployerInfos.getEmployerName());
-        lblDomaine.setText(objEmployerInfos.getEmployerDomain());
-        lblDescription.setText(objEmployerInfos.getEmployerSummary());
-        lblAdresse.setText(objEmployerInfos.getEmployerAddress());
+    public void setMatches()
+    {
+
+        Widget panel = new org.gwtbootstrap3.client.ui.Panel();
+        Widget panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
+
+        panelMatches.add(panel);
+        panelMatches.add(panelHeader);
+        //TODO: objMatchData contient les données
+
     }
 
-    @UiHandler("anchorCheck")
-    public void onCheck(ClickEvent event){
-    }
+    //@UiHandler("anchorCheck")
+    //public void onCheck(ClickEvent event){
+    //}
 
     @Inject
     public ViewMatchesPageView(final Binder binder) {

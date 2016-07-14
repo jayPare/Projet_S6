@@ -9,9 +9,9 @@ import ca.uSherbrooke.gegi.commons.core.client.presenter.application.Application
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
-import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfos;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfosResult;
+import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -24,8 +24,8 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import javax.inject.Inject;
+import java.util.List;
 
-import static com.google.gwt.query.client.GQuery.console;
 
 public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter.MyView, ViewMatchesPagePresenter.MyProxy> implements ViewMatchesPageUiHandlers {
 
@@ -38,8 +38,8 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
     }
 
     public interface MyView extends View, HasUiHandlers<ViewMatchesPageUiHandlers> {
-        public void setEmployerInfosObject(EmployerData objEmployerInfos);
-        public void setEmployerInfos();
+        public void setMatchesObject(List<MatchData> objEmployerInfos);
+        public void setMatches();
     }
 
     @ProxyStandard
@@ -60,17 +60,19 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
 
         sideMenuPresenter.getView().addToApplicationPresenter();
         sideMenuPresenter.refreshList();
-        
-        GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
-        objEmployerInfo.setEmployerID(123);
-        dispatchAsync.execute(objEmployerInfo, getEmployerInfosAsyncCallback);
+
+        //TODO: Verifier si employeur ou etudiant
+        MatchInfos objMatches = new MatchInfos();
+        objMatches.getMatchEmployer(1, true);
+        dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
     }
 
-    private AsyncCallback<GetEmployerInfosResult> getEmployerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
+    private AsyncCallback<MatchInfosResult> MatchInfosResultAsyncCallback = new AsyncCallback<MatchInfosResult>() {
         @Override
-        public void onSuccess(GetEmployerInfosResult result) {
-            getView().setEmployerInfosObject(result.getEmployerInfosObject());
-            getView().setEmployerInfos();
+        public void onSuccess(MatchInfosResult result)
+        {
+            getView().setMatchesObject(result.getMatchInfosObject());
+            getView().setMatches();
         }
         @Override
         public void onFailure(Throwable throwable) {
@@ -78,18 +80,4 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
         }
     };
 
-    private AsyncCallback<GetEmployerInfosResult> setEmployerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
-        @Override
-        public void onSuccess(GetEmployerInfosResult result) {
-            if(result.getSaveSuccess() == true){
-                console.log("Enregistrement effectuée avec succès");
-            }else{
-                console.log("Enregistrement échouée");
-            }
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'employeur n'a bien été enregistrées...");
-        }
-    };
 }
