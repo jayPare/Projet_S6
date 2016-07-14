@@ -62,7 +62,6 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
 
     EmployerData objEmployerInfos;
 
-
     public void setEmployerInfosObject(EmployerData objEmployerInfos)
     {
         this.objEmployerInfos = objEmployerInfos;

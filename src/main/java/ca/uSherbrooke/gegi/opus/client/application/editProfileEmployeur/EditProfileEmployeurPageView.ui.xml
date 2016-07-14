@@ -3,91 +3,45 @@
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 
     <g:HTMLPanel>
-        <b:PageHeader text="Page employeur" subText="Opus"/>
+        <b:PageHeader text="Modification de votre profil" subText="Opus"/>
+
+
+
         <div style="width: 100%; height: 80%; border: 2px solid black; padding: 5px;">
-            <div style="float: left; width: 20%; height:auto; padding: 5px;">
-                <b:Form ui:field="form">
+            <b:Form ui:field="form">
+                <b:FieldSet>
+
                     <b:FormGroup>
-                        <b:FormLabel ui:field="lblNomEntreprise" text="info goes here"/>
+                        <b:FormLabel b:for="formNomEntreprise" ui:field="lblNomEntreprise" text="Nom de l'entreprise:"/>
+                        <b:TextBox ui:field="tbNomEntreprise" b:id="formNomEntreprise"/>
                     </b:FormGroup>
+
                     <b:FormGroup>
-                        <b:FormLabel ui:field="lblDomaine" text="info goes here"/>
+                        <b:FormLabel b:for="formDomaine" text="Domaine:"/>
+                        <b:TextBox ui:field="tbDomaine" b:id="formDomaine"/>
                     </b:FormGroup>
+
                     <b:FormGroup>
-                        <b:FormLabel ui:field="lblDescription" text="info goes here"/>
+                        <b:FormLabel b:for="formLieu"  text="Lieu"/>
+                        <b:TextBox ui:field="tbLieu" b:id="formLieu"/>
                     </b:FormGroup>
+
                     <b:FormGroup>
-                        <b:FormLabel ui:field="lblAdresse" text="info goes here"/>
+                        <b:FormLabel b:for="formSommaire"  text="Sommaire"/>
+                        <b:TextBox ui:field="tbSommaire" b:id="formSommaire"/>
                     </b:FormGroup>
-                </b:Form>
-            </div>
-            <div style="float: left; width: 5vw; border: 2px solid black; padding: 5px;">
 
-                <div style="float: left; width: 2vw; height: 2vw; border: 2px solid black; padding: 5px;">
-                        <b:Anchor ui:field="anchorClose" icon="CLOSE"/>
-                </div>
-                <div style="float: left; width: 2vw; height: 2vw; border: 2px solid black; padding: 5px;">
-                    <b:Anchor ui:field="anchorCheck" icon="CHECK"/>
-                </div>
-            </div>
-            <div style="clear:left; width: 100%; padding: 5px;">
-                <b:NavTabs>
-                    <b:TabListItem active="true" dataTarget="#tab1" text="Sommaire"/>
-                    <b:TabListItem dataTarget="#tab2" text="Nature de l'entreprise"/>
-                    <b:TabListItem dataTarget="#tab3" text="Fonctions"/>
-                    <b:TabListItem dataTarget="#tab4" text="Technologies"/>
-                    <b:TabListItem dataTarget="#tab5" text="Exigences"/>
-                </b:NavTabs>
+                    <b:FormGroup>
+                        <b:FormLabel b:for="formTechnologies"  text="Technologies"/>
+                        <b:TextBox ui:field="tbTechnologies" b:id="formTechnologies"/>
+                    </b:FormGroup>
 
-                <b:TabContent>
-                    <b:TabPane fade="true" in="true" active="true" id="tab1">
-                        <b:Form ui:field="form2">
-                            <b:FormGroup>
-                                <b:FormLabel text="Sommaire: "/>
-                                <b:FormLabel ui:field="lblSommaire" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
+                    <b:Button>Modifier mon profil</b:Button>
 
-                    <b:TabPane fade="true" id="tab2">
-                        <b:Form ui:field="form3">
-                            <b:FormGroup>
-                                <b:FormLabel text="Nature de l'entreprise: "/>
-                                <b:FormLabel ui:field="lblNature" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
-
-                    <b:TabPane fade="true" id="tab3">
-                        <b:Form ui:field="form5">
-                            <b:FormGroup>
-                                <b:FormLabel text="Fonctions"/>
-                                <b:FormLabel ui:field="lblFonctions" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
-
-                    <b:TabPane fade="true" id="tab4">
-                        <b:Form ui:field="form6">
-                            <b:FormGroup>
-                                <b:FormLabel text="Technologies"/>
-                                <b:FormLabel ui:field="lblTechnologies" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
-
-                    <b:TabPane fade="true" id="tab5">
-                        <b:Form ui:field="form7">
-                            <b:FormGroup>
-                                <b:FormLabel text="Exigences: "/>
-                                <b:FormLabel ui:field="lblExigences" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
-                    </b:TabPane>
-
-                </b:TabContent>
-
-            </div>
+                </b:FieldSet>
+            </b:Form>
         </div>
     </g:HTMLPanel>
+
+
 </ui:UiBinder>

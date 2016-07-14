@@ -40,7 +40,7 @@
                 </b:NavTabs>
 
                 <b:TabContent>
-                    <b:TabPane fade="true" in="true" active="true" id="tab1">
+                    <b:TabPane fade="true" in="true" active="true" b:id="tab1">
                         <b:Form ui:field="form2">
                             <b:FormGroup>
                                 <b:FormLabel text="Sommaire: "/>
@@ -49,7 +49,7 @@
                         </b:Form>
                     </b:TabPane>
 
-                    <b:TabPane fade="true" id="tab2">
+                    <b:TabPane fade="true" b:id="tab2">
                         <b:Form ui:field="form3">
                             <b:FormGroup>
                                 <b:FormLabel text="Nature de l'entreprise: "/>
@@ -58,7 +58,7 @@
                         </b:Form>
                     </b:TabPane>
 
-                    <b:TabPane fade="true" id="tab3">
+                    <b:TabPane fade="true" b:id="tab3">
                         <b:Form ui:field="form5">
                             <b:FormGroup>
                                 <b:FormLabel text="Fonctions"/>
@@ -67,7 +67,7 @@
                         </b:Form>
                     </b:TabPane>
 
-                    <b:TabPane fade="true" id="tab4">
+                    <b:TabPane fade="true" b:id="tab4">
                         <b:Form ui:field="form6">
                             <b:FormGroup>
                                 <b:FormLabel text="Technologies"/>
@@ -76,7 +76,7 @@
                         </b:Form>
                     </b:TabPane>
 
-                    <b:TabPane fade="true" id="tab5">
+                    <b:TabPane fade="true" b:id="tab5">
                         <b:Form ui:field="form7">
                             <b:FormGroup>
                                 <b:FormLabel text="Exigences: "/>

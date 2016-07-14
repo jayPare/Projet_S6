@@ -30,8 +30,7 @@ import static com.google.gwt.query.client.GQuery.console;
 public class EditProfileEtudiantPagePresenter extends Presenter<EditProfileEtudiantPagePresenter.MyView, EditProfileEtudiantPagePresenter.MyProxy> implements EditProfileEtudiantPageUiHandlers {
 
     public static final Slot SLOT_USERS = new Slot();
-    @Inject
-    SideMenuPresenter sideMenuPresenter;
+    @Inject SideMenuPresenter sideMenuPresenter;
     @Inject DispatchAsync dispatchAsync;
 
     @Override
@@ -63,6 +62,7 @@ public class EditProfileEtudiantPagePresenter extends Presenter<EditProfileEtudi
         sideMenuPresenter.refreshList();
 
         GetUserInfos objUserInfo = new GetUserInfos();
+        objUserInfo.getStudent(1, true);
         dispatchAsync.execute(objUserInfo, userInfosAsyncCallback);
     }
 
