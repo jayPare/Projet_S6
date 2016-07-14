@@ -5,7 +5,7 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant;
 
-import ca.uSherbrooke.gegi.opus.client.application.homeEtudiant.sideMenu.SideMenuModule;
+import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuModule;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class HomeEtudiantModule extends AbstractPresenterModule {
