@@ -5,6 +5,7 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.editProfileEtudiant;
 
+import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -17,6 +18,8 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.FormLabel;
 
+import java.util.List;
+
 public class EditProfileEtudiantPageView extends ViewImpl implements EditProfileEtudiantPagePresenter.MyView
 {
 
@@ -27,48 +30,61 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
 
     }
 
-    public interface Binder extends UiBinder<Widget, EditProfileEtudiantPageView> {
+    public interface Binder extends UiBinder<Widget, EditProfileEtudiantPageView>
+    {
+        
     }
 
-    public interface checkUiHandlers extends UiHandlers {
+    public interface checkUiHandlers extends UiHandlers
+    {
         void onCheck();
     }
-    @UiField
-    FormLabel lblPrenom;
-    @UiField
-    FormLabel lblNom;
-    @UiField
-    FormLabel lblProgrammeEtude;
-    @UiField
-    FormLabel lblStage;
-    @UiField
-    FormLabel lblEcole;
-    @UiField
-    FormLabel lblCompetences;
-    @UiField
-    FormLabel lblInteretsObjectifs;
-    @UiField
-    Anchor anchorCheck;
-    @UiField
-    Anchor anchorClose;
 
     UserInfosData objUserInfos;
+
+    @UiField
+    org.gwtbootstrap3.client.ui.FormControlStatic lblPrenom;
+    @UiField
+    org.gwtbootstrap3.client.ui.FormControlStatic lblNom;
+    @UiField
+    org.gwtbootstrap3.client.ui.FormControlStatic lblProgrammeEtude;
+    @UiField
+    org.gwtbootstrap3.client.ui.FormControlStatic lblStage;
+    @UiField
+    org.gwtbootstrap3.client.ui.TextArea taCompetences;
+    @UiField
+    org.gwtbootstrap3.client.ui.TextArea taInteretsObjectifs;
 
     public void setUserInfosObject(UserInfosData objUserInfos)
     {
         this.objUserInfos = objUserInfos;
     }
 
-    public void setUserInfos(){
+    public void setUserInfos()
+    {
         lblPrenom.setText(objUserInfos.getFirstName());
         lblNom.setText(objUserInfos.getLastName());
         lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
         lblStage.setText(Integer.toString(objUserInfos.getNumeroStage()));
-        lblCompetences.setText("changed");
-        lblInteretsObjectifs.setText(objUserInfos.getDepartementNom());
+
+        List<ConceptData> listeCompetences = objUserInfos.getCompetence();
+        taCompetences.setText("");
+
+        List<ConceptData> listeInterets = objUserInfos.getInteret();
+        taInteretsObjectifs.setText("");
+
+        for (int i=0;i < listeCompetences.size();i++)
+        {
+            taCompetences.setText(taCompetences.getText() + listeCompetences.get(i).getConceptNom() + ": " + listeCompetences.get(i).getNiveauSur5() + " ");
+        }
+
+        for (int i=0; i < listeInterets.size(); i++)
+        {
+            taInteretsObjectifs.setText(taInteretsObjectifs.getText() + listeInterets.get(i).getConceptNom() + ": " + listeInterets.get(i).getNiveauSur5() + " ");
+        }
     }
 
-    @UiHandler("anchorCheck")
+    //@UiHandler("anchorCheck")
     public void onCheck(ClickEvent event){
     }
 

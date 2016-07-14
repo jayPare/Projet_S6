@@ -1,61 +1,49 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:html="urn:import:org.gwtbootstrap3.client.ui.html">
 
 
     <g:HTMLPanel>
-        <b:PageHeader text="Page etudiant" subText="Opus"/>
-        <div style="width: 100%; height: 80%; border: 2px solid black; padding: 5px;">
-            <div style="float: left; width: 10vw; height: 10vw; border: 2px solid black; padding: 5px;">Photo</div>
-            <div style="float: left; width: 20%; height:auto; padding: 5px;">
-                <b:Form ui:field="form">
-                    <b:FormGroup>
-                        <b:FormLabel ui:field="lblPrenom" text="info goes here"/>
-                        <b:FormLabel ui:field="lblNom" text="info goes here"/>
-                    </b:FormGroup>
-                    <b:FormGroup>
-                        <b:FormLabel ui:field="lblProgrammeEtude" text="info goes here"/>
-                        <b:FormLabel text=", Stage: "/>
-                        <b:FormLabel ui:field="lblStage" text="info goes here"/>
-                    </b:FormGroup>
-                    <b:FormGroup>
-                        <b:FormLabel ui:field="lblEcole" text="Information école"/>
-                    </b:FormGroup>
-                </b:Form>
-            </div>
-            <div style="float: left; width: 5vw; border: 2px solid black; padding: 5px;">
+        <b:PageHeader text="Consulter des profils d'étudiants(es)" subText="Opus"/>
 
-                <div style="float: left; width: 2vw; height: 2vw; border: 2px solid black; padding: 5px;">
-                        <b:Anchor ui:field="anchorClose" icon="CLOSE"/>
-                </div>
-                <div style="float: left; width: 2vw; height: 2vw; border: 2px solid black; padding: 5px;">
-                    <b:Anchor ui:field="anchorCheck" icon="CHECK"/>
-                </div>
-            </div>
-            <div style="clear:left; width: 100%; padding: 5px;">
-                <b:NavTabs>
-                    <b:TabListItem active="true" dataTarget="#tab1" text="Cométences"/>
+            <b:Panel >
+                <b:Row marginTop="10" marginLeft="0">
+                    <b:Column size="MD_2">
+                        <b:ThumbnailLink>
+                            <b:Image url="images/image.jpg" type="THUMBNAIL"/>
+                        </b:ThumbnailLink>
+                    </b:Column>
+
+                    <b:Column size="MD_3">
+                        <b:FormGroup>
+                            <b:FormControlStatic ui:field="lblNom" text=" Erreur de chargement du nom"></b:FormControlStatic>
+
+                            <b:FormControlStatic ui:field="lblProgrammeEtude" text="Erreur de chargement du programme"></b:FormControlStatic>
+
+                            <b:FormControlStatic ui:field="lblStage" text="Erreur de chargement du stage"></b:FormControlStatic>
+                        </b:FormGroup>
+                    </b:Column>
+
+                    <b:Column size="MD_2" marginTop="10">
+                        <b:Button ui:field="btnLike" size="LARGE" marginRight="10" type="SUCCESS" text="Intérêt"/>
+                        <b:Button ui:field="btnDislike" size="LARGE" type="DANGER" text="Pas d'intérêt"/>
+                    </b:Column>
+                </b:Row>
+
+                <b:NavTabs marginLeft="10" marginRight="10" marginTop="10">
+                    <b:TabListItem active="true" dataTarget="#tab1" text="Compétences"/>
                     <b:TabListItem dataTarget="#tab2" text="Intérêts et objectifs"/>
                 </b:NavTabs>
-                <b:TabContent>
-                    <b:TabPane fade="true" in="true" active="true" b:id="tab1">
-                        <b:Form ui:field="form2">
-                            <b:FormGroup>
-                                <b:FormLabel text="Competences: "/>
-                                <b:FormLabel ui:field="lblCompetences" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
+                <b:TabContent marginLeft="10" marginBottom="20" marginRight="10" >
+                    <b:TabPane  marginLeft="10" marginTop="10" fade="true" in="true" active="true" b:id="tab1">
+                            <html:Paragraph ui:field="taCompetences" text="Erreur de chergement des intérêts."></html:Paragraph>
                     </b:TabPane>
-                    <b:TabPane fade="true" b:id="tab2">
-                        <b:Form ui:field="form3">
-                            <b:FormGroup>
-                                <b:FormLabel text="Interets et objectifs: "/>
-                                <b:FormLabel ui:field="lblInteretsObjectifs" text="info goes here"/>
-                            </b:FormGroup>
-                        </b:Form>
+                    <b:TabPane marginLeft="10" marginTop="10" fade="true" b:id="tab2">
+                            <html:Paragraph ui:field="taInteretsObjectifs" text="Erreur de chergement des compétences."></html:Paragraph>
                     </b:TabPane>
                 </b:TabContent>
-            </div>
-        </div>
+
+            </b:Panel>
+
     </g:HTMLPanel>
 </ui:UiBinder>

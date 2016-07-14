@@ -36,28 +36,17 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
     {
         void onCheck();
     }
+
     @UiField
-    FormLabel lblNomEntreprise;
+    org.gwtbootstrap3.client.ui.TextBox tbNomEntreprise;
     @UiField
-    FormLabel lblDomaine;
+    org.gwtbootstrap3.client.ui.TextBox tbDomaine;
     @UiField
-    FormLabel lblDescription;
+    org.gwtbootstrap3.client.ui.TextBox tbLieu;
     @UiField
-    FormLabel lblAdresse;
+    org.gwtbootstrap3.client.ui.TextBox tbTechnologies;
     @UiField
-    FormLabel lblSommaire;
-    @UiField
-    FormLabel lblNature;
-    @UiField
-    FormLabel lblFonctions;
-    @UiField
-    FormLabel lblTechnologies;
-    @UiField
-    FormLabel lblExigences;
-    @UiField
-    Anchor anchorCheck;
-    @UiField
-    Anchor anchorClose;
+    org.gwtbootstrap3.client.ui.TextBox tbSommaire;
 
     EmployerData objEmployerInfos;
 
@@ -67,15 +56,24 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
         this.objEmployerInfos = objEmployerInfos;
     }
 
-    public void setEmployerInfos(){
-        lblNomEntreprise.setHTML(objEmployerInfos.getEmployerName());
-        lblDomaine.setText(objEmployerInfos.getEmployerDomain());
-        lblDescription.setText(objEmployerInfos.getEmployerSummary());
-        lblAdresse.setText(objEmployerInfos.getEmployerAddress());
+    public void setEmployerInfos()
+    {
+
     }
 
-    @UiHandler("anchorCheck")
-    public void onCheck(ClickEvent event){
+    public void getEmployerInfosObject(EmployerData objEmployerInfos)
+    {
+
+    }
+
+    public void getEmployerInfos()
+    {
+
+    }
+
+    //@UiHandler("anchorCheck")
+    public void onCheck(ClickEvent event)
+    {
     }
 
     @Inject

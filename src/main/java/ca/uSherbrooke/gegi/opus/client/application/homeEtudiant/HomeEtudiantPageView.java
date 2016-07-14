@@ -5,6 +5,7 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant;
 
+import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -17,40 +18,38 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.FormLabel;
 
+import java.util.List;
+
 public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePresenter.MyView
 {
 
     private final Widget widget;
 
     @Override
-    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers) {
+    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers)
+    {
 
     }
 
-    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView> {
+    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView>
+    {
+
     }
 
-    public interface checkUiHandlers extends UiHandlers {
-        void onCheck();
-    }
+    //public interface checkUiHandlers extends UiHandlers {
+    //    void onCheck();
+    //}
+
     @UiField
-    FormLabel lblPrenom;
+    org.gwtbootstrap3.client.ui.FormControlStatic lblNom;
     @UiField
-    FormLabel lblNom;
+    org.gwtbootstrap3.client.ui.FormControlStatic lblProgrammeEtude;
     @UiField
-    FormLabel lblProgrammeEtude;
+    org.gwtbootstrap3.client.ui.FormControlStatic lblStage;
     @UiField
-    FormLabel lblStage;
+    org.gwtbootstrap3.client.ui.html.Paragraph taCompetences;
     @UiField
-    FormLabel lblEcole;
-    @UiField
-    FormLabel lblCompetences;
-    @UiField
-    FormLabel lblInteretsObjectifs;
-    @UiField
-    Anchor anchorCheck;
-    @UiField
-    Anchor anchorClose;
+    org.gwtbootstrap3.client.ui.html.Paragraph taInteretsObjectifs;
 
     UserInfosData objUserInfos;
 
@@ -60,25 +59,49 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     }
 
     public void setUserInfos(){
-        lblPrenom.setText(objUserInfos.getFirstName());
-        lblNom.setText(objUserInfos.getLastName());
+        lblNom.setText(objUserInfos.getFirstName() + " " +  objUserInfos.getLastName());
         lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
-        lblStage.setText(Integer.toString(objUserInfos.getNumeroStage()));
-        lblCompetences.setText("changed");
-        lblInteretsObjectifs.setText(objUserInfos.getDepartementNom());
+        lblStage.setText("Stage: " + Integer.toString(objUserInfos.getNumeroStage()));
+
+        List<ConceptData> listeCompetences = objUserInfos.getCompetence();
+        List<ConceptData> listeInterets = objUserInfos.getInteret();
+
+        taCompetences.setText("");
+        taInteretsObjectifs.setText("");
+
+        for (int i=0;i < listeCompetences.size();i++)
+        {
+            taCompetences.setText(taCompetences.getText() + listeCompetences.get(i).getConceptNom() + ": " + listeCompetences.get(i).getNiveauSur5() + " ");
+            //taCompetences.setHTML(taCompetences.getHTML() + "<br />");
+        }
+
+        for (int i=0; i < listeInterets.size(); i++)
+        {
+            taInteretsObjectifs.setText(taInteretsObjectifs.getText() + listeInterets.get(i).getConceptNom() + ": " + listeInterets.get(i).getNiveauSur5() + " ");
+        }
     }
 
-    @UiHandler("anchorCheck")
-    public void onCheck(ClickEvent event){
+    @UiHandler("btnLike")
+    public void onLikeClick(ClickEvent event)
+    {
+
+    }
+
+    @UiHandler("btnDislike")
+    public void onDislikeClick(ClickEvent event)
+    {
+
     }
 
     @Inject
-    public HomeEtudiantPageView(final Binder binder) {
+    public HomeEtudiantPageView(final Binder binder)
+    {
         widget = binder.createAndBindUi(this);
     }
 
     @Override
-    public Widget asWidget() {
+    public Widget asWidget()
+    {
         return widget;
     }
 }
