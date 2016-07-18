@@ -1,8 +1,10 @@
 package ca.uSherbrooke.gegi.opus.shared.entity;
 
 import ca.uSherbrooke.gegi.commons.core.shared.entity.Data;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by tomaslopinto on 20/06/16.
@@ -10,7 +12,7 @@ import javax.persistence.*;
 
 
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "save_employer", // exists only for test purposes
+        @NamedNativeQuery(name = "save_employer",
                 query = "INSERT INTO recrusimple.employeur (administrative_user_id, nom,domaine,lieu,sommaire,taches) " +
                         "VALUES (#strCIP," +
                         "        #name," +
@@ -18,7 +20,7 @@ import javax.persistence.*;
                         "        #location," +
                         "        #summary," +
                         "        #tasks)"),
-        @NamedNativeQuery(name = "update_employer", // exists only for test purposes
+        @NamedNativeQuery(name = "update_employer",
                 query = "UPDATE recrusimple.employeur " +
                         "SET administrative_user_id = #strCIP," +
                         "    nom = #name," +
@@ -27,17 +29,22 @@ import javax.persistence.*;
                         "    sommaire = #summary," +
                         "    taches = #tasks " +
                         "WHERE employeur_id = #employerID"),
-        @NamedNativeQuery(name = "get_employer", // exists only for test purposes
+        @NamedNativeQuery(name = "get_employer",
                 query = "SELECT * " +
                         "FROM recrusimple.employeur " +
                         "WHERE employeur_id = #employerID",
                 resultClass = EmployerData.class),
-        @NamedNativeQuery(name = "get_employer_with_cip", // exists only for test purposes
+        @NamedNativeQuery(name = "get_employer_technologies",
+                query = "SELECT * " +
+                        "FROM recrusimple.concept_employeur " +
+                        "WHERE employeur_id = #employerID",
+                resultClass = EmployerData.class),
+        @NamedNativeQuery(name = "get_employer_with_cip",
                 query = "SELECT * " +
                         "FROM recrusimple.employeur " +
                         "WHERE administrative_user_id = #strCIP",
                 resultClass = EmployerData.class),
-        @NamedNativeQuery(name = "get_next_employer", // exists only for test purposes
+        @NamedNativeQuery(name = "get_next_employer",
                 query = "SELECT * " +
                         "FROM recrusimple.employeur AS emp " +
                         "WHERE NOT EXISTS " +
@@ -49,6 +56,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "recrusimple.employeur", schema = "recrusimple.", catalog = "opus")
+@SecondaryTable(name="recrusimple.concept_employeur",
+        pkJoinColumns=@PrimaryKeyJoinColumn(name="employeur_id"))
 public class EmployerData implements Data {
     private int nEmployerId;
     private String strCIP;
@@ -56,6 +65,17 @@ public class EmployerData implements Data {
     private String strDomain;
     private String strAddress;
     private String strSummary;
+    private String strTasks;
+    private List<String> listStrTechnologies;
+
+
+    public List<String> getTechnologies() {
+        return listStrTechnologies;
+    }
+
+    public void setTechnologies(List<String> listStrTechnologies) {
+        this.listStrTechnologies = listStrTechnologies;
+    }
 
     @Id
     @Basic
@@ -118,6 +138,16 @@ public class EmployerData implements Data {
         this.strAddress = strAddress;
     }
 
+    @Basic
+    @Column(name = "taches")
+    public String getTasks() {
+        return strTasks;
+    }
+
+    public void setTasks(String strTasks) {
+        this.strTasks = strTasks;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -136,6 +166,8 @@ public class EmployerData implements Data {
             return false;
         if (strSummary != null ? !strSummary.equals(that.strSummary) : that.strSummary != null)
             return false;
+        if (strTasks != null ? !strTasks.equals(that.strTasks) : that.strTasks != null)
+            return false;
 
         return true;
     }
@@ -148,6 +180,7 @@ public class EmployerData implements Data {
         result = 31 * result + (strDomain != null ? strDomain.hashCode() : 0);
         result = 31 * result + (strAddress != null ? strAddress.hashCode() : 0);
         result = 31 * result + (strSummary != null ? strSummary.hashCode() : 0);
+        result = 31 * result + (strTasks != null ? strTasks.hashCode() : 0);
         return result;
     }
 
@@ -171,12 +204,8 @@ public class EmployerData implements Data {
         return "";
     }
 
-    ;
-
     public void setLabel(String strLabel) {
     }
-
-    ;
 
     private String id;
 

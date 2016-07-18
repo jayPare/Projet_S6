@@ -6,8 +6,8 @@
 package ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfo;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfoResult;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -17,10 +17,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewImpl;
-import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.FormLabel;
 
 public class EditProfileEmployeurPageView extends ViewImpl implements EditProfileEmployeurPagePresenter.MyView
 {
@@ -55,7 +52,7 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
     org.gwtbootstrap3.client.ui.TextArea tbNature;
 
     EmployerData objEmployerInfos;
-    GetEmployerInfos objEmployerUpdate = new GetEmployerInfos();
+    EmployerInfo objEmployerUpdate = new EmployerInfo();
 
     @UiHandler("btnModifier")
     public void onClick(ClickEvent event)
@@ -68,7 +65,7 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
         objEmployerUpdate.m_strName = tbNom.getText();
         objEmployerUpdate.m_strDomain = tbDomaine.getText();
         objEmployerUpdate.m_strLocation = tbVille.getText();
-        objEmployerUpdate.m_strTechnologies =tbTechnologies.getText();
+        //objEmployerUpdate.m_strTechnologies =tbTechnologies.getText();
         objEmployerUpdate.m_strSummary = tbSommaire.getText();
 
         //TODO: Prendre l'ID de l'employeur connecté
@@ -78,9 +75,9 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
         //TODO: Verifier pourquoi la modification fail.
     }
 
-    private AsyncCallback<GetEmployerInfosResult> employerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
+    private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
         @Override
-        public void onSuccess(GetEmployerInfosResult result) {
+        public void onSuccess(EmployerInfoResult result) {
             //TODO: Quelque chose à rajouter ici pour dire que la modification est effectué.
         }
         @Override

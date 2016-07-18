@@ -1,6 +1,6 @@
 package ca.uSherbrooke.gegi.opus.shared.entity;
 
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,7 +17,7 @@ public class TestUserService {
         /*EntityManagerFactory emf = Persistence.createEntityManagerFactory("opus");
         EntityManager entitymanager = emf.createEntityManager();
 
-        GetUserInfos user = new GetUserInfos();
+        UserInfo user = new UserInfo();
 
         user.m_nNumeroStage = 1;
         user.m_strCV = "asdasdasd";

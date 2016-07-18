@@ -9,8 +9,8 @@ import ca.uSherbrooke.gegi.commons.core.client.presenter.application.Application
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfo;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfoResult;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -61,15 +61,15 @@ public class EditProfileEmployeurPagePresenter extends Presenter<EditProfileEmpl
         sideMenuPresenter.refreshList();
 
         //TODO: Aller chercher l'ID de l'employeur loggué
-        GetEmployerInfos objEmployerInfo = new GetEmployerInfos();
+        EmployerInfo objEmployerInfo = new EmployerInfo();
 
         objEmployerInfo.getEmployer(1, true);
         dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
 
-    private AsyncCallback<GetEmployerInfosResult> employerInfosAsyncCallback = new AsyncCallback<GetEmployerInfosResult>() {
+    private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
         @Override
-        public void onSuccess(GetEmployerInfosResult result) {
+        public void onSuccess(EmployerInfoResult result) {
             getView().setEmployerInfosObject(result.getEmployerInfosObject());
             getView().setEmployerInfos();
         }

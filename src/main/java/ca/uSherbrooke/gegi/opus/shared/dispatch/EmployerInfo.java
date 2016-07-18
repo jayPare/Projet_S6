@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Fabul on 2016-06-20.
  */
-public class GetEmployerInfos extends ActionImpl<GetEmployerInfosResult> {
+public class EmployerInfo extends ActionImpl<EmployerInfoResult> {
     private int m_nEmployerID = -1;
     //Set to true to save a new employer
     private boolean m_bSaveEmployer = false;
@@ -23,7 +23,7 @@ public class GetEmployerInfos extends ActionImpl<GetEmployerInfosResult> {
     public String m_strCIP = "";
     public List<String> m_listStrTechnologies = null;
 
-    public GetEmployerInfos() {
+    public EmployerInfo() {
     }
 
     public boolean getSaveEmployer() {

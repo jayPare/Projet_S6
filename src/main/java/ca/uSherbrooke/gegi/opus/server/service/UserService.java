@@ -6,19 +6,17 @@ package ca.uSherbrooke.gegi.opus.server.service;
 
 import ca.uSherbrooke.gegi.commons.core.server.utils.UserSession;
 import ca.uSherbrooke.gegi.commons.core.shared.utils.UserSessionActionException;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.setUserInfos;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfo;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfo;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfo;
 import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
+import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import ca.uSherbrooke.gegi.persist.dao.Dao;
 import ca.uSherbrooke.gegi.persist.dao.Opus;
 import com.google.inject.Inject;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public class UserService {
@@ -32,7 +30,8 @@ public class UserService {
         this.dao = dao;
     }
 
-    public boolean insertUserInfos(GetUserInfos user) throws UserSessionActionException {
+    public boolean insertUserInfos(UserInfo user) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_user")
                 .setParameter("stageNumber", user.m_nNumeroStage)
@@ -45,7 +44,8 @@ public class UserService {
         return true;
     }
 
-    public boolean updateUserInfos(GetUserInfos user) throws UserSessionActionException {
+    public boolean updateUserInfos(UserInfo user) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("update_user")
                 .setParameter("stageNumber", user.m_nNumeroStage)
@@ -58,31 +58,36 @@ public class UserService {
         return true;
     }
 
-    public UserInfosData getUserInfos(GetUserInfos user) throws UserSessionActionException {
-        UserInfosData objResult = (UserInfosData) (this.dao.getEntityManager().createNamedQuery("get_user")
+    public UserInfoData getUserInfos(UserInfo user) throws UserSessionActionException {
+        this.dao.clearEntityManager();
+        this.dao.clearEntityManager();
+        UserInfoData objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user")
                 .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
         objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
         objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
         return objResult;
     }
 
-    public UserInfosData getUserInfosWithCIP(GetUserInfos user) throws UserSessionActionException {
-        UserInfosData objResult = (UserInfosData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
+    public UserInfoData getUserInfosWithCIP(UserInfo user) throws UserSessionActionException {
+        this.dao.clearEntityManager();
+        UserInfoData objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
                 .setParameter("strCIP", user.m_strCIP).getSingleResult());
         objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         return objResult;
     }
 
-    public UserInfosData getNextUserInfos(GetUserInfos user) throws UserSessionActionException {
-        UserInfosData objResult = (UserInfosData) (this.dao.getEntityManager().createNamedQuery("get_next_user")
+    public UserInfoData getNextUserInfos(UserInfo user) throws UserSessionActionException {
+        this.dao.clearEntityManager();
+        UserInfoData objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_next_user")
                 .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
         objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
         objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
         return objResult;
     }
 
-    public boolean insertEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+    public boolean insertEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_employer")
                 .setParameter("strCIP", employer.m_strCIP)
@@ -94,7 +99,8 @@ public class UserService {
         return true;
     }
 
-    public boolean updateEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+    public boolean updateEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("update_employer")
                 .setParameter("strCIP", employer.m_strCIP)
@@ -107,37 +113,46 @@ public class UserService {
         return true;
     }
 
-    public EmployerData getEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+    public EmployerData getEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         EmployerData objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer")
                 .setParameter("employerID", employer.getEmployerID()).getSingleResult());
+        objResult.setTechnologies((List<String>)this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList());
         return objResult;
     }
 
-    public EmployerData getEmployerInfosWithCIP(GetEmployerInfos employer) throws UserSessionActionException {
+    public EmployerData getEmployerInfosWithCIP(EmployerInfo employer) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         EmployerData objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
                 .setParameter("strCIP", employer.m_strCIP).getSingleResult());
+        objResult.setTechnologies((List<String>)this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList());
         return objResult;
     }
 
-    public EmployerData getNextEmployerInfos(GetEmployerInfos employer) throws UserSessionActionException {
+    public EmployerData getNextEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         EmployerData objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_next_employer")
                 .setParameter("employerID", employer.getEmployerID()).getSingleResult());
+        objResult.setTechnologies((List<String>)this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList());
         return objResult;
     }
 
-    public List<MatchData> getMatchEmployer(MatchInfos match) throws UserSessionActionException {
+    public List<MatchData> getMatchEmployer(MatchInfo match) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         List<MatchData> objResult = (List<MatchData>)(this.dao.getEntityManager().createNamedQuery("get_match_employer")
                 .setParameter("employerID", match.getEmployerID()).getResultList());
         return objResult;
     }
 
-    public List<MatchData> getMatchStagiaire(MatchInfos match) throws UserSessionActionException {
+    public List<MatchData> getMatchStagiaire(MatchInfo match) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         List<MatchData> objResult = (List<MatchData>)(this.dao.getEntityManager().createNamedQuery("get_match_stagiaire")
                 .setParameter("stagiaireID", match.getStagiaireID()).getResultList());
         return objResult;
     }
 
-    public boolean saveMatchStagiaire(MatchInfos match) throws UserSessionActionException {
+    public boolean saveMatchStagiaire(MatchInfo match) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_match_employer")
                 .setParameter("stagiaireID", match.getStagiaireID())
@@ -147,7 +162,8 @@ public class UserService {
         return true;
     }
 
-    public boolean saveMatchEmployer(MatchInfos match) throws UserSessionActionException {
+    public boolean saveMatchEmployer(MatchInfo match) throws UserSessionActionException {
+        this.dao.clearEntityManager();
         this.dao.beginTransaction();
         this.dao.getEntityManager().createNamedQuery("save_match_stagiaire")
                 .setParameter("stagiaireID", match.getStagiaireID())
@@ -157,7 +173,7 @@ public class UserService {
         return true;
     }
 
-    public void setConcepts(GetUserInfos user) {
+    public void setConcepts(UserInfo user) {
         this.dao.getEntityManager().createNamedQuery("delete_competences").executeUpdate(); // Only way to do that is to delete all entries first
         for (ConceptData concept : user.m_objListCompetence) {
             this.dao.getEntityManager().createNamedQuery("save_competence")

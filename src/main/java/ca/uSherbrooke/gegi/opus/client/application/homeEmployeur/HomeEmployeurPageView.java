@@ -6,7 +6,7 @@
 package ca.uSherbrooke.gegi.opus.client.application.homeEmployeur;
 
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
+import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

@@ -5,7 +5,7 @@ import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 /**
  * Created by Fabul on 2016-07-10.
  */
-public class MatchInfos extends ActionImpl<MatchInfosResult> {
+public class MatchInfo extends ActionImpl<MatchInfoResult> {
     private int m_nEmployerID = -1;
     private int m_nStagiaireID = -1;
     private boolean m_bInteret = false;
@@ -14,7 +14,7 @@ public class MatchInfos extends ActionImpl<MatchInfosResult> {
     private boolean m_bGetMatchStudent = false;
     private boolean m_bGetMatchEmployer = false;
 
-    public MatchInfos() {
+    public MatchInfo() {
     }
 
     public boolean getSaveStudentMatch() {

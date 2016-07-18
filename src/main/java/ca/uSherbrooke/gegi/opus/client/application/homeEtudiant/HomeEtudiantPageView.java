@@ -6,7 +6,7 @@
 package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant;
 
 import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
+import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -51,9 +51,9 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     @UiField
     org.gwtbootstrap3.client.ui.html.Paragraph taInteretsObjectifs;
 
-    UserInfosData objUserInfos;
+    UserInfoData objUserInfos;
 
-    public void setUserInfosObject(UserInfosData objUserInfos)
+    public void setUserInfosObject(UserInfoData objUserInfos)
     {
         this.objUserInfos = objUserInfos;
     }

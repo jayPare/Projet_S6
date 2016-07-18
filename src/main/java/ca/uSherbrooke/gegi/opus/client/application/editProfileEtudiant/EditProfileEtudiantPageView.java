@@ -6,11 +6,10 @@
 package ca.uSherbrooke.gegi.opus.client.application.editProfileEtudiant;
 
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfosResult;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfo;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfoResult;
 import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
+import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -19,10 +18,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewImpl;
-import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.FormLabel;
 
 import java.util.List;
 
@@ -44,8 +40,8 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
         
     }
 
-    UserInfosData objUserInfos;
-    GetUserInfos objStudentUpdate = new GetUserInfos();
+    UserInfoData objUserInfos;
+    UserInfo objStudentUpdate = new UserInfo();
 
     @UiField
     org.gwtbootstrap3.client.ui.FormControlStatic lblPrenom;
@@ -60,7 +56,7 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
     @UiField
     org.gwtbootstrap3.client.ui.TextArea taInteretsObjectifs;
 
-    public void setUserInfosObject(UserInfosData objUserInfos)
+    public void setUserInfosObject(UserInfoData objUserInfos)
     {
         this.objUserInfos = objUserInfos;
     }
@@ -106,9 +102,9 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
         dispatchAsync.execute(objStudentUpdate, studentInfosAsyncCallback);
     }
 
-    private AsyncCallback<GetUserInfosResult> studentInfosAsyncCallback = new AsyncCallback<GetUserInfosResult>() {
+    private AsyncCallback<UserInfoResult> studentInfosAsyncCallback = new AsyncCallback<UserInfoResult>() {
         @Override
-        public void onSuccess(GetUserInfosResult result)
+        public void onSuccess(UserInfoResult result)
         {
             //TODO: Quelque chose à rajouter ici pour dire que la modification est effectué.
         }

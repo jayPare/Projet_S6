@@ -33,7 +33,7 @@ import java.util.List;
                         "       numero_stage " +
                         "FROM recrusimple.release_stagiaire " +
                         "WHERE stagiaire_id = #stagiaireID LIMIT 1",
-                resultClass = UserInfosData.class),
+                resultClass = UserInfoData.class),
         @NamedNativeQuery(name = "get_user_with_cip",
                 query = "SELECT stagiaire_id," +
                         "       first_name," +
@@ -42,7 +42,7 @@ import java.util.List;
                         "       numero_stage " +
                         "FROM recrusimple.release_stagiaire " +
                         "WHERE administrative_user_id = #strCIP LIMIT 1",
-                resultClass = UserInfosData.class),
+                resultClass = UserInfoData.class),
         @NamedNativeQuery(name = "get_next_user",
                 query = "SELECT * " +
                         "FROM recrusimple.stagiaire AS stagiaire " +
@@ -50,13 +50,13 @@ import java.util.List;
                         "    (SELECT 1 " +
                         "     FROM recrusimple.stagiaire_interesse_par_employeur AS SIE " +
                         "     WHERE stagiaire.stagiaire_id = SIE.stagiaire_id) LIMIT 1",
-                resultClass = UserInfosData.class)
+                resultClass = UserInfoData.class)
 })
 
 
 @Entity
 @Table(name = "recrusimple.release_stagiaire", schema = "recrusimple", catalog = "opus")
-public class UserInfosData implements Data {
+public class UserInfoData implements Data {
     private int stagiaireID = 0;
     private String firstName = "";
     private String lastName = "";
@@ -67,7 +67,7 @@ public class UserInfosData implements Data {
     private List<ConceptData> interet = null;
     private List<ConceptData> competence = null;
 
-    public UserInfosData(int stagiaireID, String firstName, String lastName, String departementNom, int numeroStage, String id) {
+    public UserInfoData(int stagiaireID, String firstName, String lastName, String departementNom, int numeroStage, String id) {
         this.stagiaireID = stagiaireID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -76,7 +76,7 @@ public class UserInfosData implements Data {
         this.id = id;
     }
 
-    public UserInfosData() {
+    public UserInfoData() {
     }
 
     @Id
@@ -175,7 +175,7 @@ public class UserInfosData implements Data {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserInfosData that = (UserInfosData) o;
+        UserInfoData that = (UserInfoData) o;
 
         if (numeroStage != that.numeroStage) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;

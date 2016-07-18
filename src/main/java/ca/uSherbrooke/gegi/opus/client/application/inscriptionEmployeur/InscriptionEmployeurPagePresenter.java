@@ -6,15 +6,9 @@
 package ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
-import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetEmployerInfosResult;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;

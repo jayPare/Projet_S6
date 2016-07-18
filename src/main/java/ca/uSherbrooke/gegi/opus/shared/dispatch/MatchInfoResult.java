@@ -9,16 +9,16 @@ import java.util.List;
 /**
  * Created by Fabul on 2016-07-10.
  */
-public class MatchInfosResult implements Result {
+public class MatchInfoResult implements Result {
 
     private boolean bSaveSuccess = false;
 
     private List<MatchData> m_objListMatchInfoData;
 
-    public MatchInfosResult() {
+    public MatchInfoResult() {
     }
 
-    public MatchInfosResult(List<MatchData> objListMatchInfoData) {
+    public MatchInfoResult(List<MatchData> objListMatchInfoData) {
         this.m_objListMatchInfoData = objListMatchInfoData;
     }
 

@@ -11,6 +11,7 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -30,7 +31,7 @@
         <setting name="provider-name" value="EclipseLink" />
         <datasource-mapping>
           <factory-entry name="noname-a.xml@0" value="72909026-899e-40e3-9689-e4da7beff751" />
-          <factory-entry name="opusCommonsCore" />
+          <factory-entry name="opusCommonsCore" value="aa22af63-8041-483a-b3a9-5fe728d8aa87" />
         </datasource-mapping>
       </configuration>
     </facet>

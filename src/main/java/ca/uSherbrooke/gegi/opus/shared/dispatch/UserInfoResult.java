@@ -1,6 +1,6 @@
 package ca.uSherbrooke.gegi.opus.shared.dispatch;
 
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
+import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 import java.util.List;
@@ -10,23 +10,23 @@ import java.util.List;
  */
 
 @SuppressWarnings("serial")
-public class GetUserInfosResult implements Result {
+public class UserInfoResult implements Result {
 
-    private UserInfosData objUserInfoData;
+    private UserInfoData objUserInfoData;
     private boolean bSaveSuccess = false;
 
-    public GetUserInfosResult() {
+    public UserInfoResult() {
     }
 
-    public GetUserInfosResult(UserInfosData objUserInfoData) {
+    public UserInfoResult(UserInfoData objUserInfoData) {
         this.objUserInfoData = objUserInfoData;
     }
 
-    public void setUserInfosObject(UserInfosData objUserInfoData) {
+    public void setUserInfosObject(UserInfoData objUserInfoData) {
         this.objUserInfoData = objUserInfoData;
     }
 
-    public UserInfosData getUserInfosObject() {
+    public UserInfoData getUserInfosObject() {
         return this.objUserInfoData;
     }
 

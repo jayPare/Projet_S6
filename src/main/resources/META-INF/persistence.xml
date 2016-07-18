@@ -25,10 +25,15 @@
 		<class>ca.uSherbrooke.gegi.commons.core.shared.entity.AdministratorGroupData</class>
 		<class>ca.uSherbrooke.gegi.commons.core.shared.entity.EmployeeData</class>
 		<class>ca.uSherbrooke.gegi.commons.core.shared.entity.StudentData</class>
-		<class>ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData</class>
 		<class>ca.uSherbrooke.gegi.opus.shared.entity.ConceptData</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.MatchDataPK</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.EmployeurInteresseParStagiaireDataPK</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.StagiaireInteresseParEmployeurDataPK</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.MatchData</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.EmployeurInteresseParStagiaireData</class>
+		<class>ca.uSherbrooke.gegi.opus.shared.entity.StagiaireInteresseParEmployeurData</class>
 		<class>ca.uSherbrooke.gegi.opus.shared.entity.EmployerData</class>
-		<class>ca.uSherbrooke.gegi.opus.shared.entity.TestEmployer</class>
 
 		<properties>
 			<!-- Disable the second-level cache -->

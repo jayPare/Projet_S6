@@ -9,8 +9,8 @@ import ca.uSherbrooke.gegi.commons.core.client.presenter.application.Application
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfosResult;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfo;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfoResult;
 import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -62,14 +62,14 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
         sideMenuPresenter.refreshList();
 
         //TODO: Verifier si employeur ou etudiant
-        MatchInfos objMatches = new MatchInfos();
+        MatchInfo objMatches = new MatchInfo();
         objMatches.getMatchEmployer(1, true);
         dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
     }
 
-    private AsyncCallback<MatchInfosResult> MatchInfosResultAsyncCallback = new AsyncCallback<MatchInfosResult>() {
+    private AsyncCallback<MatchInfoResult> MatchInfosResultAsyncCallback = new AsyncCallback<MatchInfoResult>() {
         @Override
-        public void onSuccess(MatchInfosResult result)
+        public void onSuccess(MatchInfoResult result)
         {
             getView().setMatchesObject(result.getMatchInfosObject());
             getView().setMatches();

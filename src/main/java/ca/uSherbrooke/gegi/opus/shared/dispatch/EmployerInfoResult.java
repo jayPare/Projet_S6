@@ -6,15 +6,15 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 /**
  * Created by Fabul on 2016-06-20.
  */
-public class GetEmployerInfosResult implements Result {
+public class EmployerInfoResult implements Result {
 
     private EmployerData objEmployerInfoData;
     private boolean bSaveSuccess = false;
 
-    public GetEmployerInfosResult() {
+    public EmployerInfoResult() {
     }
 
-    public GetEmployerInfosResult(EmployerData objEmployerInfoData) {
+    public EmployerInfoResult(EmployerData objEmployerInfoData) {
         this.objEmployerInfoData = objEmployerInfoData;
     }
 
