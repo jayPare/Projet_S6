@@ -2,6 +2,8 @@ package ca.uSherbrooke.gegi.opus.shared.dispatch;
 
 import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 
+import java.util.List;
+
 /**
  * Created by Fabul on 2016-06-20.
  */
@@ -19,7 +21,7 @@ public class GetEmployerInfos extends ActionImpl<GetEmployerInfosResult> {
     public String m_strLocation = "";
     public String m_strSummary = "";
     public String m_strCIP = "";
-    public String m_strTechnologies = "";
+    public List<String> m_listStrTechnologies = null;
 
     public GetEmployerInfos() {
     }
