@@ -74,71 +74,68 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
                 {
                     pbCompetence1.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
                     pbCompetence1.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
-                }
-                else if (i == 2)
-                {
-                    pbCompetence2.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
-                    pbCompetence2.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
-                }
-                else if (i == 3)
-                {
-                    pbCompetence3.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
-                    pbCompetence3.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
-                }
 
-            }
-
-            for (int i = 0; i < listeInterets.size(); i++) {
-                //taInteretsObjectifs.setText(taInteretsObjectifs.getText() + listeInterets.get(i).getConceptNom() + ": " + listeInterets.get(i).getNiveauSur5() + "\n");
-                if(i == 1)
-                {
                     pbInteret1.setPercent(listeInterets.get(i).getNiveauSur5() * 20);
                     pbInteret1.setText(Integer.toString(listeInterets.get(i).getNiveauSur5()));
                 }
                 else if (i == 2)
                 {
+                    pbCompetence2.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
+                    pbCompetence2.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
+
                     pbInteret2.setPercent(listeInterets.get(i).getNiveauSur5() * 20);
                     pbInteret2.setText(Integer.toString(listeInterets.get(i).getNiveauSur5()));
                 }
                 else if (i == 3)
                 {
+                    pbCompetence3.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
+                    pbCompetence3.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
+
                     pbInteret3.setPercent(listeInterets.get(i).getNiveauSur5() * 20);
                     pbInteret3.setText(Integer.toString(listeInterets.get(i).getNiveauSur5()));
                 }
 
             }
-        } else {
+        }
+        else
+        {
             //TODO : find a way to hide everything and display only a message to say there arent any more stagiaire + a refresh button -> use fonction onRefresh
             lblNom.setText("Il n'y a plus de stagiaires ...");
         }
     }
     
-    public void onRefresh(ClickEvent event) {
+    public void onRefresh(ClickEvent event)
+    {
         homePageUiHandlers.actionOnRefresh();
     }
 
     @UiHandler("btnLike")
-    public void onLikeClick(ClickEvent event) {
-        if (objUserInfos != null) {
+    public void onLikeClick(ClickEvent event)
+    {
+        if (objUserInfos != null)
+        {
             homePageUiHandlers.actionOnLike(objUserInfos.getStagiaireID());
         }
     }
 
     @UiHandler("btnDislike")
-    public void onDislikeClick(ClickEvent event) {
-
-        if (objUserInfos != null) {
+    public void onDislikeClick(ClickEvent event)
+    {
+        if (objUserInfos != null)
+        {
             homePageUiHandlers.actionOnDislike(objUserInfos.getStagiaireID());
         }
     }
 
     @Inject
-    public HomeEtudiantPageView(final Binder binder) {
+    public HomeEtudiantPageView(final Binder binder)
+    {
         widget = binder.createAndBindUi(this);
     }
 
     @Override
-    public Widget asWidget() {
+    public Widget asWidget()
+    {
         return widget;
     }
 }
