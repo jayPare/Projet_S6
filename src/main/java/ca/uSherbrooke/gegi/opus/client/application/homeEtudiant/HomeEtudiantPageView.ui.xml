@@ -34,10 +34,52 @@
                 </b:NavTabs>
                 <b:TabContent marginLeft="10" marginBottom="20" marginRight="10" >
                     <b:TabPane  marginLeft="10" marginTop="10" fade="true" in="true" active="true" b:id="tab1">
-                            <html:Paragraph ui:field="taCompetences" text="Erreur de chergement des intérêts."></html:Paragraph>
+
+                        <b:Container fluid="true">
+                            <b:Row>
+                                <b:Column size="MD_3">
+                                    <html:Paragraph text="Programmation web"></html:Paragraph>
+                                    <b:Progress>
+                                        <b:ProgressBar ui:field="pbCompetence1" type="INFO"/>
+                                    </b:Progress>
+
+                                    <html:Paragraph text="Gestion de projet"></html:Paragraph>
+                                    <b:Progress>
+                                        <b:ProgressBar ui:field="pbCompetence2" type="INFO"/>
+                                    </b:Progress>
+
+                                    <html:Paragraph text="Méthodologie Agile"></html:Paragraph>
+                                    <b:Progress>
+                                        <b:ProgressBar ui:field="pbCompetence3" type="INFO"/>
+                                    </b:Progress>
+
+                                </b:Column>
+                            </b:Row>
+                        </b:Container>
+
                     </b:TabPane>
                     <b:TabPane marginLeft="10" marginTop="10" fade="true" b:id="tab2">
-                            <html:Paragraph ui:field="taInteretsObjectifs" text="Erreur de chergement des compétences."></html:Paragraph>
+                        <b:Container fluid="true">
+                            <b:Row>
+                                <b:Column size="MD_3">
+                                    <html:Paragraph text="Programmation web"></html:Paragraph>
+                                    <b:Progress>
+                                        <b:ProgressBar ui:field="pbInteret1" type="INFO"/>
+                                    </b:Progress>
+
+                                    <html:Paragraph text="Gestion de projet"></html:Paragraph>
+                                    <b:Progress>
+                                        <b:ProgressBar ui:field="pbInteret2" type="INFO"/>
+                                    </b:Progress>
+
+                                    <html:Paragraph text="Méthodologie Agile"></html:Paragraph>
+                                    <b:Progress>
+                                        <b:ProgressBar ui:field="pbInteret3" type="INFO"/>
+                                    </b:Progress>
+
+                                </b:Column>
+                            </b:Row>
+                        </b:Container>
                     </b:TabPane>
                 </b:TabContent>
 
