@@ -77,7 +77,8 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
 
     private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
         @Override
-        public void onSuccess(EmployerInfoResult result) {
+        public void onSuccess(EmployerInfoResult result)
+        {
             //TODO: Quelque chose à rajouter ici pour dire que la modification est effectué.
         }
         @Override
@@ -99,18 +100,22 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
 
         tbSommaire.setText(objEmployerInfos.getEmployerSummary());
 
-        //TODO: Ajouter nature et technologies dans l'objet
-        //tbNature.setText(objEmployerInfos.getEmployerNature());
-        //tbTechnologies.setText(objEmployerInfos.getEmployerTechs());
+        //TODO: Améliorer l'affichage des technologies
+        tbTechnologies.setText(objEmployerInfos.getTechnologies().toString());
+
+        //TODO: Ajouter nature dans l'objet
+        //tbNature.setText(objEmployerInfos.getEmployerTechs());
     }
 
     @Inject
-    public EditProfileEmployeurPageView(final Binder binder) {
+    public EditProfileEmployeurPageView(final Binder binder)
+    {
         widget = binder.createAndBindUi(this);
     }
 
     @Override
-    public Widget asWidget() {
+    public Widget asWidget()
+    {
         return widget;
     }
 }

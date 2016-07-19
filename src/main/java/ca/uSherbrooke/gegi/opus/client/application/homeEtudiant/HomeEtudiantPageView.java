@@ -24,6 +24,10 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     HomeEtudiantPageUiHandlers homePageUiHandlers;
 
     @UiField
+    org.gwtbootstrap3.client.ui.Panel panelProfil;
+    @UiField
+    org.gwtbootstrap3.client.ui.Panel panelNoMoreProfile;
+    @UiField
     org.gwtbootstrap3.client.ui.Heading lblNom;
     @UiField
     org.gwtbootstrap3.client.ui.html.Paragraph lblProgrammeEtude;
@@ -60,6 +64,7 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
 
     public void setUserInfos()
     {
+        //TODO: Ajouter telephone etudiant.
         if (objUserInfos != null)
         {
             lblNom.setText(objUserInfos.getFirstName() + " " + objUserInfos.getLastName());
@@ -99,8 +104,8 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
         }
         else
         {
-            //TODO : find a way to hide everything and display only a message to say there arent any more stagiaire + a refresh button -> use fonction onRefresh
-            lblNom.setText("Il n'y a plus de stagiaires ...");
+            panelProfil.setVisible(false);
+            panelNoMoreProfile.setVisible(true);
         }
     }
     
@@ -116,6 +121,12 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
         {
             homePageUiHandlers.actionOnLike(objUserInfos.getStagiaireID());
         }
+    }
+
+    @UiHandler("btnRefresh")
+    public void onRefreshClick(ClickEvent event)
+    {
+        this.onRefresh(event);
     }
 
     @UiHandler("btnDislike")
