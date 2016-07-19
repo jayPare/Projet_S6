@@ -13,10 +13,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewImpl;
-import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.FormLabel;
 
 import java.util.List;
 
@@ -33,25 +30,38 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     @UiField
     org.gwtbootstrap3.client.ui.html.Paragraph lblStage;
     @UiField
-    org.gwtbootstrap3.client.ui.html.Paragraph taCompetences;
+    org.gwtbootstrap3.client.ui.ProgressBar pbCompetence1;
     @UiField
-    org.gwtbootstrap3.client.ui.html.Paragraph taInteretsObjectifs;
+    org.gwtbootstrap3.client.ui.ProgressBar pbCompetence2;
+    @UiField
+    org.gwtbootstrap3.client.ui.ProgressBar pbCompetence3;
+    @UiField
+    org.gwtbootstrap3.client.ui.ProgressBar pbInteret1;
+    @UiField
+    org.gwtbootstrap3.client.ui.ProgressBar pbInteret2;
+    @UiField
+    org.gwtbootstrap3.client.ui.ProgressBar pbInteret3;
 
     @Override
-    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers) {
+    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers)
+    {
         this.homePageUiHandlers = homePageUiHandlers;
     }
 
-    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView> {
+    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView>
+    {
 
     }
 
-    public void setUserInfosObject(UserInfoData objUserInfos) {
+    public void setUserInfosObject(UserInfoData objUserInfos)
+    {
         this.objUserInfos = objUserInfos;
     }
 
-    public void setUserInfos() {
-        if (objUserInfos != null) {
+    public void setUserInfos()
+    {
+        if (objUserInfos != null)
+        {
             lblNom.setText(objUserInfos.getFirstName() + " " + objUserInfos.getLastName());
             lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
             lblStage.setText("Stage: " + Integer.toString(objUserInfos.getNumeroStage()));
@@ -59,18 +69,46 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
             List<ConceptData> listeCompetences = objUserInfos.getCompetence();
             List<ConceptData> listeInterets = objUserInfos.getInteret();
 
-            taCompetences.setText("");
-            taInteretsObjectifs.setText("");
-
             for (int i = 0; i < listeCompetences.size(); i++) {
-                taCompetences.setText(taCompetences.getText() + listeCompetences.get(i).getConceptNom() + ": " + listeCompetences.get(i).getNiveauSur5() + "\n");
+                if(i == 1)
+                {
+                    pbCompetence1.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
+                    pbCompetence1.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
+                }
+                else if (i == 2)
+                {
+                    pbCompetence2.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
+                    pbCompetence2.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
+                }
+                else if (i == 3)
+                {
+                    pbCompetence3.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
+                    pbCompetence3.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
+                }
+
             }
 
             for (int i = 0; i < listeInterets.size(); i++) {
-                taInteretsObjectifs.setText(taInteretsObjectifs.getText() + listeInterets.get(i).getConceptNom() + ": " + listeInterets.get(i).getNiveauSur5() + "\n");
+                //taInteretsObjectifs.setText(taInteretsObjectifs.getText() + listeInterets.get(i).getConceptNom() + ": " + listeInterets.get(i).getNiveauSur5() + "\n");
+                if(i == 1)
+                {
+                    pbInteret1.setPercent(listeInterets.get(i).getNiveauSur5() * 20);
+                    pbInteret1.setText(Integer.toString(listeInterets.get(i).getNiveauSur5()));
+                }
+                else if (i == 2)
+                {
+                    pbInteret2.setPercent(listeInterets.get(i).getNiveauSur5() * 20);
+                    pbInteret2.setText(Integer.toString(listeInterets.get(i).getNiveauSur5()));
+                }
+                else if (i == 3)
+                {
+                    pbInteret3.setPercent(listeInterets.get(i).getNiveauSur5() * 20);
+                    pbInteret3.setText(Integer.toString(listeInterets.get(i).getNiveauSur5()));
+                }
+
             }
         } else {
-            //Todo : find a way to hide everything and display only a message to say there arent any more stagiaire + a refresh button -> use fonction onRefresh
+            //TODO : find a way to hide everything and display only a message to say there arent any more stagiaire + a refresh button -> use fonction onRefresh
             lblNom.setText("Il n'y a plus de stagiaires ...");
         }
     }
