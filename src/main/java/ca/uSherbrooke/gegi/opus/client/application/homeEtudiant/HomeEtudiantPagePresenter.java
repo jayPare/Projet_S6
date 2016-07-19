@@ -12,8 +12,7 @@ import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfo;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfoResult;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.*;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -33,21 +32,42 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresenter.MyView, HomeEtudiantPagePresenter.MyProxy> implements HomeEtudiantPageUiHandlers {
 
     public static final Slot SLOT_USERS = new Slot();
-    @Inject SideMenuPresenter sideMenuPresenter;
-    @Inject DispatchAsync dispatchAsync;
+    @Inject
+    SideMenuPresenter sideMenuPresenter;
+    @Inject
+    DispatchAsync dispatchAsync;
+
 
     @Override
-    public void displayUserInfo(Integer groupId) {
+    public void actionOnDislike(int nStagiaireID) {
+        MatchInfo match = new MatchInfo();
+        //TODO use the good stagiaireID which should be from the gatekeeper instead of 1
+        match.saveStudentMatch(true, 1, nStagiaireID, false);
+        dispatchAsync.execute(match, matchInfosAsyncCallback);
+    }
+
+    @Override
+    public void actionOnLike(int nStagiaireID) {
+        MatchInfo match = new MatchInfo();
+        //TODO use the good stagiaireID which should be from the gatekeeper  instead of 1
+        match.saveStudentMatch(true, 1, nStagiaireID, true);
+        dispatchAsync.execute(match, matchInfosAsyncCallback);
+    }
+
+    @Override
+    public void actionOnRefresh() {
+        getNextStagiaire();
     }
 
     public interface MyView extends View, HasUiHandlers<HomeEtudiantPageUiHandlers> {
         public void setUserInfosObject(UserInfoData objUserInfos);
+
         public void setUserInfos();
     }
 
     @ProxyStandard
     @NameToken(NameTokens.home)
-	/*@UseGatekeeper(AuthenticationGatekeeper.class)*/
+    /*@UseGatekeeper(AuthenticationGatekeeper.class)*/
     public interface MyProxy extends ProxyPlace<HomeEtudiantPagePresenter> {
     }
 
@@ -64,9 +84,7 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         sideMenuPresenter.getView().addToApplicationPresenter();
         sideMenuPresenter.refreshList();
 
-        UserInfo objUserInfo = new UserInfo();
-        objUserInfo.getStudent(1, true);
-        dispatchAsync.execute(objUserInfo, userInfosAsyncCallback);
+        getNextStagiaire();
     }
 
     private AsyncCallback<UserInfoResult> userInfosAsyncCallback = new AsyncCallback<UserInfoResult>() {
@@ -75,11 +93,29 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
             getView().setUserInfosObject(result.getUserInfosObject());
             getView().setUserInfos();
         }
+
         @Override
         public void onFailure(Throwable throwable) {
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
         }
     };
 
+    private AsyncCallback<MatchInfoResult> matchInfosAsyncCallback = new AsyncCallback<MatchInfoResult>() {
+        @Override
+        public void onSuccess(MatchInfoResult result) {
+            getNextStagiaire();
+        }
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
+        }
+    };
+
+    public void getNextStagiaire() {
+        UserInfo objUserInfo = new UserInfo();
+        objUserInfo.getNextStudent(true);
+        dispatchAsync.execute(objUserInfo, userInfosAsyncCallback);
+    }
 }
 

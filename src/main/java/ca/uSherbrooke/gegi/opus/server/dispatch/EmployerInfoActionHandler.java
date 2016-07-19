@@ -38,9 +38,6 @@ public class EmployerInfoActionHandler implements ActionHandler<EmployerInfo, Em
             if (employer.getEmployerID() == -1 && employer.m_strCIP != "") { // get with cip
                 employerResult = new EmployerInfoResult(userService.getEmployerInfosWithCIP(employer));
                 bSuccess = true;
-            } else if (employer.getEmployerID() == -1 && employer.m_strCIP == "") { // get next
-                employerResult = new EmployerInfoResult(userService.getNextEmployerInfos(employer));
-                bSuccess = true;
             } else if (employer.getEmployerID() >= 0) { //get with employer id
                 employerResult = new EmployerInfoResult(userService.getEmployerInfos(employer));
                 bSuccess = true;
@@ -48,6 +45,9 @@ public class EmployerInfoActionHandler implements ActionHandler<EmployerInfo, Em
                 //Error
                 employerResult = new EmployerInfoResult();
             }
+        } else if (employer.getGetNextEmployer() == true) {
+            employerResult = new EmployerInfoResult(userService.getNextEmployerInfos(employer));
+            bSuccess = true;
         } else {
             //Error
             employerResult = new EmployerInfoResult();

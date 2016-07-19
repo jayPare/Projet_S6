@@ -14,9 +14,6 @@ import javax.persistence.*;
         @NamedNativeQuery(name = "get_match_stagiaire",
                 query = " SELECT * FROM recrusimple.view_match WHERE stagiaireID = #stagiaireID ",
                 resultClass = MatchData.class)
-
-        //TODO Add columns en bas
-        //TODO Good select queries
 })
 
 @Entity
@@ -34,7 +31,7 @@ public class MatchData implements Data {
     private String firstNameEmployer;
     private String CIPEmployer;
     private String phoneEmployeur;
-
+    private String companyName;
     private String emailEmployer;
 
     @Id
@@ -94,7 +91,7 @@ public class MatchData implements Data {
     }
 
     @Column(name = "phoneStudent")
-    public String gePhoneStudent() {
+    public String getPhoneStudent() {
         return phoneStudent;
     }
 
@@ -139,12 +136,21 @@ public class MatchData implements Data {
     }
 
     @Column(name = "phoneEmployeur")
-    public String getPhoneEmployeur() {
+    public String getPhoneEmployer() {
         return phoneEmployeur;
     }
 
-    public void setPhoneEmployeur(String phoneEmployeur) {
+    public void setPhoneEmployer(String phoneEmployeur) {
         this.phoneEmployeur = phoneEmployeur;
+    }
+
+    @Column(name = "companyName")
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     @Override
@@ -166,6 +172,7 @@ public class MatchData implements Data {
         if (CIPEmployer != null ? !CIPEmployer.equals(that.CIPEmployer) : that.CIPEmployer != null) return false;
         if (emailEmployer != null ? !emailEmployer.equals(that.emailEmployer) : that.emailEmployer != null) return false;
         if (phoneEmployeur != null ? !phoneEmployeur.equals(that.phoneEmployeur) : that.phoneEmployeur != null) return false;
+        if (companyName != null ? !companyName.equals(that.companyName) : that.companyName != null) return false;
         return true;
     }
 
@@ -183,6 +190,7 @@ public class MatchData implements Data {
         result = 31 * result + (CIPEmployer != null ? CIPEmployer.hashCode() : 0);
         result = 31 * result + (emailEmployer != null ? emailEmployer.hashCode() : 0);
         result = 31 * result + (phoneEmployeur != null ? phoneEmployeur.hashCode() : 0);
+        result = 31 * result + (companyName != null ? companyName.hashCode() : 0);
         return result;
     }
 

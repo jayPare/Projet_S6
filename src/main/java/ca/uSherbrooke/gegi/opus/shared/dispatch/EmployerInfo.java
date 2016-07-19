@@ -15,6 +15,8 @@ public class EmployerInfo extends ActionImpl<EmployerInfoResult> {
     private boolean m_bUpdateEmployer = false;
     //Set to true to get a employer
     private boolean m_bGetEmployer = false;
+    //Set to true to get a new employer
+    private boolean m_bGetNextEmployer = false;
 
     public String m_strName = "";
     public String m_strDomain = "";
@@ -36,6 +38,10 @@ public class EmployerInfo extends ActionImpl<EmployerInfoResult> {
 
     public boolean getGetEmployer() {
         return m_bGetEmployer;
+    }
+
+    public boolean getGetNextEmployer() {
+        return m_bGetNextEmployer;
     }
 
     public int getEmployerID() {
@@ -60,6 +66,10 @@ public class EmployerInfo extends ActionImpl<EmployerInfoResult> {
     public void getEmployer(int nEmployerID, boolean bGetEmployer) {
         this.m_nEmployerID = nEmployerID;
         this.m_bGetEmployer = bGetEmployer;
+    }
+
+    public void getNextEmployer(boolean bGetNextEmployer) {
+        this.m_bGetNextEmployer = bGetNextEmployer;
     }
 
     public void getEmployerWithCIP(String strCIP, boolean bGetEmployer) {

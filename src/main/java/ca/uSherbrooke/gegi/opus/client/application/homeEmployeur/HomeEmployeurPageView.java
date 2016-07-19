@@ -18,26 +18,10 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.FormLabel;
 
-public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPagePresenter.MyView
-{
-
+public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPagePresenter.MyView {
     private final Widget widget;
-
-    @Override
-    public void setUiHandlers(HomeEmployeurPageUiHandlers homePageUiHandlers)
-    {
-
-    }
-
-    public interface Binder extends UiBinder<Widget, HomeEmployeurPageView>
-    {
-    }
-
-    public interface checkUiHandlers extends UiHandlers
-    {
-        void onCheck();
-    }
-
+    EmployerData objEmployerInfos;
+    HomeEmployeurPageUiHandlers homePageUiHandlers;
     @UiField
     org.gwtbootstrap3.client.ui.Heading lblNomEntreprise;
     @UiField
@@ -51,29 +35,59 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     @UiField
     org.gwtbootstrap3.client.ui.html.Paragraph lblTechnologies;
 
-    EmployerData objEmployerInfos;
+    @Override
+    public void setUiHandlers(HomeEmployeurPageUiHandlers homePageUiHandlers) {
+        this.homePageUiHandlers = homePageUiHandlers;
+    }
 
-    public void setEmployerInfosObject(EmployerData objEmployerInfos)
-    {
+    public interface Binder extends UiBinder<Widget, HomeEmployeurPageView> {
+    }
+
+    public interface checkUiHandlers extends UiHandlers {
+        void onCheck();
+    }
+
+    public void setEmployerInfosObject(EmployerData objEmployerInfos) {
         this.objEmployerInfos = objEmployerInfos;
     }
 
-    public void setEmployerInfos()
-    {
-        lblNomEntreprise.setText(objEmployerInfos.getEmployerName());
-        lblDomaine.setText(objEmployerInfos.getEmployerDomain());
-        lblAdresse.setText(objEmployerInfos.getEmployerAddress());
-
-        lblSommaire.setText(objEmployerInfos.getEmployerSummary());
-
-        //TODO: Ajouter ces champs dans l'objet employeur
-        //lblNature.setText(objEmployerInfos.getEmployerNature());
-        //lblTechnologies.setText(objEmployerInfos.getEmployerTechs());
+    public void setEmployerInfos() {
+        if (objEmployerInfos != null) {
+            lblNomEntreprise.setText(objEmployerInfos.getEmployerName());
+            lblDomaine.setText(objEmployerInfos.getEmployerDomain());
+            lblAdresse.setText(objEmployerInfos.getEmployerAddress());
+            lblSommaire.setText(objEmployerInfos.getEmployerSummary());
+            lblNature.setText(objEmployerInfos.getTasks());
+            String technologies = "";
+            for (String tech : objEmployerInfos.getTechnologies()) {
+                technologies += tech + ",";
+            }
+            lblTechnologies.setText(technologies);
+        } else {
+            //Todo : find a way to hide everything and display only a message to say there arent any more employer + a refresh button -> use fonction onRefresh
+            lblNomEntreprise.setText("Il n'y a plus d'employeur ...");
+        }
     }
 
-    //@UiHandler("anchorCheck")
-    //public void onCheck(ClickEvent event){
-    //}
+    public void onRefresh(ClickEvent event) {
+        homePageUiHandlers.actionOnRefresh();
+    }
+
+    @UiHandler("btnLike")
+    public void onLikeClick(ClickEvent event) {
+
+        if (objEmployerInfos != null) {
+            homePageUiHandlers.actionOnLike(objEmployerInfos.getEmployerId());
+        }
+    }
+
+    @UiHandler("btnDislike")
+    public void onDislikeClick(ClickEvent event) {
+
+        if (objEmployerInfos != null) {
+            homePageUiHandlers.actionOnDislike(objEmployerInfos.getEmployerId());
+        }
+    }
 
     @Inject
     public HomeEmployeurPageView(final Binder binder) {

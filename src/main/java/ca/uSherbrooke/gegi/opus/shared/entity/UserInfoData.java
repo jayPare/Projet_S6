@@ -46,9 +46,10 @@ import java.util.List;
         @NamedNativeQuery(name = "get_next_user",
                 query = "SELECT * " +
                         "FROM recrusimple.stagiaire AS stagiaire " +
+                        "LEFT JOIN public.users AS U ON stagiaire.administrative_user_id = U.administrative_user_id " +
                         "WHERE NOT EXISTS " +
                         "    (SELECT 1 " +
-                        "     FROM recrusimple.stagiaire_interesse_par_employeur AS SIE " +
+                        "     FROM recrusimple.employeur_interesse_par_stagiaire AS SIE " +
                         "     WHERE stagiaire.stagiaire_id = SIE.stagiaire_id) LIMIT 1",
                 resultClass = UserInfoData.class)
 })

@@ -20,25 +20,11 @@ import org.gwtbootstrap3.client.ui.FormLabel;
 
 import java.util.List;
 
-public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePresenter.MyView
-{
+public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePresenter.MyView {
 
     private final Widget widget;
-
-    @Override
-    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers)
-    {
-
-    }
-
-    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView>
-    {
-
-    }
-
-    //public interface checkUiHandlers extends UiHandlers {
-    //    void onCheck();
-    //}
+    UserInfoData objUserInfos;
+    HomeEtudiantPageUiHandlers homePageUiHandlers;
 
     @UiField
     org.gwtbootstrap3.client.ui.Heading lblNom;
@@ -51,57 +37,70 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     @UiField
     org.gwtbootstrap3.client.ui.html.Paragraph taInteretsObjectifs;
 
-    UserInfoData objUserInfos;
+    @Override
+    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers) {
+        this.homePageUiHandlers = homePageUiHandlers;
+    }
 
-    public void setUserInfosObject(UserInfoData objUserInfos)
-    {
+    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView> {
+
+    }
+
+    public void setUserInfosObject(UserInfoData objUserInfos) {
         this.objUserInfos = objUserInfos;
     }
 
-    public void setUserInfos(){
-        lblNom.setText(objUserInfos.getFirstName() + " " +  objUserInfos.getLastName());
-        lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
-        lblStage.setText("Stage: " + Integer.toString(objUserInfos.getNumeroStage()));
+    public void setUserInfos() {
+        if (objUserInfos != null) {
+            lblNom.setText(objUserInfos.getFirstName() + " " + objUserInfos.getLastName());
+            lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
+            lblStage.setText("Stage: " + Integer.toString(objUserInfos.getNumeroStage()));
 
-        List<ConceptData> listeCompetences = objUserInfos.getCompetence();
-        List<ConceptData> listeInterets = objUserInfos.getInteret();
+            List<ConceptData> listeCompetences = objUserInfos.getCompetence();
+            List<ConceptData> listeInterets = objUserInfos.getInteret();
 
-        taCompetences.setText("");
-        taInteretsObjectifs.setText("");
+            taCompetences.setText("");
+            taInteretsObjectifs.setText("");
 
-        for (int i=0;i < listeCompetences.size();i++)
-        {
-            taCompetences.setText(taCompetences.getText() + listeCompetences.get(i).getConceptNom() + ": " + listeCompetences.get(i).getNiveauSur5() + " ");
-            //taCompetences.setHTML(taCompetences.getHTML() + "<br />");
+            for (int i = 0; i < listeCompetences.size(); i++) {
+                taCompetences.setText(taCompetences.getText() + listeCompetences.get(i).getConceptNom() + ": " + listeCompetences.get(i).getNiveauSur5() + "\n");
+            }
+
+            for (int i = 0; i < listeInterets.size(); i++) {
+                taInteretsObjectifs.setText(taInteretsObjectifs.getText() + listeInterets.get(i).getConceptNom() + ": " + listeInterets.get(i).getNiveauSur5() + "\n");
+            }
+        } else {
+            //Todo : find a way to hide everything and display only a message to say there arent any more stagiaire + a refresh button -> use fonction onRefresh
+            lblNom.setText("Il n'y a plus de stagiaires ...");
         }
-
-        for (int i=0; i < listeInterets.size(); i++)
-        {
-            taInteretsObjectifs.setText(taInteretsObjectifs.getText() + listeInterets.get(i).getConceptNom() + ": " + listeInterets.get(i).getNiveauSur5() + " ");
-        }
+    }
+    
+    public void onRefresh(ClickEvent event) {
+        homePageUiHandlers.actionOnRefresh();
     }
 
     @UiHandler("btnLike")
-    public void onLikeClick(ClickEvent event)
-    {
-
+    public void onLikeClick(ClickEvent event) {
+        if (objUserInfos != null) {
+            homePageUiHandlers.actionOnLike(objUserInfos.getStagiaireID());
+        }
     }
 
     @UiHandler("btnDislike")
-    public void onDislikeClick(ClickEvent event)
-    {
+    public void onDislikeClick(ClickEvent event) {
 
+        if (objUserInfos != null) {
+            homePageUiHandlers.actionOnDislike(objUserInfos.getStagiaireID());
+        }
     }
 
     @Inject
-    public HomeEtudiantPageView(final Binder binder)
-    {
+    public HomeEtudiantPageView(final Binder binder) {
         widget = binder.createAndBindUi(this);
     }
 
     @Override
-    public Widget asWidget()
-    {
+    public Widget asWidget() {
         return widget;
     }
 }

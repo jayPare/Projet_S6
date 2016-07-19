@@ -39,9 +39,6 @@ public class UserInfoActionHandler implements ActionHandler<UserInfo, UserInfoRe
             if (user.getStagiaireID() == -1 && user.m_strCIP != "") { // get with cip
                 userResult = new UserInfoResult(userService.getUserInfosWithCIP(user));
                 bSuccess = true;
-            }else if (user.getStagiaireID() == -1 && user.m_strCIP == "") { // get next
-                userResult = new UserInfoResult(userService.getNextUserInfos(user));
-                bSuccess = true;
             } else if (user.getStagiaireID() >= 0) { // get with stagiaire ID
                 userResult = new UserInfoResult(userService.getUserInfos(user));
                 bSuccess = true;
@@ -49,6 +46,9 @@ public class UserInfoActionHandler implements ActionHandler<UserInfo, UserInfoRe
                 //Error
                 userResult = new UserInfoResult();
             }
+        } else if (user.getGetNextStudent() == true) {
+            userResult = new UserInfoResult(userService.getNextUserInfos(user));
+            bSuccess = true;
         } else {
             //Error
             userResult = new UserInfoResult();

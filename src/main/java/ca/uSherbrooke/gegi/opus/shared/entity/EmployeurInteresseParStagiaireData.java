@@ -7,8 +7,8 @@ import javax.persistence.*;
  */
 
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "save_match_employer",
-                query = "INSERT INTO recrusimple.employe_interesse_par_stagiaire (stagiaire_id, employeur_id, interet) " +
+        @NamedNativeQuery(name = "save_match_stagiaire",
+                query = "INSERT INTO recrusimple.employeur_interesse_par_stagiaire (stagiaire_id, employeur_id, interet) " +
                         "VALUES (#stagiaireID, " +
                         "        #employerID, " +
                         "        #interet) ")

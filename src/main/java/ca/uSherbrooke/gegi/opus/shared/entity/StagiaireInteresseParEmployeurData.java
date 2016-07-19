@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by tomaslopinto on 10/07/16.
  */
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "save_match_stagiaire",
+        @NamedNativeQuery(name = "save_match_employer",
                 query = "INSERT INTO recrusimple.stagiaire_interesse_par_employeur (stagiaire_id, employeur_id, interet) " +
                         "VALUES (#stagiaireID, " +
                         "        #employerID, " +

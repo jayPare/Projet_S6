@@ -47,17 +47,18 @@ import java.util.List;
         @NamedNativeQuery(name = "get_next_employer",
                 query = "SELECT * " +
                         "FROM recrusimple.employeur AS emp " +
+                        "LEFT JOIN public.users AS U ON emp.administrative_user_id = U.administrative_user_id " +
                         "WHERE NOT EXISTS " +
                         "    (SELECT 1 " +
-                        "     FROM recrusimple.employeur_interesse_par_stagiaire AS EIS " +
+                        "     FROM recrusimple.stagiaire_interesse_par_employeur AS EIS " +
                         "     WHERE emp.employeur_id = EIS.employeur_id) LIMIT 1",
                 resultClass = EmployerData.class)
 })
 
 @Entity
 @Table(name = "recrusimple.employeur", schema = "recrusimple.", catalog = "opus")
-@SecondaryTable(name="recrusimple.concept_employeur",
-        pkJoinColumns=@PrimaryKeyJoinColumn(name="employeur_id"))
+@SecondaryTable(name = "recrusimple.concept_employeur",
+        pkJoinColumns = @PrimaryKeyJoinColumn(name = "employeur_id"))
 public class EmployerData implements Data {
     private int nEmployerId;
     private String strCIP;

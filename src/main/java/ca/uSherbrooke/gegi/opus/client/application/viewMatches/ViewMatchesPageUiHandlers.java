@@ -10,5 +10,5 @@ import com.gwtplatform.mvp.client.UiHandlers;
  * Created by maip2202 on 2016-05-04.
  */
 public interface ViewMatchesPageUiHandlers extends UiHandlers {
-    public void displayUserInfo(Integer groupId);
+    public void actionOnRefresh();
 }

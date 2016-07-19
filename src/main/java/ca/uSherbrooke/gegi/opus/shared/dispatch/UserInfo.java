@@ -17,6 +17,8 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
     private boolean m_bUpdateStudent = false;
     //Set to true to get a student
     private boolean m_bGetStudent = false;
+    //Set to true to get a new student
+    private boolean m_bGetNextStudent = false;
 
     public String m_strFirstName = "";
     public String m_strLastName = "";
@@ -42,6 +44,10 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
         return m_bGetStudent;
     }
 
+    public boolean getGetNextStudent() {
+        return m_bGetNextStudent;
+    }
+
     public int getStagiaireID() {
         return m_nStagiaireID;
     }
@@ -59,11 +65,15 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
         this.m_bUpdateStudent = bUpdateStudent;
     }
 
-    //Set nStagiaireID to -1 to get a non-seen student
     public void getStudent(int nStagiaireID, boolean bGetStudent) {
         this.m_nStagiaireID = nStagiaireID;
         this.m_bGetStudent = bGetStudent;
     }
+
+    public void getNextStudent(boolean bGetNextStudent) {
+        this.m_bGetNextStudent = bGetNextStudent;
+    }
+
     public void getStudentWithCIP(String strCIP, boolean bGetStudent) {
         this.m_strCIP = strCIP;
         this.m_bGetStudent = bGetStudent;

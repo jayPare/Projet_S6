@@ -30,21 +30,25 @@ import java.util.List;
 public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter.MyView, ViewMatchesPagePresenter.MyProxy> implements ViewMatchesPageUiHandlers {
 
     public static final Slot SLOT_USERS = new Slot();
-    @Inject SideMenuPresenter sideMenuPresenter;
-    @Inject DispatchAsync dispatchAsync;
-
+    @Inject
+    SideMenuPresenter sideMenuPresenter;
+    @Inject
+    DispatchAsync dispatchAsync;
+    boolean bIsEmployer = false;
     @Override
-    public void displayUserInfo(Integer groupId) {
+    public void actionOnRefresh() {
+        getMatches(bIsEmployer);
     }
 
     public interface MyView extends View, HasUiHandlers<ViewMatchesPageUiHandlers> {
         public void setMatchesObject(List<MatchData> objEmployerInfos);
-        public void setMatches();
+
+        public void setMatches(boolean bIsEmployer);
     }
 
     @ProxyStandard
     @NameToken(NameTokens.MATCHES)
-	/*@UseGatekeeper(AuthenticationGatekeeper.class)*/
+    /*@UseGatekeeper(AuthenticationGatekeeper.class)*/
     public interface MyProxy extends ProxyPlace<ViewMatchesPagePresenter> {
     }
 
@@ -62,22 +66,32 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
         sideMenuPresenter.refreshList();
 
         //TODO: Verifier si employeur ou etudiant
-        MatchInfo objMatches = new MatchInfo();
-        objMatches.getMatchEmployer(1, true);
-        dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
+        getMatches(bIsEmployer);
     }
 
     private AsyncCallback<MatchInfoResult> MatchInfosResultAsyncCallback = new AsyncCallback<MatchInfoResult>() {
         @Override
-        public void onSuccess(MatchInfoResult result)
-        {
+        public void onSuccess(MatchInfoResult result) {
             getView().setMatchesObject(result.getMatchInfosObject());
-            getView().setMatches();
+            getView().setMatches(bIsEmployer);
         }
+
         @Override
         public void onFailure(Throwable throwable) {
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'employeur est inaccessible.");
         }
     };
+
+    public void getMatches(boolean bEmployer) {
+        if (!bEmployer) { // If stagaire, get employer matches
+            MatchInfo objMatches = new MatchInfo();
+            objMatches.getMatchEmployer(1, true);
+            dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
+        }else{
+            MatchInfo objMatches = new MatchInfo();
+            objMatches.getMatchStudent(1, true);
+            dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
+        }
+    }
 
 }

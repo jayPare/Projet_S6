@@ -22,12 +22,12 @@ public class MatchInfoActionHandler implements ActionHandler<MatchInfo, MatchInf
 
         if (match.getSaveEmployerMatch() == true) {
             matchResult = new MatchInfoResult();
-            if (userService.saveMatchStagiaire(match) == true) {
+            if (userService.saveMatchEmployer(match) == true) {
                 bSuccess = true;
             }
         } else if (match.getSaveStudentMatch() == true) {
             matchResult = new MatchInfoResult();
-            if (userService.saveMatchEmployer(match) == true) {
+            if (userService.saveMatchStagiaire(match) == true) {
                 bSuccess = true;
             }
         } else if (match.getGetStagiaireMatch() == true) {

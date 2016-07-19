@@ -31,145 +31,220 @@ public class UserService {
     }
 
     public boolean insertUserInfos(UserInfo user) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        this.dao.beginTransaction();
-        this.dao.getEntityManager().createNamedQuery("save_user")
-                .setParameter("stageNumber", user.m_nNumeroStage)
-                .setParameter("stagiaireCV", user.m_strCV)
-                .setParameter("strCIP", user.m_strCIP)
-                .setParameter("deptID", user.m_nDepartementID).executeUpdate();
-        user.setStagiaireID((int) this.dao.getNamedSingleResult("get_last_id"));
-        setConcepts(user);
-        this.dao.commitTransaction();
+        try {
+            this.dao.beginTransaction();
+            this.dao.getEntityManager().createNamedQuery("save_user")
+                    .setParameter("stageNumber", user.m_nNumeroStage)
+                    .setParameter("stagiaireCV", user.m_strCV)
+                    .setParameter("strCIP", user.m_strCIP)
+                    .setParameter("deptID", user.m_nDepartementID).executeUpdate();
+            user.setStagiaireID((int) this.dao.getNamedSingleResult("get_last_id"));
+            setConcepts(user);
+            this.dao.commitTransaction();
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return true;
     }
 
     public boolean updateUserInfos(UserInfo user) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        this.dao.beginTransaction();
-        this.dao.getEntityManager().createNamedQuery("update_user")
-                .setParameter("stageNumber", user.m_nNumeroStage)
-                .setParameter("stagiaireCV", user.m_strCV)
-                .setParameter("strCIP", user.m_strCIP)
-                .setParameter("deptID", user.m_nDepartementID)
-                .setParameter("stagiaireID", user.getStagiaireID()).executeUpdate();
-        this.dao.commitTransaction();
-        setConcepts(user);
+        try {
+            this.dao.beginTransaction();
+            this.dao.getEntityManager().createNamedQuery("update_user")
+                    .setParameter("stageNumber", user.m_nNumeroStage)
+                    .setParameter("stagiaireCV", user.m_strCV)
+                    .setParameter("strCIP", user.m_strCIP)
+                    .setParameter("deptID", user.m_nDepartementID)
+                    .setParameter("stagiaireID", user.getStagiaireID()).executeUpdate();
+            setConcepts(user);
+            this.dao.commitTransaction();
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return true;
     }
 
     public UserInfoData getUserInfos(UserInfo user) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        this.dao.clearEntityManager();
-        UserInfoData objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user")
-                .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
-        objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
-        objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
+        UserInfoData objResult = null;
+        try {
+            objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user")
+                    .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
+            objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
+            objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return objResult;
     }
 
     public UserInfoData getUserInfosWithCIP(UserInfo user) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        UserInfoData objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
-                .setParameter("strCIP", user.m_strCIP).getSingleResult());
-        objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
-        objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+        UserInfoData objResult = null;
+        try {
+            objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
+                    .setParameter("strCIP", user.m_strCIP).getSingleResult());
+            objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+            objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return objResult;
     }
 
     public UserInfoData getNextUserInfos(UserInfo user) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        UserInfoData objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_next_user")
-                .setParameter("stagiaireID", user.getStagiaireID()).getSingleResult());
-        objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
-        objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", user.getStagiaireID()).getResultList());
+        UserInfoData objResult = null;
+        try {
+            objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_next_user").getSingleResult());
+            objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+            objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return objResult;
     }
 
     public boolean insertEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        this.dao.beginTransaction();
-        this.dao.getEntityManager().createNamedQuery("save_employer")
-                .setParameter("strCIP", employer.m_strCIP)
-                .setParameter("name", employer.m_strName)
-                .setParameter("domain", employer.m_strDomain)
-                .setParameter("location", employer.m_strLocation)
-                .setParameter("summary", employer.m_strSummary).executeUpdate();
-        this.dao.commitTransaction();
+        try {
+            this.dao.beginTransaction();
+            this.dao.getEntityManager().createNamedQuery("save_employer")
+                    .setParameter("strCIP", employer.m_strCIP)
+                    .setParameter("name", employer.m_strName)
+                    .setParameter("domain", employer.m_strDomain)
+                    .setParameter("location", employer.m_strLocation)
+                    .setParameter("summary", employer.m_strSummary).executeUpdate();
+            this.dao.commitTransaction();
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return true;
     }
 
     public boolean updateEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        this.dao.beginTransaction();
-        this.dao.getEntityManager().createNamedQuery("update_employer")
-                .setParameter("strCIP", employer.m_strCIP)
-                .setParameter("name", employer.m_strName)
-                .setParameter("domain", employer.m_strDomain)
-                .setParameter("location", employer.m_strLocation)
-                .setParameter("summary", employer.m_strSummary)
-                .setParameter("employerID", employer.getEmployerID()).executeUpdate();
-        this.dao.commitTransaction();
+        try {
+            this.dao.beginTransaction();
+            this.dao.getEntityManager().createNamedQuery("update_employer")
+                    .setParameter("strCIP", employer.m_strCIP)
+                    .setParameter("name", employer.m_strName)
+                    .setParameter("domain", employer.m_strDomain)
+                    .setParameter("location", employer.m_strLocation)
+                    .setParameter("summary", employer.m_strSummary)
+                    .setParameter("employerID", employer.getEmployerID()).executeUpdate();
+            this.dao.commitTransaction();
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return true;
     }
 
     public EmployerData getEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        EmployerData objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer")
-                .setParameter("employerID", employer.getEmployerID()).getSingleResult());
-        objResult.setTechnologies((List<String>)this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList());
+        EmployerData objResult = null;
+        try {
+            objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer")
+                    .setParameter("employerID", employer.getEmployerID()).getSingleResult());
+            objResult.setTechnologies((List<String>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList());
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return objResult;
     }
 
     public EmployerData getEmployerInfosWithCIP(EmployerInfo employer) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        EmployerData objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
-                .setParameter("strCIP", employer.m_strCIP).getSingleResult());
-        objResult.setTechnologies((List<String>)this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList());
+        EmployerData objResult = null;
+        try {
+            objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
+                    .setParameter("strCIP", employer.m_strCIP).getSingleResult());
+            objResult.setTechnologies((List<String>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList());
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return objResult;
     }
 
     public EmployerData getNextEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        EmployerData objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_next_employer")
-                .setParameter("employerID", employer.getEmployerID()).getSingleResult());
-        objResult.setTechnologies((List<String>)this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList());
+        EmployerData objResult = null;
+        try {
+            objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_next_employer").getSingleResult());
+            objResult.setTechnologies((List<String>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList());
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return objResult;
     }
 
     public List<MatchData> getMatchEmployer(MatchInfo match) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        List<MatchData> objResult = (List<MatchData>)(this.dao.getEntityManager().createNamedQuery("get_match_employer")
-                .setParameter("employerID", match.getEmployerID()).getResultList());
+        List<MatchData> objResult = null;
+        try {
+            objResult = (List<MatchData>) (this.dao.getEntityManager().createNamedQuery("get_match_employer")
+                    .setParameter("employerID", match.getEmployerID()).getResultList());
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return objResult;
     }
 
     public List<MatchData> getMatchStagiaire(MatchInfo match) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        List<MatchData> objResult = (List<MatchData>)(this.dao.getEntityManager().createNamedQuery("get_match_stagiaire")
-                .setParameter("stagiaireID", match.getStagiaireID()).getResultList());
+        List<MatchData> objResult = null;
+        try {
+            objResult = (List<MatchData>) (this.dao.getEntityManager().createNamedQuery("get_match_stagiaire")
+                    .setParameter("stagiaireID", match.getStagiaireID()).getResultList());
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return objResult;
     }
 
     public boolean saveMatchStagiaire(MatchInfo match) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        this.dao.beginTransaction();
-        this.dao.getEntityManager().createNamedQuery("save_match_employer")
-                .setParameter("stagiaireID", match.getStagiaireID())
-                .setParameter("employerID", match.getEmployerID())
-                .setParameter("interet", match.getInteret()).executeUpdate();
-        this.dao.commitTransaction();
+        try {
+            this.dao.beginTransaction();
+            this.dao.getEntityManager().createNamedQuery("save_match_stagiaire")
+                    .setParameter("stagiaireID", match.getStagiaireID())
+                    .setParameter("employerID", match.getEmployerID())
+                    .setParameter("interet", match.getInteret()).executeUpdate();
+            this.dao.commitTransaction();
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return true;
     }
 
     public boolean saveMatchEmployer(MatchInfo match) throws UserSessionActionException {
-        this.dao.clearEntityManager();
-        this.dao.beginTransaction();
-        this.dao.getEntityManager().createNamedQuery("save_match_stagiaire")
-                .setParameter("stagiaireID", match.getStagiaireID())
-                .setParameter("employerID", match.getEmployerID())
-                .setParameter("interet", match.getInteret()).executeUpdate();
-        this.dao.commitTransaction();
+        try {
+            this.dao.beginTransaction();
+            this.dao.getEntityManager().createNamedQuery("save_match_employer")
+                    .setParameter("stagiaireID", match.getStagiaireID())
+                    .setParameter("employerID", match.getEmployerID())
+                    .setParameter("interet", match.getInteret()).executeUpdate();
+            this.dao.commitTransaction();
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
         return true;
     }
 
