@@ -52,9 +52,18 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
     @UiField
     org.gwtbootstrap3.client.ui.FormControlStatic lblStage;
     @UiField
-    org.gwtbootstrap3.client.ui.TextArea taCompetences;
+    org.gwtbootstrap3.extras.select.client.ui.Select ddCompetence1;
     @UiField
-    org.gwtbootstrap3.client.ui.TextArea taInteretsObjectifs;
+    org.gwtbootstrap3.extras.select.client.ui.Select ddCompetence2;
+    @UiField
+    org.gwtbootstrap3.extras.select.client.ui.Select ddCompetence3;
+    @UiField
+    org.gwtbootstrap3.extras.select.client.ui.Select ddInteret1;
+    @UiField
+    org.gwtbootstrap3.extras.select.client.ui.Select ddInteret2;
+    @UiField
+    org.gwtbootstrap3.extras.select.client.ui.Select ddInteret3;
+
 
     public void setUserInfosObject(UserInfoData objUserInfos)
     {
@@ -69,20 +78,27 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
         lblStage.setText(Integer.toString(objUserInfos.getNumeroStage()));
 
         List<ConceptData> listeCompetences = objUserInfos.getCompetence();
-        taCompetences.setText("");
 
         List<ConceptData> listeInterets = objUserInfos.getInteret();
-        taInteretsObjectifs.setText("");
 
-        //TODO: Améliorer la modif des cométences et intérêts.
-        for (int i=0;i < listeCompetences.size();i++)
+        //TODO: Améliorer la modification des compétences et intérêts.
+        for (int i=0;i <  listeInterets.size();i++)
         {
-            taCompetences.setText(taCompetences.getText() + listeCompetences.get(i).getConceptNom() + ": " + listeCompetences.get(i).getNiveauSur5() + " ");
-        }
-
-        for (int i=0; i < listeInterets.size(); i++)
-        {
-            taInteretsObjectifs.setText(taInteretsObjectifs.getText() + listeInterets.get(i).getConceptNom() + ": " + listeInterets.get(i).getNiveauSur5() + " ");
+            if(i == 1)
+            {
+                ddInteret1.setValue(Integer.toString(listeInterets.get(i).getNiveauSur5()));
+                ddCompetence1.setValue(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
+            }
+            else if (i == 2)
+            {
+                ddInteret2.setValue(Integer.toString(listeInterets.get(i).getNiveauSur5()));
+                ddCompetence2.setValue(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
+            }
+            else if (i == 3)
+            {
+                ddInteret3.setValue(Integer.toString(listeInterets.get(i).getNiveauSur5()));
+                ddCompetence3.setValue(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
+            }
         }
     }
 
@@ -94,8 +110,19 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
 
     public void updateStudent()
     {
-        //TODO: Faire la modification des champ de objStudentUpdate avec ce qu'on retrouve dans la page.
+        List<ConceptData> listeCompetencesUpdate = objUserInfos.getCompetence();
+        List<ConceptData> listeInteretsUpdate = objUserInfos.getInteret();
 
+        listeCompetencesUpdate.get(0).setNiveauSur5(Integer.parseInt(ddCompetence1.getValue()));
+        listeCompetencesUpdate.get(1).setNiveauSur5(Integer.parseInt(ddCompetence2.getValue()));
+        listeCompetencesUpdate.get(2).setNiveauSur5(Integer.parseInt(ddCompetence3.getValue()));
+
+        listeInteretsUpdate.get(0).setNiveauSur5(Integer.parseInt(ddInteret1.getValue()));
+        listeInteretsUpdate.get(1).setNiveauSur5(Integer.parseInt(ddInteret2.getValue()));
+        listeInteretsUpdate.get(2).setNiveauSur5(Integer.parseInt(ddInteret3.getValue()));
+
+        objStudentUpdate.m_objListCompetence = listeCompetencesUpdate;
+        objStudentUpdate.m_objListInteret = listeInteretsUpdate;
 
         //TODO: Prendre l'ID de l'employeur connecté
         objStudentUpdate.updateStudent(1,true);

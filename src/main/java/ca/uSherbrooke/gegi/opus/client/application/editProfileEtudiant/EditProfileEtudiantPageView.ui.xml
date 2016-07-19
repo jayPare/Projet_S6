@@ -1,6 +1,9 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:b.html="http://www.w3.org/1999/html">
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+             xmlns:b.html="http://www.w3.org/1999/html"
+             xmlns:select="urn:import:org.gwtbootstrap3.extras.select.client.ui"
+             xmlns:html="urn:import:org.gwtbootstrap3.client.ui.html">
 
     <g:HTMLPanel>
         <b:PageHeader text="Modification de votre profil" subText="Opus"/>
@@ -32,20 +35,70 @@
                     </b:Column>
                 </b:Row>
 
-                <b:NavTabs marginLeft="10">
+                <b:NavTabs marginLeft="10" marginRight="10">
                     <b:TabListItem active="true" dataTarget="#tab1" text="Cométences"/>
                     <b:TabListItem dataTarget="#tab2" text="Intérêts et objectifs"/>
                 </b:NavTabs>
                 <b:TabContent marginLeft="10" marginBottom="10" marginRight="10">
                     <b:TabPane fade="true" in="true" active="true" b:id="tab1">
-                        <b:FormGroup>
-                            <b:TextArea ui:field="taInteretsObjectifs" text="Erreur de chargement des intérêts."/>
-                        </b:FormGroup>
+                        <b:Panel paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
+                            <html:Paragraph text="Programmation web"></html:Paragraph>
+                            <select:Select width="50" ui:field="ddCompetence1">
+                                <select:Option text="1"/>
+                                <select:Option text="2"/>
+                                <select:Option text="3"/>
+                                <select:Option text="4"/>
+                                <select:Option text="5"/>
+                            </select:Select>
+
+                            <html:Paragraph text="Gestion de projet"></html:Paragraph>
+                            <select:Select width="50" ui:field="ddCompetence2">
+                                <select:Option text="1"/>
+                                <select:Option text="2"/>
+                                <select:Option text="3"/>
+                                <select:Option text="4"/>
+                                <select:Option text="5"/>
+                            </select:Select>
+
+                            <html:Paragraph text="Méthodologie Agile"></html:Paragraph>
+                            <select:Select width="50" ui:field="ddCompetence3">
+                                <select:Option text="1"/>
+                                <select:Option text="2"/>
+                                <select:Option text="3"/>
+                                <select:Option text="4"/>
+                                <select:Option text="5"/>
+                            </select:Select>
+                        </b:Panel>
                     </b:TabPane>
                     <b:TabPane fade="true" b:id="tab2">
-                        <b:FormGroup>
-                            <b:TextArea ui:field="taCompetences" text="Erreur de chargement des compétences."/>
-                        </b:FormGroup>
+                        <b:Panel paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
+                            <html:Paragraph text="Programmation web"></html:Paragraph>
+                            <select:Select width="50" ui:field="ddInteret1">
+                                <select:Option text="1"/>
+                                <select:Option text="2"/>
+                                <select:Option text="3"/>
+                                <select:Option text="4"/>
+                                <select:Option text="5"/>
+                            </select:Select>
+
+                            <html:Paragraph text="Gestion de projet"></html:Paragraph>
+                            <select:Select width="50" ui:field="ddInteret2">
+                                <select:Option text="1"/>
+                                <select:Option text="2"/>
+                                <select:Option text="3"/>
+                                <select:Option text="4"/>
+                                <select:Option text="5"/>
+                            </select:Select>
+
+                            <html:Paragraph text="Méthodologie Agile"></html:Paragraph>
+                            <select:Select width="50" ui:field="ddInteret3">
+                                <select:Option text="1"/>
+                                <select:Option text="2"/>
+                                <select:Option text="3"/>
+                                <select:Option text="4"/>
+                                <select:Option text="5"/>
+                            </select:Select>
+                        </b:Panel>
                     </b:TabPane>
                 </b:TabContent>
 
