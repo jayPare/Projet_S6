@@ -5,9 +5,9 @@
     <g:HTMLPanel>
         <b:PageHeader text="Intérêts mutuels" subText="Opus"/>
 
-        <b:PanelGroup b:id="accordion" ui:field="panelMatches">
+        <b:PanelGroup ui:field="panelMatches">
             <b:Panel>
-                <b:PanelHeader dataToggle="COLLAPSE" dataParent="#accordion2" dataTarget="#collapseFour">
+                <b:PanelHeader dataToggle="COLLAPSE" dataTarget="#collapseFour">
                     <b:Heading size="H4" text="Genetech"/>
                 </b:PanelHeader>
                 <b:PanelCollapse b:id="collapseFour">
@@ -18,7 +18,7 @@
                 </b:PanelCollapse>
             </b:Panel>
             <b:Panel>
-                <b:PanelHeader dataToggle="COLLAPSE" dataParent="#accordion2" dataTarget="#collapseFive">
+                <b:PanelHeader dataToggle="COLLAPSE" dataTarget="#collapseFive">
                     <b:Heading size="H4" text="GSoft"/>
                 </b:PanelHeader>
                 <b:PanelCollapse b:id="collapseFive">
@@ -29,7 +29,7 @@
                 </b:PanelCollapse>
             </b:Panel>
             <b:Panel>
-                <b:PanelHeader dataToggle="COLLAPSE" dataParent="#accordion2" dataTarget="#collapseSix">
+                <b:PanelHeader dataToggle="COLLAPSE" dataTarget="#collapseSix">
                     <b:Heading size="H4" text="Intel"/>
                 </b:PanelHeader>
                 <b:PanelCollapse b:id="collapseSix">

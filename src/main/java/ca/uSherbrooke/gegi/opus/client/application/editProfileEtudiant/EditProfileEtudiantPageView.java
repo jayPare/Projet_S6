@@ -81,7 +81,7 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
 
         List<ConceptData> listeInterets = objUserInfos.getInteret();
 
-        //TODO: Améliorer la modification des compétences et intérêts.
+        //TODO: Améliorer la modification des compétences et intérêts pour pouvoir rajouter des competences et des interets.
         for (int i=0;i <  listeInterets.size();i++)
         {
             if(i == 1)
