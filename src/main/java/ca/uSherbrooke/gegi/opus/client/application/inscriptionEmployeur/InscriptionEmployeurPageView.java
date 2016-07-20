@@ -22,9 +22,6 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class InscriptionEmployeurPageView extends ViewImpl implements InscriptionEmployeurPagePresenter.MyView
 {
-
-    //TODO: Refaire le style pour la page d'inscription des employeurs
-
     private final Widget widget;
 
     @javax.inject.Inject
@@ -47,9 +44,11 @@ public class InscriptionEmployeurPageView extends ViewImpl implements Inscriptio
     @UiField
     org.gwtbootstrap3.client.ui.TextBox tbLieu;
     @UiField
-    org.gwtbootstrap3.client.ui.TextBox tbTechnologies;
+    org.gwtbootstrap3.client.ui.TextArea taTechnologies;
     @UiField
-    org.gwtbootstrap3.client.ui.TextBox tbSommaire;
+    org.gwtbootstrap3.client.ui.TextArea taSommaire;
+    @UiField
+    org.gwtbootstrap3.client.ui.TextArea taNature;
 
     @UiHandler("btnSubscribe")
     public void onClick(ClickEvent event)
@@ -62,11 +61,17 @@ public class InscriptionEmployeurPageView extends ViewImpl implements Inscriptio
         objEmployerInfo.m_strName = tbNomEntreprise.getText();
         objEmployerInfo.m_strDomain = tbDomaine.getText();
         objEmployerInfo.m_strLocation = tbLieu.getText();
-        //objEmployerInfo.m_strTechnologies =tbTechnologies.getText();
+
+        //TODO: Ajouter nature dans l'objet
+        //objEmployerInfo.m_strNature = taNature.getText();
         //TODO : technologies = list de string
-        objEmployerInfo.m_strSummary = tbSommaire.getText();
+        //objEmployerInfo.m_strTechnologies =taTechnologies.getText();
+
+        objEmployerInfo.m_strSummary = taSommaire.getText();
+
         //TODO: Ajouter le CIP de l'employeur déja connecté.
         objEmployerInfo.insertNewEmployer("degs2601",true);
+
         dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
 
         MatchInfo MatchInfo = new MatchInfo();

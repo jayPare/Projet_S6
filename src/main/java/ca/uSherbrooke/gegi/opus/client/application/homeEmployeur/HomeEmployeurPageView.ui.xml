@@ -13,8 +13,8 @@
                     <html:Paragraph ui:field="lblAdresse" text="Erreur de chargement d'adresse."/>
                 </b:Column>
                 <b:Column size="MD_2" marginTop="10">
-                    <b:Button ui:field="btnLike" size="LARGE" marginRight="10" type="SUCCESS" text="Intérêt"/>
-                    <b:Button ui:field="btnDislike" size="LARGE" type="DANGER" text="Pas d'intérêt"/>
+                    <b:Button ui:field="btnLike" size="DEFAULT" marginRight="10" type="SUCCESS" text="Intérêt"/>
+                    <b:Button ui:field="btnDislike" size="DEFAULT" type="DANGER" text="Pas d'intérêt"/>
                 </b:Column>
             </b:Row>
             <b:NavTabs marginLeft="10" marginRight="20">
@@ -24,18 +24,24 @@
             </b:NavTabs>
             <b:TabContent marginLeft="10" marginBottom="10" marginRight="20">
                 <b:TabPane fade="true" in="true" active="true" b:id="tab1">
-                    <html:Paragraph marginTop="10" marginLeft="10" ui:field="lblSommaire"
+                    <b:Panel paddingRight="10" paddingTop="10" paddingLeft="10" paddingBottom="10">
+                        <html:Paragraph ui:field="lblSommaire"
                                     text="Erreur de chargement du sommaire."></html:Paragraph>
+                    </b:Panel>
                 </b:TabPane>
 
                 <b:TabPane fade="true" b:id="tab2">
-                    <html:Paragraph marginTop="10" marginLeft="10" ui:field="lblNature"
+                    <b:Panel>
+                        <html:Paragraph ui:field="lblNature"
                                     text="Erreur de chargement de la nature."></html:Paragraph>
+                    </b:Panel>
                 </b:TabPane>
 
                 <b:TabPane fade="true" b:id="tab4">
-                    <html:Paragraph marginTop="10" marginLeft="10" ui:field="lblTechnologies"
+                    <b:Panel>
+                        <html:Paragraph ui:field="lblTechnologies"
                                     text="Erreur de chergement des technologies"></html:Paragraph>
+                    </b:Panel>
                 </b:TabPane>
             </b:TabContent>
         </b:Panel>
