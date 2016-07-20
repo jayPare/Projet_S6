@@ -9,7 +9,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 
 public class NameTokens
 {
-    public static final String EMPLOYEUR_INSCRIPTION = "/suscribe";
+    public static final String EMPLOYEUR_INSCRIPTION = "/inscription";
     public static final String MATCHES = "/matches";
     public static final String ETUDIANT_EDIT = "/editEtudiant";
     public static final String EMPLOYEUR_EDIT = "/editEmployeur";

@@ -3,9 +3,9 @@
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 
     <g:HTMLPanel>
-        <b:PageHeader text="Modification de votre profil" subText="Opus"/>
-        <div style="width: 100%; height: 80%; border: 2px solid black; padding: 5px;">
-                <b:Form ui:field="form">
+        <b:PageHeader text="Inscription" subText="Opus"/>
+        <b:Panel paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
+                <b:Form>
                     <b:FieldSet>
 
                         <b:FormGroup>
@@ -25,18 +25,23 @@
 
                         <b:FormGroup>
                             <b:FormLabel b:for="formSommaire"  text="Sommaire"/>
-                            <b:TextBox ui:field="tbSommaire" b:id="formSommaire"/>
+                            <b:TextArea ui:field="taSommaire" b:id="formSommaire"/>
                         </b:FormGroup>
 
                         <b:FormGroup>
                             <b:FormLabel b:for="formTechnologies"  text="Technologies"/>
-                            <b:TextBox ui:field="tbTechnologies" b:id="formTechnologies"/>
+                            <b:TextArea ui:field="taTechnologies" b:id="formTechnologies"/>
+                        </b:FormGroup>
+
+                        <b:FormGroup>
+                            <b:FormLabel b:for="formNature"  text="Nature"/>
+                            <b:TextArea ui:field="taNature" b:id="formNature"/>
                         </b:FormGroup>
 
                         <b:Button ui:field="btnSubscribe">S'inscrire</b:Button>
 
                     </b:FieldSet>
                 </b:Form>
-        </div>
+        </b:Panel>
     </g:HTMLPanel>
 </ui:UiBinder>
