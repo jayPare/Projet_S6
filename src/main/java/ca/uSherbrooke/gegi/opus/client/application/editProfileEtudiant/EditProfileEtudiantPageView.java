@@ -24,7 +24,7 @@ import java.util.List;
 
 public class EditProfileEtudiantPageView extends ViewImpl implements EditProfileEtudiantPagePresenter.MyView
 {
-
+    //TODO: Ajouterr SuggestBox pour les competences et les interets
     private final Widget widget;
 
     @javax.inject.Inject

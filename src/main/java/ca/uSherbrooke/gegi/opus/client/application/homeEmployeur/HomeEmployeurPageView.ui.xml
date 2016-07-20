@@ -4,7 +4,7 @@
 
     <g:HTMLPanel>
         <b:PageHeader text="Consulter des profils d'employeurs" subText="Opus"/>
-        <b:Panel>
+        <b:Panel ui:field="panelProfile">
             <b:Row marginTop="10" marginLeft="0">
                 <b:Column size="MD_4">
                     <b:Heading size="H3" ui:field="lblNomEntreprise"
@@ -44,6 +44,13 @@
                     </b:Panel>
                 </b:TabPane>
             </b:TabContent>
+        </b:Panel>
+
+        <b:Panel paddingTop="150" paddingRight="400" paddingLeft="400" paddingBottom="150" visible="false" ui:field="panelNoMoreProfile">
+            <b:Heading size="H1" alignment="CENTER" text="Il n'y a plus d'employeurs disponibles."></b:Heading>
+
+            <b:Button ui:field="btnRefresh" block="true" type="SUCCESS" size="LARGE" text="Rafraichir"></b:Button>
+
         </b:Panel>
     </g:HTMLPanel>
 </ui:UiBinder>

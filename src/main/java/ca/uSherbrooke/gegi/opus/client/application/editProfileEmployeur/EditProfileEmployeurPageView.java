@@ -21,7 +21,10 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class EditProfileEmployeurPageView extends ViewImpl implements EditProfileEmployeurPagePresenter.MyView
 {
-
+    //TODO: Ajouter SuggestBox pour les technologies
+    //http://gwtbootstrap3.github.io/gwtbootstrap3-demo/#suggestBox
+    //TODO: Ajouter SummerNote pour le sommaire
+    //http://gwtbootstrap3.github.io/gwtbootstrap3-demo/#summernote
     private final Widget widget;
 
     @javax.inject.Inject

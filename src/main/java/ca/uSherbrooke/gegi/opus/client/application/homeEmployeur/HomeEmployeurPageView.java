@@ -34,6 +34,10 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     org.gwtbootstrap3.client.ui.html.Paragraph lblNature;
     @UiField
     org.gwtbootstrap3.client.ui.html.Paragraph lblTechnologies;
+    @UiField
+    org.gwtbootstrap3.client.ui.Panel panelProfile;
+    @UiField
+    org.gwtbootstrap3.client.ui.Panel panelNoMoreProfile;
 
     @Override
     public void setUiHandlers(HomeEmployeurPageUiHandlers homePageUiHandlers) {
@@ -63,13 +67,22 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
                 technologies += tech + ",";
             }
             lblTechnologies.setText(technologies);
-        } else {
-            //Todo : find a way to hide everything and display only a message to say there arent any more employer + a refresh button -> use fonction onRefresh
-            lblNomEntreprise.setText("Il n'y a plus d'employeur ...");
+        }
+        else
+        {
+            panelProfile.setVisible(false);
+            panelNoMoreProfile.setVisible(true);
         }
     }
 
-    public void onRefresh(ClickEvent event) {
+    @UiHandler("btnRefresh")
+    public void onRefreshClick(ClickEvent event)
+    {
+        this.onRefresh(event);
+    }
+
+    public void onRefresh(ClickEvent event)
+    {
         homePageUiHandlers.actionOnRefresh();
     }
 
