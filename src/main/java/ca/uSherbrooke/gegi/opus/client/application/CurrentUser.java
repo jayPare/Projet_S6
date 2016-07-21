@@ -2,15 +2,9 @@ package ca.uSherbrooke.gegi.opus.client.application;
 
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 import ca.uSherbrooke.gegi.commons.core.server.utils.UserSessionImpl;
-<<<<<<< Updated upstream
 import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfo;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfoResult;
-=======
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfos;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GetUserInfosResult;
 import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfosData;
->>>>>>> Stashed changes
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 
