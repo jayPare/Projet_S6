@@ -19,6 +19,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.html.Div;
 import org.gwtbootstrap3.client.ui.html.UnorderedList;
 
 import javax.inject.Inject;
@@ -32,7 +33,9 @@ public class SideMenuView extends ViewWithUiHandlers<SideMenuUiHandlers> impleme
 	@UiField UnorderedList ulMenuContent;
 	@UiField ListBox listBoxSort;
 	@UiField TextBox textBoxFilter;
-	@UiField UnorderedList ulSidebar;
+	@UiField Div ulSidebarEtudiant;
+	@UiField Div ulSidebarEmployeur;
+	@UiField Div ulSidebarMatches;
 
 	@Inject ApplicationPresenter applicationPresenter;
 	
@@ -52,8 +55,10 @@ public class SideMenuView extends ViewWithUiHandlers<SideMenuUiHandlers> impleme
     }
 
 	public void addToApplicationPresenter(){
-		applicationPresenter.getView().setInSlot(ApplicationPresenter.SLOT_SIDE_MENU, panelMenu);
-		applicationPresenter.getView().setInSlot(ApplicationPresenter.SLOT_SIDEBAR, ulSidebar);
+		applicationPresenter.getView().addToSlot(ApplicationPresenter.SLOT_SIDE_MENU, panelMenu);
+		applicationPresenter.getView().addToSlot(ApplicationPresenter.SLOT_SIDEBAR, ulSidebarEtudiant);
+		applicationPresenter.getView().addToSlot(ApplicationPresenter.SLOT_SIDEBAR, ulSidebarEmployeur);
+		applicationPresenter.getView().addToSlot(ApplicationPresenter.SLOT_SIDEBAR, ulSidebarMatches);
 	}
 	
 	public void setList(List<Data> listData){
