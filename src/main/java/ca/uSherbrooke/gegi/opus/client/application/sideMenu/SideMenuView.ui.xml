@@ -27,9 +27,20 @@
             </b:FormGroup>
             <b_html:UnorderedList ui:field="ulMenuContent" styleName="nav" />
         </g:HTMLPanel>
-        <!-- End interior panel of the side menu -->
-		<b_html:UnorderedList ui:field="ulSidebar" b:id="sidebar">
-			<b:AnchorListItem icon="GLOBE" title="Tous les data" targetHistoryToken="/homeEtudiant" />
-		</b_html:UnorderedList>
+        <g:HTMLPanel ui:field="panelNavi">
+            <b:FormGroup>
+                <b:InputGroup>
+                    <b_html:Div ui:field="ulSidebarEtudiant" b:id="sidebarEtudiant">
+                        <b:AnchorListItem icon="BOOK" title="Étudiants" targetHistoryToken="/homeEtudiant" />
+                    </b_html:Div>
+                    <b_html:Div ui:field="ulSidebarEmployeur" b:id="sidebarEmployeur">
+                        <b:AnchorListItem icon="COFFEE" title="Employeurs" targetHistoryToken="/homeEmployeur" />
+                    </b_html:Div>
+                    <b_html:Div ui:field="ulSidebarMatches" b:id="sidebarMatches">
+                        <b:AnchorListItem icon="BELL" title="Matches" targetHistoryToken="/matches" />
+                    </b_html:Div>
+                </b:InputGroup>
+            </b:FormGroup>
+        </g:HTMLPanel>
     </g:HTMLPanel>
 </ui:UiBinder>
