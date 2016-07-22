@@ -104,10 +104,9 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
         tbSommaire.setText(objEmployerInfos.getEmployerSummary());
 
         //TODO: Améliorer l'affichage des technologies
-        tbTechnologies.setText(objEmployerInfos.getTechnologies().toString());
+        //tbTechnologies.setText(objEmployerInfos.getTechnologies().toString());
 
-        //TODO: Ajouter nature dans l'objet
-        //tbNature.setText(objEmployerInfos.getEmployerTechs());
+        tbNature.setText(objEmployerInfos.getTasks());
     }
 
     @Inject

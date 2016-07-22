@@ -8,43 +8,51 @@ import javax.persistence.*;
  * Created by Fabul on 2016-06-11.
  */
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "get_competences", // exists only for test purposes
+        @NamedNativeQuery(name = "get_competences",
                 query = " SELECT C.concept_id, C.concept_nom, CCS.niveau_sur_5 FROM recrusimple.concept AS C " +
                         " LEFT JOIN recrusimple.concept_competence_stagiaire AS CCS ON C.concept_id = CCS.concept_id " +
                         " WHERE CCS.stagiaire_id = #stagiaireID ",
                 resultClass = ConceptData.class),
-        @NamedNativeQuery(name = "delete_competences", // exists only for test purposes
+        @NamedNativeQuery(name = "delete_competences",
                 query = "DELETE " +
                         "FROM recrusimple.concept_competence_stagiaire " +
                         "WHERE stagiaire_id <> #stagiaireID"),
-        @NamedNativeQuery(name = "save_competence", // exists only for test purposes
+        @NamedNativeQuery(name = "save_competence",
                 query = "INSERT INTO recrusimple.concept_competence_stagiaire (stagiaire_id, niveau_sur_5,concept_id) " +
                         "VALUES (#stagiaireID," +
                         "        #niveau5," +
                         "        #conceptID)"),
-        @NamedNativeQuery(name = "get_interets", // exists only for test purposes
+        @NamedNativeQuery(name = "get_interets",
                 query = " SELECT C.concept_id, C.concept_nom, CIS.niveau_sur_5 FROM recrusimple.concept AS C " +
                         " LEFT JOIN recrusimple.concept_interet_stagiaire AS CIS ON C.concept_id = CIS.concept_id " +
                         " WHERE CIS.stagiaire_id = #stagiaireID ",
                 resultClass = ConceptData.class),
-        @NamedNativeQuery(name = "delete_interets", // exists only for test purposes
+        @NamedNativeQuery(name = "delete_interets",
                 query = "DELETE " +
                         "FROM recrusimple.concept_interet_stagiaire " +
                         "WHERE stagiaire_id <> #stagiaireID"),
-        @NamedNativeQuery(name = "save_interet", // exists only for test purposes
+        @NamedNativeQuery(name = "save_interet",
                 query = "INSERT INTO recrusimple.concept_interet_stagiaire (stagiaire_id,niveau_sur_5, concept_id) " +
                         "VALUES (#stagiaireID," +
                         "        #niveau5," +
-                        "        #conceptID)")
+                        "        #conceptID)"),
+        @NamedNativeQuery(name = "get_employer_technologies",
+                query = "SELECT C.concept_nom " +
+                        "FROM recrusimple.concept_employeur AS CE " +
+                        "LEFT JOIN recrusimple.concept AS C on CE.concept_id = C.concept_id  " +
+                        "WHERE employeur_id = #employerID",
+                resultClass = EmployerData.class),
 })
 
 @Entity
 @Table(name = "recrusimple.concept", schema = "recrusimple", catalog = "opus")
 @SecondaryTables({
-        @SecondaryTable(name="recrusimple.concept_competence_stagiaire",
-                pkJoinColumns=@PrimaryKeyJoinColumn(name="concept_id")),
-        @SecondaryTable(name="recrusimple.concept_interet_stagiaire",
-                pkJoinColumns=@PrimaryKeyJoinColumn(name="concept_id"))
+        @SecondaryTable(name = "recrusimple.concept_competence_stagiaire",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "concept_id")),
+        @SecondaryTable(name = "recrusimple.concept_interet_stagiaire",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "concept_id")),
+        @SecondaryTable(name = "recrusimple.concept_employeur",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "concept_id"))
 })
 public class ConceptData implements Data {
     String conceptNom = "";
@@ -57,8 +65,7 @@ public class ConceptData implements Data {
         this.id = id;
     }
 
-    public ConceptData()
-    {
+    public ConceptData() {
 
     }
 
@@ -69,7 +76,7 @@ public class ConceptData implements Data {
         return conceptID;
     }
 
-    public void setConceptID( int conceptID ){
+    public void setConceptID(int conceptID) {
         this.conceptID = conceptID;
     }
 
@@ -114,21 +121,36 @@ public class ConceptData implements Data {
         return result;
     }
 
-    public void setUserId(Integer userId)
-    {
-    };
+    public void setUserId(Integer userId) {
+    }
 
-    public Integer getUserId(){return null;};
+    ;
 
-    public Integer getId(){
+    public Integer getUserId() {
         return null;
-    };
+    }
 
-    public void setId(Integer nId){}
+    ;
 
-    public String getLabel(){return "";};
+    public Integer getId() {
+        return null;
+    }
 
-    public void setLabel(String strLabel){};
+    ;
+
+    public void setId(Integer nId) {
+    }
+
+    public String getLabel() {
+        return "";
+    }
+
+    ;
+
+    public void setLabel(String strLabel) {
+    }
+
+    ;
 
     private String id;
 

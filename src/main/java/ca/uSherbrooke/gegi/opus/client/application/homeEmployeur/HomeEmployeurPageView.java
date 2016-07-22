@@ -5,6 +5,7 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.homeEmployeur;
 
+import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -63,8 +64,8 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
             lblSommaire.setText(objEmployerInfos.getEmployerSummary());
             lblNature.setText(objEmployerInfos.getTasks());
             String technologies = "";
-            for (String tech : objEmployerInfos.getTechnologies()) {
-                technologies += tech + ",";
+            for (ConceptData tech : objEmployerInfos.listStrTechnologies) {
+                technologies += tech.getConceptNom() + ",";
             }
             lblTechnologies.setText(technologies);
         }

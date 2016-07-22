@@ -1,10 +1,8 @@
 package ca.uSherbrooke.gegi.opus.shared.dispatch;
 
-import ca.uSherbrooke.gegi.opus.shared.entity.GatekeeperData;
-import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
+import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
+import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.gwtplatform.dispatch.rpc.shared.Result;
-
-import java.util.List;
 
 /**
  * Created by Fabul on 2016-07-21.
@@ -13,21 +11,25 @@ public class GatekeeperInfoResult implements Result {
 
     private boolean bSaveSuccess = false;
 
-    private GatekeeperData m_objGatekeeperInfo;
+    private EmployerData m_objEmployer;
+    private UserInfoData m_objUser;
 
     public GatekeeperInfoResult() {
     }
 
-    public GatekeeperInfoResult(GatekeeperData objGatekeeperInfo) {
-        this.m_objGatekeeperInfo = objGatekeeperInfo;
+    public void setEmployerObject(EmployerData objEmployerInfo) {
+        this.m_objEmployer = objEmployerInfo;
     }
 
-    public void setGatekeeperInfoObject(GatekeeperData objGatekeeperInfo) {
-        this.m_objGatekeeperInfo = objGatekeeperInfo;
+    public void setUserObject(UserInfoData objUserInfo) {
+        this.m_objUser = objUserInfo;
     }
 
-    public GatekeeperData getGatekeeperInfoObject() {
-        return this.m_objGatekeeperInfo;
+    public EmployerData getEmployerObject() {
+        return this.m_objEmployer;
+    }
+    public UserInfoData getUserObject() {
+        return this.m_objUser;
     }
 
     public void setSaveSuccess(boolean bSaveSuccess) {

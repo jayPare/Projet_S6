@@ -19,6 +19,8 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
     private boolean m_bGetStudent = false;
     //Set to true to get a new student
     private boolean m_bGetNextStudent = false;
+    //Set to true to get a new student
+    public boolean m_bGetCurrentStudent = false;
 
     public String m_strFirstName = "";
     public String m_strLastName = "";

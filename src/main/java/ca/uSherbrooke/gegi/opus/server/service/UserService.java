@@ -7,10 +7,7 @@ package ca.uSherbrooke.gegi.opus.server.service;
 import ca.uSherbrooke.gegi.commons.core.server.utils.UserSession;
 import ca.uSherbrooke.gegi.commons.core.shared.utils.UserSessionActionException;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.*;
-import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
-import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
-import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
+import ca.uSherbrooke.gegi.opus.shared.entity.*;
 import ca.uSherbrooke.gegi.persist.dao.Dao;
 import ca.uSherbrooke.gegi.persist.dao.Opus;
 import com.google.inject.Inject;
@@ -85,7 +82,7 @@ public class UserService {
         UserInfoData objResult = null;
         try {
             objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
-                    .setParameter("strCIP", user.m_strCIP).getSingleResult());
+                    .setParameter("strCIP",user.m_strCIP).getSingleResult());
             objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
             objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         } catch (Exception e) {
@@ -152,7 +149,7 @@ public class UserService {
         try {
             objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer")
                     .setParameter("employerID", employer.getEmployerID()).getSingleResult());
-            objResult.setTechnologies((List<String>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList());
+            //objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList();
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
             this.dao.rollbackTransaction();
@@ -166,7 +163,7 @@ public class UserService {
         try {
             objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
                     .setParameter("strCIP", employer.m_strCIP).getSingleResult());
-            objResult.setTechnologies((List<String>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList());
+            //objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList();
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
             this.dao.rollbackTransaction();
@@ -179,7 +176,7 @@ public class UserService {
         EmployerData objResult = null;
         try {
             objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_next_employer").getSingleResult());
-            objResult.setTechnologies((List<String>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList());
+            //objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList();
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
             this.dao.rollbackTransaction();
@@ -249,16 +246,18 @@ public class UserService {
     public GatekeeperInfoResult getUserWithCIP(GatekeeperInfo gatekeeper) throws UserSessionActionException {
         GatekeeperInfoResult objResult = null;
         try {
-            objResult = (GatekeeperInfoResult) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
-                    .setParameter("strCIP", gatekeeper.m_strCIP).getResultList());
-            if (objResult == null) {
-                objResult = (GatekeeperInfoResult) (this.dao.getEntityManager().createNamedQuery("get_stagiaire_with_cip")
-                        .setParameter("strCIP", gatekeeper.m_strCIP).getResultList());
-            }
+            objResult.setUserObject((UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
+                    .setParameter("strCIP", gatekeeper.m_strCIP).getSingleResult()));
         } catch (Exception e) {
-            System.out.println("Error message: " + e.getMessage());
-            this.dao.rollbackTransaction();
-            this.dao.clearEntityManager();
+            System.out.println("Error message: " + e.getMessage() + "-> Trying for an employer!");
+            try {
+                objResult.setEmployerObject((EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
+                        .setParameter("strCIP", gatekeeper.m_strCIP).getSingleResult()));
+            } catch (Exception ex) {
+                System.out.println("Error message: " + ex.getMessage());
+                this.dao.clearEntityManager();
+                objResult = null;
+            }
         }
         return objResult;
     }
