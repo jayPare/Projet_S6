@@ -6,6 +6,7 @@
 package ca.uSherbrooke.gegi.opus.client.application.inscriptionEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
+import ca.uSherbrooke.gegi.opus.client.application.LoggedInGatekeeper;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import com.google.web.bindery.event.shared.EventBus;
@@ -14,6 +15,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
@@ -34,7 +36,7 @@ public class InscriptionEmployeurPagePresenter extends Presenter<InscriptionEmpl
 
     @ProxyStandard
     @NameToken(NameTokens.EMPLOYEUR_INSCRIPTION)
-	/*@UseGatekeeper(AuthenticationGatekeeper.class)*/
+    //@UseGatekeeper(AuthentificationGatekeeper.class)
     public interface MyProxy extends ProxyPlace<InscriptionEmployeurPagePresenter> {
     }
 

@@ -6,9 +6,7 @@ package ca.uSherbrooke.gegi.opus.server.service;
 
 import ca.uSherbrooke.gegi.commons.core.server.utils.UserSession;
 import ca.uSherbrooke.gegi.commons.core.shared.utils.UserSessionActionException;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfo;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfo;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfo;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.*;
 import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
@@ -246,6 +244,23 @@ public class UserService {
             this.dao.clearEntityManager();
         }
         return true;
+    }
+
+    public GatekeeperInfoResult getUserWithCIP(GatekeeperInfo gatekeeper) throws UserSessionActionException {
+        GatekeeperInfoResult objResult = null;
+        try {
+            objResult = (GatekeeperInfoResult) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
+                    .setParameter("strCIP", gatekeeper.m_strCIP).getResultList());
+            if (objResult == null) {
+                objResult = (GatekeeperInfoResult) (this.dao.getEntityManager().createNamedQuery("get_stagiaire_with_cip")
+                        .setParameter("strCIP", gatekeeper.m_strCIP).getResultList());
+            }
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
+        return objResult;
     }
 
     public void setConcepts(UserInfo user) {

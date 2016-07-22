@@ -22,8 +22,6 @@ public class SideMenuPresenter extends PresenterWidget<SideMenuPresenter.MyView>
 	
 	public interface MyView extends View, HasUiHandlers<SideMenuUiHandlers> {
 		public void setList(List<Data> listData);
-		public Sort getSort();
-		public String getFilterText();
 		public void addToApplicationPresenter();
     }
 

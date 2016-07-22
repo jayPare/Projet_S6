@@ -7,6 +7,8 @@ package ca.uSherbrooke.gegi.opus.client.application.homeEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
+import ca.uSherbrooke.gegi.commons.core.client.accessRestriction.AuthenticationGatekeeper;
+import ca.uSherbrooke.gegi.opus.client.application.LoggedInGatekeeper;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfo;
@@ -22,6 +24,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
@@ -64,7 +67,7 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
 
     @ProxyStandard
     @NameToken(NameTokens.EMPLOYEUR)
-    /*@UseGatekeeper(AuthenticationGatekeeper.class)*/
+    //@UseGatekeeper(AuthentificationGatekeeper.class)
     public interface MyProxy extends ProxyPlace<HomeEmployeurPagePresenter> {
     }
 

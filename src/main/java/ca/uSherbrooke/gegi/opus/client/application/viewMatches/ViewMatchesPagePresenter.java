@@ -5,6 +5,7 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.viewMatches;
 
+import ca.uSherbrooke.gegi.commons.core.client.accessRestriction.AuthenticationGatekeeper;
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
@@ -20,6 +21,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
@@ -48,7 +50,7 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
 
     @ProxyStandard
     @NameToken(NameTokens.MATCHES)
-    /*@UseGatekeeper(AuthenticationGatekeeper.class)*/
+    //@UseGatekeeper(AuthentificationGatekeeper.class)
     public interface MyProxy extends ProxyPlace<ViewMatchesPagePresenter> {
     }
 

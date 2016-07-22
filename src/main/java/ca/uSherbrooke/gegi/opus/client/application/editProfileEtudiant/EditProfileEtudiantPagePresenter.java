@@ -5,8 +5,10 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.editProfileEtudiant;
 
+import ca.uSherbrooke.gegi.commons.core.client.accessRestriction.AuthenticationGatekeeper;
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
+import ca.uSherbrooke.gegi.opus.client.application.LoggedInGatekeeper;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.UserInfo;
@@ -20,6 +22,7 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
@@ -42,7 +45,7 @@ public class EditProfileEtudiantPagePresenter extends Presenter<EditProfileEtudi
 
     @ProxyStandard
     @NameToken(NameTokens.ETUDIANT_EDIT)
-	/*@UseGatekeeper(AuthenticationGatekeeper.class)*/
+    //@UseGatekeeper(AuthentificationGatekeeper.class)
     public interface MyProxy extends ProxyPlace<EditProfileEtudiantPagePresenter> {
     }
 

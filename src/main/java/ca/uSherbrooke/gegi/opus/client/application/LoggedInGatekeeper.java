@@ -1,27 +1,52 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package ca.uSherbrooke.gegi.opus.client.application;
 
+import ca.uSherbrooke.gegi.commons.core.client.accessRestriction.UserNameTokens;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
+import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
-/**
- * Created by Genie on 10/juil./2016.
- */
-
-@DefaultGatekeeper
-public class LoggedInGatekeeper implements Gatekeeper{
-    private CurrentUser _currentUser;
+@Singleton
+public class LoggedInGatekeeper implements Gatekeeper {
+    private String nameToken;
+    private final PlaceManager placeManager;
+    //CurrentUser _user;
 
     @Inject
-    public LoggedInGatekeeper(CurrentUser currentUser)
-    {
-        this._currentUser = currentUser;
+    public LoggedInGatekeeper(PlaceManager placeManager) {
+        this.placeManager = placeManager;
+        this.nameToken = null;
     }
 
-    @Override
-    public boolean canReveal()
-    {
-        return _currentUser.IsLoggedIn();
+    public boolean canReveal() {
+        boolean reveal = false;
+        if(this.nameToken == null || this.nameToken.isEmpty()) {
+            this.nameToken = this.placeManager.getCurrentPlaceRequest().getNameToken();
+        }
+
+        //reveal = UserNameTokens.getInstance().hasAccess(this.nameToken);
+        reveal = true;
+        if(reveal) {
+            System.out.println("Accès autorisé");
+        } else {
+            System.out.println("Accès refusé");
+        }
+        //_user = new CurrentUser();
+        //_user.IsLoggedIn();
+        this.nameToken = null;
+        return reveal;
     }
 
+    public String getNameToken() {
+        return this.nameToken;
+    }
+
+    public void setNameToken(String nameToken) {
+        this.nameToken = nameToken;
+    }
 }

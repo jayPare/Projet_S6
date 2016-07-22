@@ -76,21 +76,4 @@ public class SideMenuView extends ViewWithUiHandlers<SideMenuUiHandlers> impleme
 		}
 	}
 
-	public Sort getSort(){
-		return Sort.valueOf(listBoxSort.getSelectedValue());
-	}
-	
-	public String getFilterText(){
-		return textBoxFilter.getText();
-	}
-
-	@UiHandler("listBoxSort")
-	public void sortChangeHandler(ChangeEvent event) {
-		getUiHandlers().refreshList();
-	}
-
-	@UiHandler("buttonFilter")
-	public void filterClickHandler(ClickEvent event) {
-		getUiHandlers().refreshList();
-	}
 }
