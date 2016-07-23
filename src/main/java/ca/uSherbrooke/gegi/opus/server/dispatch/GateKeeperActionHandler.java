@@ -18,8 +18,8 @@ public class GateKeeperActionHandler implements ActionHandler<GatekeeperInfo, Ga
 
     @Override
     public GatekeeperInfoResult execute(GatekeeperInfo gatekeeperInfo, ExecutionContext context) throws ActionException {
-        //HttpServletRequest request = getThreadLocalRequest();
-        //UserSessionImpl session = new UserSessionImpl(request);
+        HttpServletRequest request = getThreadLocalRequest();
+        UserSessionImpl session = new UserSessionImpl(request);
         gatekeeperInfo.setUserCIP("degs2601");
         return userService.getUserWithCIP(gatekeeperInfo);
     }

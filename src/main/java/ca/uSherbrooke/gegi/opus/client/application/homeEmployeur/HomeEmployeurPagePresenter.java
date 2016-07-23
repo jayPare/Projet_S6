@@ -88,7 +88,7 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
         sideMenuPresenter.refreshList();
 
         getNextEmployer();
-        setCurrentUser();
+        //setCurrentUser(); //TODO: to get current user -> not working
     }
 
     public void getNextEmployer() {

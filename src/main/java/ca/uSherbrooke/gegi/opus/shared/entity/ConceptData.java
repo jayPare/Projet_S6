@@ -37,11 +37,11 @@ import javax.persistence.*;
                         "        #niveau5," +
                         "        #conceptID)"),
         @NamedNativeQuery(name = "get_employer_technologies",
-                query = "SELECT C.concept_nom " +
+                query = "SELECT C.concept_nom, C.concept_id " +
                         "FROM recrusimple.concept_employeur AS CE " +
                         "LEFT JOIN recrusimple.concept AS C on CE.concept_id = C.concept_id  " +
                         "WHERE employeur_id = #employerID",
-                resultClass = EmployerData.class),
+                resultClass = ConceptData.class),
 })
 
 @Entity

@@ -149,7 +149,7 @@ public class UserService {
         try {
             objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer")
                     .setParameter("employerID", employer.getEmployerID()).getSingleResult());
-            //objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList();
+            objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", employer.getEmployerID()).getResultList();
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
             this.dao.rollbackTransaction();
@@ -163,7 +163,7 @@ public class UserService {
         try {
             objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
                     .setParameter("strCIP", employer.m_strCIP).getSingleResult());
-            //objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList();
+            objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList();
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
             this.dao.rollbackTransaction();
@@ -176,7 +176,7 @@ public class UserService {
         EmployerData objResult = null;
         try {
             objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_next_employer").getSingleResult());
-            //objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList();
+            objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList();
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
             this.dao.rollbackTransaction();

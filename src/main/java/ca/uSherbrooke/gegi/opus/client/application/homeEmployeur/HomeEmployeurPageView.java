@@ -65,9 +65,9 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
             lblNature.setText(objEmployerInfos.getTasks());
             String technologies = "";
             for (ConceptData tech : objEmployerInfos.listStrTechnologies) {
-                technologies += tech.getConceptNom() + ",";
+                technologies += "- " + tech.getConceptNom() + "<br>";
             }
-            lblTechnologies.setText(technologies);
+            lblTechnologies.setHTML(technologies);
         }
         else
         {

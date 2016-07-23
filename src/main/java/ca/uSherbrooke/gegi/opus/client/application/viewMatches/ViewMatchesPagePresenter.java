@@ -13,6 +13,7 @@ import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfo;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfoResult;
 import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
+import com.google.gwt.query.client.Console;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -71,6 +72,18 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
         getMatches(bIsEmployer);
     }
 
+    public void getMatches(boolean bEmployer) {
+        if (!bEmployer) { // If stagaire
+            MatchInfo objMatches = new MatchInfo();
+            objMatches.getMatchStudent(2, true);
+            dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
+        }else{
+            MatchInfo objMatches = new MatchInfo();
+            objMatches.getMatchEmployer(2, true);
+            dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
+        }
+    }
+
     private AsyncCallback<MatchInfoResult> MatchInfosResultAsyncCallback = new AsyncCallback<MatchInfoResult>() {
         @Override
         public void onSuccess(MatchInfoResult result) {
@@ -83,17 +96,5 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Les informations de l'employeur est inaccessible.");
         }
     };
-
-    public void getMatches(boolean bEmployer) {
-        if (!bEmployer) { // If stagaire, get employer matches
-            MatchInfo objMatches = new MatchInfo();
-            objMatches.getMatchEmployer(1, true);
-            dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
-        }else{
-            MatchInfo objMatches = new MatchInfo();
-            objMatches.getMatchStudent(1, true);
-            dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
-        }
-    }
 
 }

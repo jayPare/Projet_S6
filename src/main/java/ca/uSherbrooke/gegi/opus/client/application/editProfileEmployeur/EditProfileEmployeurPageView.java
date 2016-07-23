@@ -8,6 +8,7 @@ package ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfo;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfoResult;
+import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -69,10 +70,9 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
         objEmployerUpdate.m_strDomain = tbDomaine.getText();
         objEmployerUpdate.m_strLocation = tbVille.getText();
         //objEmployerUpdate.m_strTechnologies =tbTechnologies.getText();
+        //TODO : the user only can choose between a list of technologies
         objEmployerUpdate.m_strSummary = tbSommaire.getText();
-
-        //TODO: Prendre l'ID de l'employeur connecté
-        objEmployerUpdate.updateEmployer(1,true);
+        objEmployerUpdate.updateEmployer(objEmployerInfos.getEmployerId(),true);
         dispatchAsync.execute(objEmployerUpdate, employerInfosAsyncCallback);
 
         //TODO: Verifier pourquoi la modification fail.
@@ -103,9 +103,11 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
 
         tbSommaire.setText(objEmployerInfos.getEmployerSummary());
 
-        //TODO: Améliorer l'affichage des technologies
-        //tbTechnologies.setText(objEmployerInfos.getTechnologies().toString());
-
+        String technologies = "";
+        for (ConceptData tech : objEmployerInfos.listStrTechnologies) {
+            technologies += tech.getConceptNom() + " - ";
+        }
+        tbTechnologies.setText(technologies);
         tbNature.setText(objEmployerInfos.getTasks());
     }
 

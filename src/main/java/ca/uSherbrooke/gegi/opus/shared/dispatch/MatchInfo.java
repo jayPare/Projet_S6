@@ -26,11 +26,11 @@ public class MatchInfo extends ActionImpl<MatchInfoResult> {
     }
 
     public boolean getGetEmployerMatch() {
-        return m_bGetMatchStudent;
+        return m_bGetMatchEmployer;
     }
 
     public boolean getGetStagiaireMatch() {
-        return m_bGetMatchEmployer;
+        return m_bGetMatchStudent;
     }
 
     public void setStagiaireID(int nStagiaireID) {
