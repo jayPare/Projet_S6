@@ -31,11 +31,10 @@ public class MatchInfoActionHandler implements ActionHandler<MatchInfo, MatchInf
                 bSuccess = true;
             }
         } else if (match.getGetStagiaireMatch() == true) {
-            matchResult = new MatchInfoResult(userService.getMatchEmployer(match));
-            bSuccess = true;
-            //getMatchEmployer
-        } else if (match.getGetEmployerMatch() == true) {
             matchResult = new MatchInfoResult(userService.getMatchStagiaire(match));
+            bSuccess = true;
+        } else if (match.getGetEmployerMatch() == true) {
+            matchResult = new MatchInfoResult(userService.getMatchEmployer(match));
             bSuccess = true;
         } else {
             //Error

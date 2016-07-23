@@ -40,7 +40,7 @@
                 <b:TabPane fade="true" b:id="tab4">
                     <b:Panel>
                         <html:Paragraph ui:field="lblTechnologies"
-                                    text="Erreur de chergement des technologies"></html:Paragraph>
+                                    text="Erreur de chargement des technologies"></html:Paragraph>
                     </b:Panel>
                 </b:TabPane>
             </b:TabContent>

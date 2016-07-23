@@ -6,6 +6,7 @@
         <b:PageHeader text="Intérêts mutuels" subText="Opus"/>
 
         <b:PanelGroup ui:field="panelMatches">
+            <!--<b:FormControlStatic ui:field="lblPrenom" b:id="formPrenom" text=" Erreur de chargement du nom"></b:FormControlStatic>-->
             <b:Panel>
                 <b:PanelHeader dataToggle="COLLAPSE" dataTarget="#collapseFour">
                     <b:Heading size="H4" text="Genetech"/>

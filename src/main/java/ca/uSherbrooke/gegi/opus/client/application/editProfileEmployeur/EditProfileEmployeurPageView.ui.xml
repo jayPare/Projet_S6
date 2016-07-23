@@ -40,7 +40,7 @@
                     </b:TabPane>
 
                     <b:TabPane fade="true" b:id="tab4">
-                        <b:TextArea  ui:field="tbTechnologies" text="Erreur de chergement des technologies"></b:TextArea>
+                        <b:TextArea  ui:field="tbTechnologies" text="Erreur de chargement des technologies"></b:TextArea>
                     </b:TabPane>
 
                 </b:TabContent>

@@ -39,7 +39,8 @@ import java.util.List;
                         "       first_name," +
                         "       last_name," +
                         "       departement_nom," +
-                        "       numero_stage " +
+                        "       numero_stage," +
+                        "       administrative_user_id " +
                         "FROM recrusimple.release_stagiaire " +
                         "WHERE administrative_user_id = #strCIP LIMIT 1",
                 resultClass = UserInfoData.class),
