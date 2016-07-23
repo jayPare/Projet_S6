@@ -4,9 +4,7 @@
 
     <g:HTMLPanel>
         <b:PageHeader text="Intérêts mutuels" subText="Opus"/>
-
         <b:PanelGroup ui:field="panelMatches">
         </b:PanelGroup>
-
     </g:HTMLPanel>
 </ui:UiBinder>

@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @NamedNativeQueries({
         @NamedNativeQuery(name = "get_match_employer",
-                query = " SELECT * FROM recrusimple.view_match WHERE employeurID = #employeurID ",
+                query = " SELECT * FROM recrusimple.view_match WHERE employeurID = #employerID ",
                 resultClass = MatchData.class),
         @NamedNativeQuery(name = "get_match_stagiaire",
                 query = " SELECT * FROM recrusimple.view_match WHERE stagiaireID = #stagiaireID ",

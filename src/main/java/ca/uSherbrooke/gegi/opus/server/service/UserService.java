@@ -187,6 +187,10 @@ public class UserService {
 
     public List<MatchData> getMatchEmployer(MatchInfo match) throws UserSessionActionException {
         List<MatchData> objResult = null;
+        System.out.println("HERE EMPLOYER COUCOU");
+        System.out.println("EMPLOYER ID -> " + match.getEmployerID());
+        System.out.println("STAGIAIRE ID -> " + match.getStagiaireID());
+
         try {
             objResult = (List<MatchData>) (this.dao.getEntityManager().createNamedQuery("get_match_employer")
                     .setParameter("employerID", match.getEmployerID()).getResultList());

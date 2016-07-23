@@ -37,10 +37,10 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
     SideMenuPresenter sideMenuPresenter;
     @Inject
     DispatchAsync dispatchAsync;
-    boolean bIsEmployer = false;
+    boolean bIsEmployer = true;
     @Override
     public void actionOnRefresh() {
-        getMatches(bIsEmployer);
+        getMatches();
     }
 
     public interface MyView extends View, HasUiHandlers<ViewMatchesPageUiHandlers> {
@@ -69,17 +69,17 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
         sideMenuPresenter.refreshList();
 
         //TODO: Verifier si employeur ou etudiant
-        getMatches(bIsEmployer);
+        getMatches();
     }
 
-    public void getMatches(boolean bEmployer) {
-        if (!bEmployer) { // If stagaire
+    public void getMatches() {
+        if (bIsEmployer == true) { // If stagaire
             MatchInfo objMatches = new MatchInfo();
             objMatches.getMatchStudent(2, true);
             dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
         }else{
             MatchInfo objMatches = new MatchInfo();
-            objMatches.getMatchEmployer(2, true);
+            objMatches.getMatchEmployer(3, true);
             dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
         }
     }

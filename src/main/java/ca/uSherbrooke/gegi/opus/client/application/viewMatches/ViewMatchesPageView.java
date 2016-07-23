@@ -14,6 +14,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.constants.HeadingSize;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
+
 import java.util.List;
 
 public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePresenter.MyView {
@@ -25,32 +26,25 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
     org.gwtbootstrap3.client.ui.PanelGroup panelMatches;
 
     @Override
-    public void setUiHandlers(ViewMatchesPageUiHandlers homePageUiHandlers)
-    {
+    public void setUiHandlers(ViewMatchesPageUiHandlers homePageUiHandlers) {
         this.homePageUiHandlers = homePageUiHandlers;
     }
 
-    public interface Binder extends UiBinder<Widget, ViewMatchesPageView>
-    {
+    public interface Binder extends UiBinder<Widget, ViewMatchesPageView> {
     }
 
     List<MatchData> objMatchData;
 
-    public void setMatchesObject(List<MatchData> listMatches)
-    {
+    public void setMatchesObject(List<MatchData> listMatches) {
         this.objMatchData = listMatches;
     }
 
-    public void setMatches(boolean bIsEmployer)
-    {
-        if (bIsEmployer == false)
-        {
-
-            for (MatchData match : objMatchData)
-            {
+    public void setMatches(boolean bIsEmployer) {
+        if (bIsEmployer == true) {
+            for (MatchData match : objMatchData) {
                 org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
                 org.gwtbootstrap3.client.ui.Heading header = new org.gwtbootstrap3.client.ui.Heading(HeadingSize.H4);
-                //TODO: getCompanyName retourne null???
+
                 header.setText(match.getCompanyName());
 
                 org.gwtbootstrap3.client.ui.PanelHeader panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
@@ -78,14 +72,12 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
 
                 panelMatches.add(panel);
             }
-        }
-        else
-        {
-            for (MatchData match : objMatchData)
-            {
+        } else {
+            for (MatchData match : objMatchData) {
                 org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
                 org.gwtbootstrap3.client.ui.Heading header = new org.gwtbootstrap3.client.ui.Heading(HeadingSize.H4);
-                header.setText(match.getFirstNameStudent() + " " + match.getLastNameStudent());
+
+                header.setText(match.getFirstNameStudent() + " " + match.getLastNameStudent() );
 
                 org.gwtbootstrap3.client.ui.PanelHeader panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
                 panelHeader.setDataToggle(Toggle.COLLAPSE);
@@ -115,20 +107,17 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
         }
     }
 
-    public void onRefresh(ClickEvent event)
-    {
+    public void onRefresh(ClickEvent event) {
         homePageUiHandlers.actionOnRefresh();
     }
 
     @Inject
-    public ViewMatchesPageView(final Binder binder)
-    {
+    public ViewMatchesPageView(final Binder binder) {
         widget = binder.createAndBindUi(this);
     }
 
     @Override
-    public Widget asWidget()
-    {
+    public Widget asWidget() {
         return widget;
     }
 }

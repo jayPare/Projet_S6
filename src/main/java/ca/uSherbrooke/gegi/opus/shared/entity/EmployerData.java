@@ -131,7 +131,7 @@ public class EmployerData implements Data {
         return strTasks;
     }
 
-    public void setTasks(String strTasks) {
+    public void setNature(String strTasks) {
         this.strTasks = strTasks;
     }
 
