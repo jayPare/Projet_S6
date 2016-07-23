@@ -50,6 +50,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
         //TODO: Verifier que tout fonctionne en ajoutant des matches dans la BD et enlever les match hardcoder dans le ui.
         if (bIsEmployer == false)
         {
+            int index = 0;
             for (MatchData match : objMatchData)
             {
                 org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
@@ -60,7 +61,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
 
                 org.gwtbootstrap3.client.ui.PanelHeader panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
                 panelHeader.setDataToggle(Toggle.COLLAPSE);
-                panelHeader.setDataTarget(Integer.toString(match.getStagiaireId()));
+                panelHeader.setDataTarget(Integer.toString(match.getStagiaireId())); // --> DO NOT USER getId -> ca retourne null seulement
                 panelHeader.add(header);
 
                 org.gwtbootstrap3.client.ui.PanelCollapse panelCollapse = new org.gwtbootstrap3.client.ui.PanelCollapse();
@@ -77,7 +78,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
                 //lblPrenom.setText("Telephone: " + match.getPhoneStudent());
 
 
-                panelCollapse.setId(Integer.toString(match.getStagiaireId()));
+                panelCollapse.setId(Integer.toString(match.getStagiaireId())); // --> DO NOT USER getId -> ca retourne null seulement
 
                 panelBody.add(courriel);
                 panelBody.add(telephone);
@@ -97,7 +98,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
 
                 org.gwtbootstrap3.client.ui.PanelHeader panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
                 panelHeader.setDataToggle(Toggle.COLLAPSE);
-                panelHeader.setDataTarget(Integer.toString(match.getEmployeurId()));
+                panelHeader.setDataTarget(Integer.toString(match.getEmployeurId())); // --> DO NOT USER getId -> ca retourne null seulement
                 panelHeader.add(header);
 
                 org.gwtbootstrap3.client.ui.PanelCollapse panelCollapse = new org.gwtbootstrap3.client.ui.PanelCollapse();
@@ -109,7 +110,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
                 org.gwtbootstrap3.client.ui.html.Paragraph telephone = new org.gwtbootstrap3.client.ui.html.Paragraph();
                 telephone.setText("Telephone: " + match.getPhoneEmployer());
 
-                panelCollapse.setId(Integer.toString(match.getEmployeurId()));
+                panelCollapse.setId(Integer.toString(match.getEmployeurId())); // --> DO NOT USER getId -> ca retourne null seulement
 
                 panelBody.add(courriel);
                 panelBody.add(telephone);
