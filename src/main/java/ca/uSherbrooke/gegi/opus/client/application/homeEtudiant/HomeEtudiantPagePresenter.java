@@ -44,7 +44,7 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
     @Override
     public void actionOnDislike(int nStagiaireID) {
         MatchInfo match = new MatchInfo();
-        //TODO use the good stagiaireID which should be from the gatekeeper instead of 1
+        //TODO use the good stagiaireID which should be from the currentUser instead of 1
         match.saveStudentMatch(true, 1, nStagiaireID, false);
         dispatchAsync.execute(match, matchInfosAsyncCallback);
     }
@@ -52,7 +52,7 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
     @Override
     public void actionOnLike(int nStagiaireID) {
         MatchInfo match = new MatchInfo();
-        //TODO use the good stagiaireID which should be from the gatekeeper  instead of 1
+        //TODO use the good stagiaireID which should be from the currentUser instead of 1
         match.saveStudentMatch(true, 1, nStagiaireID, true);
         dispatchAsync.execute(match, matchInfosAsyncCallback);
     }

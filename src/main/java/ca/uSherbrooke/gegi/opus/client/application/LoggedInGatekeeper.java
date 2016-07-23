@@ -5,14 +5,8 @@
 
 package ca.uSherbrooke.gegi.opus.client.application;
 
-import ca.uSherbrooke.gegi.commons.core.client.accessRestriction.UserNameTokens;
-import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GatekeeperInfo;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.GatekeeperInfoResult;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 

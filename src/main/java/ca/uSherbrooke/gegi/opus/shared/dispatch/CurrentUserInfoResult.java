@@ -7,14 +7,14 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 /**
  * Created by Fabul on 2016-07-21.
  */
-public class GatekeeperInfoResult implements Result {
+public class CurrentUserInfoResult implements Result {
 
     private boolean bSaveSuccess = false;
 
     private EmployerData m_objEmployer;
     private UserInfoData m_objUser;
 
-    public GatekeeperInfoResult() {
+    public CurrentUserInfoResult() {
     }
 
     public void setEmployerObject(EmployerData objEmployerInfo) {

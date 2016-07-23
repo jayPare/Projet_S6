@@ -7,7 +7,6 @@ package ca.uSherbrooke.gegi.opus.client.application.homeEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-import ca.uSherbrooke.gegi.commons.core.client.accessRestriction.AuthenticationGatekeeper;
 import ca.uSherbrooke.gegi.opus.client.application.LoggedInGatekeeper;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
@@ -88,22 +87,41 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
         sideMenuPresenter.refreshList();
 
         getNextEmployer();
-        //setCurrentUser(); //TODO: to get current user -> not working
+        //getCurrentUser();
     }
 
+    public void getCurrentUser() {
+        CurrentUserInfo currentUser = new CurrentUserInfo();
+        dispatchAsync.execute(currentUser, currentUserInfosAsyncCallback);
+        /*while (answerFromServer == null) {
+
+        }*/
+    }
+    private AsyncCallback<CurrentUserInfoResult> currentUserInfosAsyncCallback = new AsyncCallback<CurrentUserInfoResult>() {
+        @Override
+        public void onSuccess(CurrentUserInfoResult result) {
+            if (result.getUserObject() != null) {
+                _stagiaireID = result.getUserObject().getStagiaireID();
+                _cip = result.getUserObject().getCIP();
+                _bIsEmployer = false;
+            } else if (result.getEmployerObject() != null) {
+                _employerID = result.getEmployerObject().getEmployerId();
+                _cip = result.getEmployerObject().getCIP();
+                _bIsEmployer = true;
+            }
+            answerFromServer = true;
+        }
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
+            answerFromServer = false;
+        }
+    };
     public void getNextEmployer() {
         EmployerInfo objEmployerInfo = new EmployerInfo();
         objEmployerInfo.getNextEmployer(true);
         dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
-    }
-
-
-    public void setCurrentUser() {
-        GatekeeperInfo gatekeeper = new GatekeeperInfo();
-        dispatchAsync.execute(gatekeeper, gatekeeperInfosAsyncCallback);
-        while (answerFromServer == null) {
-
-        }
     }
 
     private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
@@ -130,27 +148,4 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
         }
     };
-
-    private AsyncCallback<GatekeeperInfoResult> gatekeeperInfosAsyncCallback = new AsyncCallback<GatekeeperInfoResult>() {
-        @Override
-        public void onSuccess(GatekeeperInfoResult result) {
-            if (result.getUserObject() != null) {
-                _stagiaireID = result.getUserObject().getStagiaireID();
-                _cip = result.getUserObject().getCIP();
-                _bIsEmployer = false;
-            } else if (result.getEmployerObject() != null) {
-                _employerID = result.getEmployerObject().getEmployerId();
-                _cip = result.getEmployerObject().getCIP();
-                _bIsEmployer = true;
-            }
-            answerFromServer = true;
-        }
-
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
-            answerFromServer = false;
-        }
-    };
-
 }

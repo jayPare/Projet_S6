@@ -243,16 +243,16 @@ public class UserService {
         return true;
     }
 
-    public GatekeeperInfoResult getUserWithCIP(GatekeeperInfo gatekeeper) throws UserSessionActionException {
-        GatekeeperInfoResult objResult = null;
+    public CurrentUserInfoResult getUserWithCIP(CurrentUserInfo currentUser) throws UserSessionActionException {
+        CurrentUserInfoResult objResult = null;
         try {
             objResult.setUserObject((UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
-                    .setParameter("strCIP", gatekeeper.m_strCIP).getSingleResult()));
+                    .setParameter("strCIP", currentUser.m_strCIP).getSingleResult()));
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage() + "-> Trying for an employer!");
             try {
                 objResult.setEmployerObject((EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
-                        .setParameter("strCIP", gatekeeper.m_strCIP).getSingleResult()));
+                        .setParameter("strCIP", currentUser.m_strCIP).getSingleResult()));
             } catch (Exception ex) {
                 System.out.println("Error message: " + ex.getMessage());
                 this.dao.clearEntityManager();
