@@ -34,11 +34,6 @@ import java.util.List;
                         "FROM recrusimple.employeur " +
                         "WHERE employeur_id = #employerID",
                 resultClass = EmployerData.class),
-        @NamedNativeQuery(name = "get_employer_technologies",
-                query = "SELECT * " +
-                        "FROM recrusimple.concept_employeur " +
-                        "WHERE employeur_id = #employerID",
-                resultClass = EmployerData.class),
         @NamedNativeQuery(name = "get_employer_with_cip",
                 query = "SELECT * " +
                         "FROM recrusimple.employeur " +
@@ -67,16 +62,7 @@ public class EmployerData implements Data {
     private String strAddress;
     private String strSummary;
     private String strTasks;
-    private List<String> listStrTechnologies;
-
-
-    public List<String> getTechnologies() {
-        return listStrTechnologies;
-    }
-
-    public void setTechnologies(List<String> listStrTechnologies) {
-        this.listStrTechnologies = listStrTechnologies;
-    }
+    public List<ConceptData> listStrTechnologies;
 
     @Id
     @Basic

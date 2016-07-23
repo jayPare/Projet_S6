@@ -36,7 +36,7 @@
                 </b:Row>
 
                 <b:NavTabs marginLeft="10" marginRight="10">
-                    <b:TabListItem active="true" dataTarget="#tab1" text="Cométences"/>
+                    <b:TabListItem active="true" dataTarget="#tab1" text="Compétences"/>
                     <b:TabListItem dataTarget="#tab2" text="Intérêts et objectifs"/>
                 </b:NavTabs>
                 <b:TabContent marginLeft="10" marginBottom="10" marginRight="10">

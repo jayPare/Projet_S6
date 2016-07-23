@@ -7,14 +7,10 @@ package ca.uSherbrooke.gegi.opus.client.application.homeEmployeur;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-import ca.uSherbrooke.gegi.commons.core.client.accessRestriction.AuthenticationGatekeeper;
 import ca.uSherbrooke.gegi.opus.client.application.LoggedInGatekeeper;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfo;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfoResult;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfo;
-import ca.uSherbrooke.gegi.opus.shared.dispatch.MatchInfoResult;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.*;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -31,6 +27,12 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import javax.inject.Inject;
 
 public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePresenter.MyView, HomeEmployeurPagePresenter.MyProxy> implements HomeEmployeurPageUiHandlers {
+
+    public int _stagiaireID = 0;
+    public int _employerID = 0;
+    public boolean _bIsEmployer = false;
+    public String _cip = "";
+    private Boolean answerFromServer = null;
 
     public static final Slot SLOT_USERS = new Slot();
     @Inject
@@ -67,7 +69,7 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
 
     @ProxyStandard
     @NameToken(NameTokens.EMPLOYEUR)
-    //@UseGatekeeper(AuthentificationGatekeeper.class)
+    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MyProxy extends ProxyPlace<HomeEmployeurPagePresenter> {
     }
 
@@ -85,6 +87,41 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
         sideMenuPresenter.refreshList();
 
         getNextEmployer();
+        //getCurrentUser();
+    }
+
+    public void getCurrentUser() {
+        CurrentUserInfo currentUser = new CurrentUserInfo();
+        dispatchAsync.execute(currentUser, currentUserInfosAsyncCallback);
+        /*while (answerFromServer == null) {
+
+        }*/
+    }
+    private AsyncCallback<CurrentUserInfoResult> currentUserInfosAsyncCallback = new AsyncCallback<CurrentUserInfoResult>() {
+        @Override
+        public void onSuccess(CurrentUserInfoResult result) {
+            if (result.getUserObject() != null) {
+                _stagiaireID = result.getUserObject().getStagiaireID();
+                _cip = result.getUserObject().getCIP();
+                _bIsEmployer = false;
+            } else if (result.getEmployerObject() != null) {
+                _employerID = result.getEmployerObject().getEmployerId();
+                _cip = result.getEmployerObject().getCIP();
+                _bIsEmployer = true;
+            }
+            answerFromServer = true;
+        }
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
+            answerFromServer = false;
+        }
+    };
+    public void getNextEmployer() {
+        EmployerInfo objEmployerInfo = new EmployerInfo();
+        objEmployerInfo.getNextEmployer(true);
+        dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
 
     private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
@@ -111,10 +148,4 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
         }
     };
-
-    public void getNextEmployer() {
-        EmployerInfo objEmployerInfo = new EmployerInfo();
-        objEmployerInfo.getNextEmployer(true);
-        dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
-    }
 }
