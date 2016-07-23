@@ -24,7 +24,7 @@ import java.util.List;
 
 public class EditProfileEtudiantPageView extends ViewImpl implements EditProfileEtudiantPagePresenter.MyView
 {
-    //TODO: Ajouterr SuggestBox pour les competences et les interets
+    //TODO: Ajouter SuggestBox pour les competences et les interets
     private final Widget widget;
 
     @javax.inject.Inject
@@ -42,6 +42,8 @@ public class EditProfileEtudiantPageView extends ViewImpl implements EditProfile
 
     UserInfoData objUserInfos;
     UserInfo objStudentUpdate = new UserInfo();
+
+    //TODO: Ajouter telephone
 
     @UiField
     org.gwtbootstrap3.client.ui.FormControlStatic lblPrenom;

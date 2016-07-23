@@ -6,40 +6,6 @@
         <b:PageHeader text="Intérêts mutuels" subText="Opus"/>
 
         <b:PanelGroup ui:field="panelMatches">
-            <!--<b:FormControlStatic ui:field="lblPrenom" b:id="formPrenom" text=" Erreur de chargement du nom"></b:FormControlStatic>-->
-            <b:Panel>
-                <b:PanelHeader dataToggle="COLLAPSE" dataTarget="#collapseFour">
-                    <b:Heading size="H4" text="Genetech"/>
-                </b:PanelHeader>
-                <b:PanelCollapse b:id="collapseFour">
-                    <b:PanelBody>
-                        <html:Paragraph text="Courriel: info@genetech.com"></html:Paragraph>
-                        <html:Paragraph text="Telephone: 819-758-7458"></html:Paragraph>
-                    </b:PanelBody>
-                </b:PanelCollapse>
-            </b:Panel>
-            <b:Panel>
-                <b:PanelHeader dataToggle="COLLAPSE" dataTarget="#collapseFive">
-                    <b:Heading size="H4" text="GSoft"/>
-                </b:PanelHeader>
-                <b:PanelCollapse b:id="collapseFive">
-                    <b:PanelBody>
-                        <html:Paragraph text="Courriel: info@gsoft.com"></html:Paragraph>
-                        <html:Paragraph text="Telephone: 819-758-7458"></html:Paragraph>
-                    </b:PanelBody>
-                </b:PanelCollapse>
-            </b:Panel>
-            <b:Panel>
-                <b:PanelHeader dataToggle="COLLAPSE" dataTarget="#collapseSix">
-                    <b:Heading size="H4" text="Intel"/>
-                </b:PanelHeader>
-                <b:PanelCollapse b:id="collapseSix">
-                    <b:PanelBody>
-                        <html:Paragraph text="Courriel: info@intel.com"></html:Paragraph>
-                        <html:Paragraph text="Telephone: 819-758-7458"></html:Paragraph>
-                    </b:PanelBody>
-                </b:PanelCollapse>
-            </b:Panel>
         </b:PanelGroup>
 
     </g:HTMLPanel>

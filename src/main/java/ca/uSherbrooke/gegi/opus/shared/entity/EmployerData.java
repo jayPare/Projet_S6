@@ -127,7 +127,7 @@ public class EmployerData implements Data {
 
     @Basic
     @Column(name = "taches")
-    public String getTasks() {
+    public String getNature() {
         return strTasks;
     }
 

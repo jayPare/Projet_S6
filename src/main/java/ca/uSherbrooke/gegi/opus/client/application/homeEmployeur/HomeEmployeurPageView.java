@@ -7,7 +7,6 @@ package ca.uSherbrooke.gegi.opus.client.application.homeEmployeur;
 
 import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
-import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -16,8 +15,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewImpl;
-import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.FormLabel;
 
 public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPagePresenter.MyView {
     private final Widget widget;
@@ -48,7 +45,8 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     public interface Binder extends UiBinder<Widget, HomeEmployeurPageView> {
     }
 
-    public interface checkUiHandlers extends UiHandlers {
+    public interface checkUiHandlers extends UiHandlers
+    {
         void onCheck();
     }
 
@@ -62,7 +60,10 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
             lblDomaine.setText(objEmployerInfos.getEmployerDomain());
             lblAdresse.setText(objEmployerInfos.getEmployerAddress());
             lblSommaire.setText(objEmployerInfos.getEmployerSummary());
-            lblNature.setText(objEmployerInfos.getTasks());
+
+            lblNature.setText(objEmployerInfos.getNature());
+
+            //TODO: Modifier l'affichage des technologies
             String technologies = "";
             for (ConceptData tech : objEmployerInfos.listStrTechnologies) {
                 technologies += "- " + tech.getConceptNom() + "<br>";
