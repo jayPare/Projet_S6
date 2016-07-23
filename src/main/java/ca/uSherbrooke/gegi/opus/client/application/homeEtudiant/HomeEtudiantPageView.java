@@ -64,7 +64,6 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
 
     public void setUserInfos()
     {
-        //TODO: Ajouter telephone etudiant.
         if (objUserInfos != null)
         {
             lblNom.setText(objUserInfos.getFirstName() + " " + objUserInfos.getLastName());

@@ -9,7 +9,6 @@ import ca.uSherbrooke.gegi.opus.shared.entity.MatchData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.rpc.core.java.lang.Integer_CustomFieldSerializer;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -24,8 +23,6 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
 
     @UiField
     org.gwtbootstrap3.client.ui.PanelGroup panelMatches;
-    //@UiField
-    //org.gwtbootstrap3.client.ui.FormControlStatic lblPrenom;
 
     @Override
     public void setUiHandlers(ViewMatchesPageUiHandlers homePageUiHandlers)
@@ -46,59 +43,19 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
 
     public void setMatches(boolean bIsEmployer)
     {
-        System.out.println("DONE 6");
-        //TODO: Verifier que tout fonctionne en ajoutant des matches dans la BD et enlever les match hardcoder dans le ui.
         if (bIsEmployer == false)
         {
-            int index = 0;
+
             for (MatchData match : objMatchData)
             {
                 org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
                 org.gwtbootstrap3.client.ui.Heading header = new org.gwtbootstrap3.client.ui.Heading(HeadingSize.H4);
-                header.setText(match.getFirstNameStudent() + " " + match.getLastNameStudent());
-
-                //lblPrenom.setText(match.getFirstNameStudent() + " " + match.getLastNameStudent());
-
-                org.gwtbootstrap3.client.ui.PanelHeader panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
-                panelHeader.setDataToggle(Toggle.COLLAPSE);
-                panelHeader.setDataTarget(Integer.toString(match.getStagiaireId())); // --> DO NOT USER getId -> ca retourne null seulement
-                panelHeader.add(header);
-
-                org.gwtbootstrap3.client.ui.PanelCollapse panelCollapse = new org.gwtbootstrap3.client.ui.PanelCollapse();
-                org.gwtbootstrap3.client.ui.PanelBody panelBody = new org.gwtbootstrap3.client.ui.PanelBody();
-
-                org.gwtbootstrap3.client.ui.html.Paragraph courriel = new org.gwtbootstrap3.client.ui.html.Paragraph();
-                courriel.setText("Courriel: " + match.getEmailStudent());
-
-                //lblPrenom.setText("Courriel: " + match.getEmailStudent());
-
-                org.gwtbootstrap3.client.ui.html.Paragraph telephone = new org.gwtbootstrap3.client.ui.html.Paragraph();
-                telephone.setText("Telephone: " + match.getPhoneStudent());
-
-                //lblPrenom.setText("Telephone: " + match.getPhoneStudent());
-
-
-                panelCollapse.setId(Integer.toString(match.getStagiaireId())); // --> DO NOT USER getId -> ca retourne null seulement
-
-                panelBody.add(courriel);
-                panelBody.add(telephone);
-                panelCollapse.add(panelBody);
-
-                panel.add(panelHeader);
-                panel.add(panelCollapse);
-            }
-        }
-        else
-        {
-            for (MatchData match : objMatchData)
-            {
-                org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
-                org.gwtbootstrap3.client.ui.Heading header = new org.gwtbootstrap3.client.ui.Heading(HeadingSize.H4);
+                //TODO: getCompanyName retourne null???
                 header.setText(match.getCompanyName());
 
                 org.gwtbootstrap3.client.ui.PanelHeader panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
                 panelHeader.setDataToggle(Toggle.COLLAPSE);
-                panelHeader.setDataTarget(Integer.toString(match.getEmployeurId())); // --> DO NOT USER getId -> ca retourne null seulement
+                panelHeader.setDataTarget("#" + Integer.toString(match.getEmployeurId()));
                 panelHeader.add(header);
 
                 org.gwtbootstrap3.client.ui.PanelCollapse panelCollapse = new org.gwtbootstrap3.client.ui.PanelCollapse();
@@ -110,7 +67,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
                 org.gwtbootstrap3.client.ui.html.Paragraph telephone = new org.gwtbootstrap3.client.ui.html.Paragraph();
                 telephone.setText("Telephone: " + match.getPhoneEmployer());
 
-                panelCollapse.setId(Integer.toString(match.getEmployeurId())); // --> DO NOT USER getId -> ca retourne null seulement
+                panelCollapse.setId(Integer.toString(match.getEmployeurId()));
 
                 panelBody.add(courriel);
                 panelBody.add(telephone);
@@ -118,10 +75,45 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
 
                 panel.add(panelHeader);
                 panel.add(panelCollapse);
+
+                panelMatches.add(panel);
+            }
+        }
+        else
+        {
+            for (MatchData match : objMatchData)
+            {
+                org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
+                org.gwtbootstrap3.client.ui.Heading header = new org.gwtbootstrap3.client.ui.Heading(HeadingSize.H4);
+                header.setText(match.getFirstNameStudent() + " " + match.getLastNameStudent());
+
+                org.gwtbootstrap3.client.ui.PanelHeader panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
+                panelHeader.setDataToggle(Toggle.COLLAPSE);
+                panelHeader.setDataTarget("#" + Integer.toString(match.getStagiaireId()));
+                panelHeader.add(header);
+
+                org.gwtbootstrap3.client.ui.PanelCollapse panelCollapse = new org.gwtbootstrap3.client.ui.PanelCollapse();
+                org.gwtbootstrap3.client.ui.PanelBody panelBody = new org.gwtbootstrap3.client.ui.PanelBody();
+
+                org.gwtbootstrap3.client.ui.html.Paragraph courriel = new org.gwtbootstrap3.client.ui.html.Paragraph();
+                courriel.setText("Courriel: " + match.getEmailStudent());
+
+                org.gwtbootstrap3.client.ui.html.Paragraph telephone = new org.gwtbootstrap3.client.ui.html.Paragraph();
+                telephone.setText("Telephone: " + match.getPhoneStudent());
+
+                panelCollapse.setId(Integer.toString(match.getStagiaireId()));
+
+                panelBody.add(courriel);
+                panelBody.add(telephone);
+                panelCollapse.add(panelBody);
+
+                panel.add(panelHeader);
+                panel.add(panelCollapse);
+
+                panelMatches.add(panel);
             }
         }
     }
-
 
     public void onRefresh(ClickEvent event)
     {

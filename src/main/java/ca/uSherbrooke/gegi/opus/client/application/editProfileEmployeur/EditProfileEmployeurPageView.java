@@ -69,7 +69,7 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
         objEmployerUpdate.m_strName = tbNom.getText();
         objEmployerUpdate.m_strDomain = tbDomaine.getText();
         objEmployerUpdate.m_strLocation = tbVille.getText();
-        //objEmployerUpdate.m_strTechnologies =tbTechnologies.getText();
+        //objEmployerUpdate.m_listStrTechnologies = tbTechnologies.getText();
         //TODO : the user only can choose between a list of technologies
         objEmployerUpdate.m_strSummary = tbSommaire.getText();
         objEmployerUpdate.updateEmployer(objEmployerInfos.getEmployerId(),true);
@@ -108,7 +108,7 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
             technologies += tech.getConceptNom() + " - ";
         }
         tbTechnologies.setText(technologies);
-        tbNature.setText(objEmployerInfos.getTasks());
+        tbNature.setText(objEmployerInfos.getNature());
     }
 
     @Inject
