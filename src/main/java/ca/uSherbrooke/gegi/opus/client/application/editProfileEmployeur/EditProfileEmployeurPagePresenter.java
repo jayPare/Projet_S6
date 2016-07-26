@@ -65,7 +65,7 @@ public class EditProfileEmployeurPagePresenter extends Presenter<EditProfileEmpl
 
         EmployerInfo objEmployerInfo = new EmployerInfo();
         //TODO: Aller chercher l'ID de l'employeur loggué
-        objEmployerInfo.getEmployer(1, true);
+        objEmployerInfo.getEmployer(3, true);
         dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
 

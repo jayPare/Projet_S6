@@ -6,6 +6,7 @@
 package ca.uSherbrooke.gegi.opus.client.application.homeEtudiant;
 
 import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
+import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -22,6 +23,7 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     private final Widget widget;
     UserInfoData objUserInfos;
     HomeEtudiantPageUiHandlers homePageUiHandlers;
+    int  idEmployer;
 
     @UiField
     org.gwtbootstrap3.client.ui.Panel panelProfil;
@@ -45,6 +47,8 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     org.gwtbootstrap3.client.ui.ProgressBar pbInteret2;
     @UiField
     org.gwtbootstrap3.client.ui.ProgressBar pbInteret3;
+    @UiField
+    org.gwtbootstrap3.extras.select.client.ui.Select ddSelectEmployeur;
 
     @Override
     public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers)
@@ -57,6 +61,30 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
 
     }
 
+    public void setEmployerID()
+    {
+        //TODO: Modify according to the object with all employer
+        /*String selected  = ddSelectEmployeur.getSelectedItem().getValue();
+
+        i = 0;
+        while (objTousLesEmployeurs.getEmployer(i).employerName != selected)
+        {
+            i++;
+        }
+
+        if (objTousLesEmployeurs.getEmployer(i).employerName == selected)
+        {
+            idEmployer = objTousLesEmployeurs.getEmployer(i).getEmployerID();
+        }*/
+
+    }
+
+    @UiHandler("btnSelectEmployeur")
+    public void onClickBtnSelectEmployeur(ClickEvent event)
+    {
+        setEmployerID();
+    }
+
     public void setUserInfosObject(UserInfoData objUserInfos)
     {
         this.objUserInfos = objUserInfos;
@@ -64,6 +92,21 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
 
     public void setUserInfos()
     {
+        //TODO: Ajouter les employeurs au dropdown.
+        /*for (UnEmployeur unEmployeur : objTousLesEmployeurs)
+        {
+            org.gwtbootstrap3.extras.select.client.ui.Option employeur1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
+
+            employeur1.setText(unEmployeur.getNameEmployer());
+
+            ddSelectEmployeur.add(employeur1);
+        }
+
+        ddSelectEmployeur.setSelectedITem(1);
+
+        setEmployerID();
+        */
+
         if (objUserInfos != null)
         {
             lblNom.setText(objUserInfos.getFirstName() + " " + objUserInfos.getLastName());
@@ -118,7 +161,7 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     {
         if (objUserInfos != null)
         {
-            homePageUiHandlers.actionOnLike(objUserInfos.getStagiaireID());
+            homePageUiHandlers.actionOnLike(objUserInfos.getStagiaireID(), idEmployer);
         }
     }
 
@@ -133,7 +176,7 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     {
         if (objUserInfos != null)
         {
-            homePageUiHandlers.actionOnDislike(objUserInfos.getStagiaireID());
+            homePageUiHandlers.actionOnDislike(objUserInfos.getStagiaireID(), idEmployer);
         }
     }
 
