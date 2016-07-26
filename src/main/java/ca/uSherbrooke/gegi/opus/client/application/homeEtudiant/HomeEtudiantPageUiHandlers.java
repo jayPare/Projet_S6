@@ -10,7 +10,7 @@ import com.gwtplatform.mvp.client.UiHandlers;
  * Created by maip2202 on 2016-05-04.
  */
 public interface HomeEtudiantPageUiHandlers extends UiHandlers {
-    public void actionOnLike(int nStagiaireID);
-    public void actionOnDislike(int nStagiaireID);
+    public void actionOnLike(int nStagiaireID, int employerID);
+    public void actionOnDislike(int nStagiaireID, int employerID);
     public void actionOnRefresh();
 }

@@ -19,9 +19,17 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.ViewImpl;
+import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.gwtbootstrap3.client.ui.constants.ColumnSize;
+import org.gwtbootstrap3.extras.select.client.ui.Option;
+import org.gwtbootstrap3.extras.select.client.ui.Select;
+
+
+
 
 public class EditProfileEmployeurPageView extends ViewImpl implements EditProfileEmployeurPagePresenter.MyView
 {
+
     //TODO: Ajouter SuggestBox pour les technologies
     //http://gwtbootstrap3.github.io/gwtbootstrap3-demo/#suggestBox
     //TODO: Ajouter SummerNote pour le sommaire
@@ -49,11 +57,15 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
     @UiField
     org.gwtbootstrap3.client.ui.TextBox tbVille;
     @UiField
-    org.gwtbootstrap3.client.ui.TextArea tbTechnologies;
-    @UiField
     org.gwtbootstrap3.client.ui.TextArea tbSommaire;
     @UiField
     org.gwtbootstrap3.client.ui.TextArea tbNature;
+    @UiField
+    org.gwtbootstrap3.client.ui.Panel panelTechnologies;
+    @UiField
+    org.gwtbootstrap3.client.ui.Button btnAjouter;
+    @UiField
+    org.gwtbootstrap3.extras.select.client.ui.Select ddSelectEmployeur;
 
     EmployerData objEmployerInfos;
     EmployerInfo objEmployerUpdate = new EmployerInfo();
@@ -62,6 +74,28 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
     public void onClick(ClickEvent event)
     {
         updateEmployer();
+    }
+
+    @UiHandler("btnAjouter")
+    public void onClickAjouter(ClickEvent event)
+    {
+        btnAjouter.setVisible(false);
+
+        org.gwtbootstrap3.extras.select.client.ui.Select sbTechs = new org.gwtbootstrap3.extras.select.client.ui.Select();
+
+        org.gwtbootstrap3.extras.select.client.ui.Option option1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
+        org.gwtbootstrap3.extras.select.client.ui.Option option2 = new org.gwtbootstrap3.extras.select.client.ui.Option();
+        org.gwtbootstrap3.extras.select.client.ui.Option option3 = new org.gwtbootstrap3.extras.select.client.ui.Option();
+
+        option1.setText("Test1");
+        option2.setText("Test2");
+        option3.setText("Test3");
+
+        sbTechs.add(option1);
+        sbTechs.add(option2);
+        sbTechs.add(option3);
+
+        panelTechnologies.add(sbTechs);
     }
 
     public void updateEmployer()
@@ -95,19 +129,78 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
         this.objEmployerInfos = objEmployerInf;
     }
 
+    public void updateEmployerInfosObject(EmployerData objEmployerInf)
+    {
+        this.objEmployerInfos = objEmployerInf;
+    }
+
+    @UiHandler("btnSelectEmployeur")
+    public void onClickBtnSelectEmployeur(ClickEvent event)
+    {
+        //TODO: Modify according to the object with all employer
+        /*String selected  = ddSelectEmployeur.getSelectedItem().getValue();
+
+        i = 0;
+        while (objTousLesEmployeurs.getEmployer(i).employerName != selected)
+        {
+            i++;
+        }
+
+        if (objTousLesEmployeurs.getEmployer(i).employerName == selected)
+        {
+            updateEmployerInfosObject(objTousLesEmployeurs.getEmployer(i));
+        }
+
+        setEmployerInfos();*/
+    }
+
     public void setEmployerInfos()
     {
+        //TODO: Ajouter les employeurs au dropdown.
+        /*for (UnEmployeur unEmployeur : objTousLesEmployeurs)
+        {
+            org.gwtbootstrap3.extras.select.client.ui.Option employeur1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
+
+            employeur1.setText(unEmployeur.getNameEmployer());
+
+            ddSelectEmployeur.add(employeur1);
+        }*/
+
         tbNom.setText(objEmployerInfos.getEmployerName());
         tbDomaine.setText(objEmployerInfos.getEmployerDomain());
         tbVille.setText(objEmployerInfos.getEmployerAddress());
 
         tbSommaire.setText(objEmployerInfos.getEmployerSummary());
 
-        String technologies = "";
-        for (ConceptData tech : objEmployerInfos.listStrTechnologies) {
-            technologies += tech.getConceptNom() + " - ";
+        panelTechnologies.remove(btnAjouter);
+
+        for (ConceptData tech : objEmployerInfos.listStrTechnologies)
+        {
+            org.gwtbootstrap3.client.ui.Row rowTechnologies = new org.gwtbootstrap3.client.ui.Row();
+            org.gwtbootstrap3.client.ui.Column columnTechnologieNom = new org.gwtbootstrap3.client.ui.Column(ColumnSize.LG_2);
+            org.gwtbootstrap3.client.ui.Column columnTechnologieButton = new org.gwtbootstrap3.client.ui.Column(ColumnSize.LG_2);
+
+            org.gwtbootstrap3.client.ui.html.Paragraph lblTechnologie = new org.gwtbootstrap3.client.ui.html.Paragraph();
+            lblTechnologie.setText(tech.getConceptNom());
+            columnTechnologieNom.add(lblTechnologie);
+            org.gwtbootstrap3.client.ui.Button btnDelete = new org.gwtbootstrap3.client.ui.Button();
+            btnDelete.setText("Supprimer");
+            btnDelete.setType(ButtonType.DANGER);
+
+            columnTechnologieButton.add(btnDelete);
+
+            rowTechnologies.add(columnTechnologieNom);
+
+            columnTechnologieNom.setPaddingTop(8);
+            rowTechnologies.add(columnTechnologieButton);
+
+            rowTechnologies.setMarginBottom(8);
+
+            panelTechnologies.add(rowTechnologies);
+
         }
-        tbTechnologies.setText(technologies);
+
+        panelTechnologies.add(btnAjouter);
         tbNature.setText(objEmployerInfos.getNature());
     }
 

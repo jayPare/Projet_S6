@@ -42,18 +42,18 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
 
 
     @Override
-    public void actionOnDislike(int nStagiaireID) {
+    public void actionOnDislike(int nStagiaireID, int employerID) {
         MatchInfo match = new MatchInfo();
-        //TODO use the good stagiaireID which should be from the currentUser instead of 1
-        match.saveStudentMatch(true, 1, nStagiaireID, false);
+        //TODO use the good employerID which should be from the currentUser instead of 1
+        match.saveStudentMatch(true, employerID, nStagiaireID, false);
         dispatchAsync.execute(match, matchInfosAsyncCallback);
     }
 
     @Override
-    public void actionOnLike(int nStagiaireID) {
+    public void actionOnLike(int nStagiaireID, int employerID) {
         MatchInfo match = new MatchInfo();
         //TODO use the good stagiaireID which should be from the currentUser instead of 1
-        match.saveStudentMatch(true, 1, nStagiaireID, true);
+        match.saveStudentMatch(true, employerID, nStagiaireID, true);
         dispatchAsync.execute(match, matchInfosAsyncCallback);
     }
 
