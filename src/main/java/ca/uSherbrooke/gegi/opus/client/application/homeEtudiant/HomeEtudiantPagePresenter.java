@@ -15,6 +15,7 @@ import ca.uSherbrooke.gegi.opus.client.application.LoggedInGatekeeper;
 import ca.uSherbrooke.gegi.opus.client.application.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.*;
+import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -31,6 +32,8 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+
+import java.util.List;
 
 public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresenter.MyView, HomeEtudiantPagePresenter.MyProxy> implements HomeEtudiantPageUiHandlers {
 
@@ -66,6 +69,10 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         public void setUserInfosObject(UserInfoData objUserInfos);
 
         public void setUserInfos();
+
+        public void setEmployerInfoListObject(List<EmployerData> objEmployerInfos);
+
+        public void setEmployerInfos();
     }
 
     @ProxyStandard
@@ -88,6 +95,7 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         sideMenuPresenter.refreshList();
 
         getNextStagiaire();
+        getAllEmployer();
     }
 
     private AsyncCallback<UserInfoResult> userInfosAsyncCallback = new AsyncCallback<UserInfoResult>() {
@@ -115,10 +123,29 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         }
     };
 
+    private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
+        @Override
+        public void onSuccess(EmployerInfoResult result) {
+            getView().setEmployerInfoListObject(result.getEmployerInfosListObject());
+            getView().setEmployerInfos();
+        }
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
+        }
+    };
+
     public void getNextStagiaire() {
         UserInfo objUserInfo = new UserInfo();
         objUserInfo.getNextStudent(true);
         dispatchAsync.execute(objUserInfo, userInfosAsyncCallback);
+    }
+
+    public void getAllEmployer() {
+        EmployerInfo emp = new EmployerInfo();
+        emp.getAllEmployer(true);
+        dispatchAsync.execute(emp, employerInfosAsyncCallback);
     }
 }
 

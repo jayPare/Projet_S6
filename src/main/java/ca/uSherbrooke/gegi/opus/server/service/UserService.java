@@ -82,7 +82,7 @@ public class UserService {
         UserInfoData objResult = null;
         try {
             objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
-                    .setParameter("strCIP",user.m_strCIP).getSingleResult());
+                    .setParameter("strCIP", user.m_strCIP).getSingleResult());
             objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
             objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         } catch (Exception e) {
@@ -105,6 +105,22 @@ public class UserService {
             this.dao.clearEntityManager();
         }
         return objResult;
+    }
+
+    public List<UserInfoData> getAllUser(UserInfo user) throws UserSessionActionException {
+        List<UserInfoData> objListResult = null;
+        try {
+            objListResult = (List<UserInfoData>) (this.dao.getEntityManager().createNamedQuery("get_all_user").getResultList());
+            for (UserInfoData us : objListResult) {
+                us.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", us.getStagiaireID()).getResultList());
+                us.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", us.getStagiaireID()).getResultList());
+            }
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
+        return objListResult;
     }
 
     public boolean insertEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
@@ -185,12 +201,23 @@ public class UserService {
         return objResult;
     }
 
+    public List<EmployerData> getAllEmployer(EmployerInfo employer) throws UserSessionActionException {
+        List<EmployerData> objListResult = null;
+        try {
+            objListResult = (List<EmployerData>) (this.dao.getEntityManager().createNamedQuery("get_all_employer").getResultList());
+            for (EmployerData emp : objListResult) {
+                emp.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", emp.getEmployerId()).getResultList();
+            }
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
+        return objListResult;
+    }
+
     public List<MatchData> getMatchEmployer(MatchInfo match) throws UserSessionActionException {
         List<MatchData> objResult = null;
-        System.out.println("HERE EMPLOYER COUCOU");
-        System.out.println("EMPLOYER ID -> " + match.getEmployerID());
-        System.out.println("STAGIAIRE ID -> " + match.getStagiaireID());
-
         try {
             objResult = (List<MatchData>) (this.dao.getEntityManager().createNamedQuery("get_match_employer")
                     .setParameter("employerID", match.getEmployerID()).getResultList());
@@ -264,6 +291,20 @@ public class UserService {
             }
         }
         return objResult;
+    }
+
+
+    public UserInfoData getAllConcepts(UserInfo user) throws UserSessionActionException {
+        UserInfoData objListResult = null;
+        try {
+            objListResult = new UserInfoData();
+            objListResult.concepts = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_all_concepts").getResultList();
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            this.dao.rollbackTransaction();
+            this.dao.clearEntityManager();
+        }
+        return objListResult;
     }
 
     public void setConcepts(UserInfo user) {

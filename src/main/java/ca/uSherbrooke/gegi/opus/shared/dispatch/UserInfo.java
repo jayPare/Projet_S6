@@ -19,6 +19,10 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
     private boolean m_bGetStudent = false;
     //Set to true to get a new student
     private boolean m_bGetNextStudent = false;
+    //Set to true to get all students
+    private boolean m_bGetAllStudent = false;
+    //Set to true to get all concepts
+    private boolean m_bGetAllConcept = false;
 
     public String m_strFirstName = "";
     public String m_strLastName = "";
@@ -48,6 +52,14 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
         return m_bGetNextStudent;
     }
 
+    public boolean getGetAllConcept() {
+        return m_bGetAllConcept;
+    }
+
+    public boolean getGetAllStudents() {
+        return m_bGetAllStudent;
+    }
+
     public int getStagiaireID() {
         return m_nStagiaireID;
     }
@@ -74,6 +86,13 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
         this.m_bGetNextStudent = bGetNextStudent;
     }
 
+    public void getAllStudent(boolean bGetAllStudent) {
+        this.m_bGetAllStudent = bGetAllStudent;
+    }
+
+    public void getAllConcept(boolean bGetAllConcept) {
+        this.m_bGetAllConcept = bGetAllConcept;
+    }
     public void getStudentWithCIP(String strCIP, boolean bGetStudent) {
         this.m_strCIP = strCIP;
         this.m_bGetStudent = bGetStudent;

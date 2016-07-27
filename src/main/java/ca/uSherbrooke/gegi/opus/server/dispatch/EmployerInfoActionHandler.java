@@ -24,7 +24,11 @@ public class EmployerInfoActionHandler implements ActionHandler<EmployerInfo, Em
         EmployerInfoResult employerResult = null;
         boolean bSuccess = false;
 
-        if (employer.getSaveEmployer() == true) {
+        if (employer.getGetAllEmployer() == true) {
+            employerResult = new EmployerInfoResult();
+            employerResult.setEmployerInfosListObject(userService.getAllEmployer(employer));
+            bSuccess = true;
+        } else if (employer.getSaveEmployer() == true) {
             employerResult = new EmployerInfoResult();
             if (userService.insertEmployerInfos(employer) == true) {
                 bSuccess = true;

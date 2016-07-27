@@ -13,6 +13,7 @@ import java.util.List;
 public class UserInfoResult implements Result {
 
     private UserInfoData objUserInfoData;
+    private List<UserInfoData> m_objListUserInfoData; //-> only will be filled if you do a getAllUser
     private boolean bSaveSuccess = false;
 
     public UserInfoResult() {
@@ -26,8 +27,16 @@ public class UserInfoResult implements Result {
         this.objUserInfoData = objUserInfoData;
     }
 
+    public void setUserInfosListObject(List<UserInfoData> objListUserInfoData) {
+        this.m_objListUserInfoData = objListUserInfoData;
+    }
+
     public UserInfoData getUserInfosObject() {
         return this.objUserInfoData;
+    }
+
+    public List<UserInfoData> getUserInfosListObject() {
+        return this.m_objListUserInfoData;
     }
 
     public void setSaveSuccess(boolean bSaveSuccess) {

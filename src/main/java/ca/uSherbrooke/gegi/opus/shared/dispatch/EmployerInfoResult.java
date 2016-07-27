@@ -3,12 +3,15 @@ package ca.uSherbrooke.gegi.opus.shared.dispatch;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
+import java.util.List;
+
 /**
  * Created by Fabul on 2016-06-20.
  */
 public class EmployerInfoResult implements Result {
 
     private EmployerData objEmployerInfoData;
+    private List<EmployerData> m_objListEmployerInfoData; //-> only will be filled if you do a getAllEmployer
     private boolean bSaveSuccess = false;
 
     public EmployerInfoResult() {
@@ -24,6 +27,14 @@ public class EmployerInfoResult implements Result {
 
     public EmployerData getEmployerInfosObject() {
         return this.objEmployerInfoData;
+    }
+
+    public void setEmployerInfosListObject(List<EmployerData> objListEmployerInfoData) {
+        this.m_objListEmployerInfoData = objListEmployerInfoData;
+    }
+
+    public List<EmployerData> getEmployerInfosListObject() {
+        return this.m_objListEmployerInfoData;
     }
 
     public void setSaveSuccess(boolean bSaveSuccess){

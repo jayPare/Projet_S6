@@ -52,9 +52,13 @@ import java.util.List;
                         "    (SELECT 1 " +
                         "     FROM recrusimple.employeur_interesse_par_stagiaire AS SIE " +
                         "     WHERE stagiaire.stagiaire_id = SIE.stagiaire_id) LIMIT 1",
+                resultClass = UserInfoData.class),
+        @NamedNativeQuery(name = "get_all_user",
+                query = "SELECT * " +
+                        "FROM recrusimple.stagiaire AS stagiaire " +
+                        "LEFT JOIN public.users AS U ON stagiaire.administrative_user_id = U.administrative_user_id ",
                 resultClass = UserInfoData.class)
 })
-
 
 @Entity
 @Table(name = "recrusimple.release_stagiaire", schema = "recrusimple", catalog = "opus")
@@ -68,6 +72,7 @@ public class UserInfoData implements Data {
     private int numeroStage = 0;
     private List<ConceptData> interet = null;
     private List<ConceptData> competence = null;
+    public List<ConceptData> concepts = null; // Only used for the getAllConcepts
 
     public UserInfoData(int stagiaireID, String firstName, String lastName, String departementNom, int numeroStage, String id) {
         this.stagiaireID = stagiaireID;

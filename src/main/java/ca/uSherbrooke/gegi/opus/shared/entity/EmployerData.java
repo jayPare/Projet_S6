@@ -47,6 +47,11 @@ import java.util.List;
                         "    (SELECT 1 " +
                         "     FROM recrusimple.stagiaire_interesse_par_employeur AS EIS " +
                         "     WHERE emp.employeur_id = EIS.employeur_id) LIMIT 1",
+                resultClass = EmployerData.class),
+        @NamedNativeQuery(name = "get_all_employer",
+                query = "SELECT * " +
+                        "FROM recrusimple.employeur AS emp " +
+                        "LEFT JOIN public.users AS U ON emp.administrative_user_id = U.administrative_user_id ",
                 resultClass = EmployerData.class)
 })
 

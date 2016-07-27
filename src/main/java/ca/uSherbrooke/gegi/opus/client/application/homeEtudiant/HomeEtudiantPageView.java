@@ -23,6 +23,7 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     private final Widget widget;
     UserInfoData objUserInfos;
     HomeEtudiantPageUiHandlers homePageUiHandlers;
+    List<EmployerData> objEmployerListInfos;
     int  idEmployer;
 
     @UiField
@@ -63,20 +64,14 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
 
     public void setEmployerID()
     {
-        //TODO: Modify according to the object with all employer
-        /*String selected  = ddSelectEmployeur.getSelectedItem().getValue();
+        String selectedEmployerName  = ddSelectEmployeur.getSelectedItem().getValue();
 
-        i = 0;
-        while (objTousLesEmployeurs.getEmployer(i).employerName != selected)
+        for (EmployerData emp : objEmployerListInfos)
         {
-            i++;
+            if(emp.getEmployerName() == selectedEmployerName){
+                idEmployer = emp.getEmployerId();
+            }
         }
-
-        if (objTousLesEmployeurs.getEmployer(i).employerName == selected)
-        {
-            idEmployer = objTousLesEmployeurs.getEmployer(i).getEmployerID();
-        }*/
-
     }
 
     @UiHandler("btnSelectEmployeur")
@@ -89,24 +84,27 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     {
         this.objUserInfos = objUserInfos;
     }
-
-    public void setUserInfos()
+    public void setEmployerInfoListObject(List<EmployerData> objEmployerListInfos)
     {
-        //TODO: Ajouter les employeurs au dropdown.
-        /*for (UnEmployeur unEmployeur : objTousLesEmployeurs)
+        this.objEmployerListInfos = objEmployerListInfos;
+    }
+
+    public void setEmployerInfos(){
+        for (EmployerData emp : objEmployerListInfos)
         {
             org.gwtbootstrap3.extras.select.client.ui.Option employeur1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
 
-            employeur1.setText(unEmployeur.getNameEmployer());
+            employeur1.setText(emp.getEmployerName());
 
             ddSelectEmployeur.add(employeur1);
         }
 
-        ddSelectEmployeur.setSelectedITem(1);
+        //ddSelectEmployeur.setSelectedItem(1);
 
-        setEmployerID();
-        */
-
+        //setEmployerID(1);
+    }
+    public void setUserInfos()
+    {
         if (objUserInfos != null)
         {
             lblNom.setText(objUserInfos.getFirstName() + " " + objUserInfos.getLastName());

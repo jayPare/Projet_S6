@@ -42,6 +42,9 @@ import javax.persistence.*;
                         "LEFT JOIN recrusimple.concept AS C on CE.concept_id = C.concept_id  " +
                         "WHERE employeur_id = #employerID",
                 resultClass = ConceptData.class),
+        @NamedNativeQuery(name = "get_all_concepts",
+                query = " SELECT concept_id, concept_nom FROM recrusimple.concept ",
+                resultClass = ConceptData.class)
 })
 
 @Entity

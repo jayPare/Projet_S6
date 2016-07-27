@@ -21,10 +21,17 @@ public class UserInfoActionHandler implements ActionHandler<UserInfo, UserInfoRe
 
     @Override
     public UserInfoResult execute(UserInfo user, ExecutionContext context) throws ActionException {
-        UserInfoResult userResult;
+        UserInfoResult userResult = null;
         boolean bSuccess = false;
 
-        if (user.getSaveStudent() == true) {
+        if (user.getGetAllConcept() == true) {
+            userResult = new UserInfoResult(userService.getAllConcepts(user));
+            bSuccess = true;
+        } else if (user.getGetAllStudents() == true) {
+            userResult = new UserInfoResult();
+            userResult.setUserInfosListObject(userService.getAllUser(user));
+            bSuccess = true;
+        } else if (user.getSaveStudent() == true) {
             userResult = new UserInfoResult();
             if (userService.insertUserInfos(user) == true) {
                 bSuccess = true;
