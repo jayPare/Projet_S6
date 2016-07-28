@@ -11,6 +11,7 @@ import java.util.List;
 
 public class UserInfo extends ActionImpl<UserInfoResult> {
     private int m_nStagiaireID = -1;
+    private int m_nEmployerID = -1;
     //Set to true to save a new student
     private boolean m_bSaveStudent = false;
     //Set to true to update an existing student with its stagiaireID
@@ -64,6 +65,10 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
         return m_nStagiaireID;
     }
 
+    public int getEmployerID() {
+        return m_nEmployerID;
+    }
+
     public void setStagiaireID(int nStagiaireID) {
         this.m_nStagiaireID = nStagiaireID;
     }
@@ -82,8 +87,10 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
         this.m_bGetStudent = bGetStudent;
     }
 
-    public void getNextStudent(boolean bGetNextStudent) {
+    //get the next student for a specific employer
+    public void getNextStudent(boolean bGetNextStudent, int employerID) {
         this.m_bGetNextStudent = bGetNextStudent;
+        this.m_nEmployerID = employerID;
     }
 
     public void getAllStudent(boolean bGetAllStudent) {
@@ -93,6 +100,7 @@ public class UserInfo extends ActionImpl<UserInfoResult> {
     public void getAllConcept(boolean bGetAllConcept) {
         this.m_bGetAllConcept = bGetAllConcept;
     }
+
     public void getStudentWithCIP(String strCIP, boolean bGetStudent) {
         this.m_strCIP = strCIP;
         this.m_bGetStudent = bGetStudent;

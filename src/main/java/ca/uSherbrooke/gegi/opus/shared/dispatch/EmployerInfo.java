@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class EmployerInfo extends ActionImpl<EmployerInfoResult> {
     private int m_nEmployerID = -1;
+    private int m_nStagiaireID = -1;
     //Set to true to save a new employer
     private boolean m_bSaveEmployer = false;
     //Set to true to update an existing employer with its employerID
@@ -54,6 +55,10 @@ public class EmployerInfo extends ActionImpl<EmployerInfoResult> {
         return m_nEmployerID;
     }
 
+    public int getStagiaireID() {
+        return m_nStagiaireID;
+    }
+
     public void setEmployerID(int nEmployerID) {
         this.m_nEmployerID = nEmployerID;
     }
@@ -74,8 +79,10 @@ public class EmployerInfo extends ActionImpl<EmployerInfoResult> {
         this.m_bGetEmployer = bGetEmployer;
     }
 
-    public void getNextEmployer(boolean bGetNextEmployer) {
+    //Get the next employer for a specific student
+    public void getNextEmployer(boolean bGetNextEmployer, int nStagiaireID) {
         this.m_bGetNextEmployer = bGetNextEmployer;
+        this.m_nStagiaireID = nStagiaireID;
     }
 
     public void getAllEmployer(boolean bGetAllEmployer) {

@@ -51,7 +51,7 @@ import java.util.List;
                         "WHERE NOT EXISTS " +
                         "    (SELECT 1 " +
                         "     FROM recrusimple.employeur_interesse_par_stagiaire AS SIE " +
-                        "     WHERE stagiaire.stagiaire_id = SIE.stagiaire_id) LIMIT 1",
+                        "     WHERE stagiaire.stagiaire_id = SIE.stagiaire_id AND EIS.employeur_id = #employerID) LIMIT 1",
                 resultClass = UserInfoData.class),
         @NamedNativeQuery(name = "get_all_user",
                 query = "SELECT * " +

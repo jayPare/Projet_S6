@@ -96,7 +96,7 @@ public class UserService {
     public UserInfoData getNextUserInfos(UserInfo user) throws UserSessionActionException {
         UserInfoData objResult = null;
         try {
-            objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_next_user").getSingleResult());
+            objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_next_user").setParameter("stagiaireID", user.getEmployerID()).getSingleResult());
             objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
             objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         } catch (Exception e) {
@@ -191,7 +191,7 @@ public class UserService {
     public EmployerData getNextEmployerInfos(EmployerInfo employer) throws UserSessionActionException {
         EmployerData objResult = null;
         try {
-            objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_next_employer").getSingleResult());
+            objResult = (EmployerData) (this.dao.getEntityManager().createNamedQuery("get_next_employer").setParameter("stagiaireID", employer.getStagiaireID()).getSingleResult());
             objResult.listStrTechnologies = (List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_employer_technologies").setParameter("employerID", objResult.getEmployerId()).getResultList();
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
