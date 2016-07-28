@@ -23,7 +23,9 @@ public class CurrentUser {
 
     DispatchAsync dispatchAsync;
 
-    public CurrentUser() {
+    public CurrentUser()
+    {
+
     }
 
     public void getCurrentUser() {

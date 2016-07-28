@@ -5,21 +5,31 @@
 
 package ca.uSherbrooke.gegi.opus.client.application.homeEmployeur;
 
+import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfo;
+import ca.uSherbrooke.gegi.opus.shared.dispatch.EmployerInfoResult;
 import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPagePresenter.MyView {
     private final Widget widget;
-    EmployerData objEmployerInfos;
+    EmployerData objEmployerData;
+
+
     HomeEmployeurPageUiHandlers homePageUiHandlers;
+
+
+
     @UiField
     org.gwtbootstrap3.client.ui.Heading lblNomEntreprise;
     @UiField
@@ -37,6 +47,7 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     @UiField
     org.gwtbootstrap3.client.ui.Panel panelNoMoreProfile;
 
+
     @Override
     public void setUiHandlers(HomeEmployeurPageUiHandlers homePageUiHandlers) {
         this.homePageUiHandlers = homePageUiHandlers;
@@ -51,21 +62,26 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     }
 
     public void setEmployerInfosObject(EmployerData objEmployerInfos) {
-        this.objEmployerInfos = objEmployerInfos;
+        this.objEmployerData = objEmployerInfos;
     }
 
-    public void setEmployerInfos() {
-        if (objEmployerInfos != null) {
-            lblNomEntreprise.setText(objEmployerInfos.getEmployerName());
-            lblDomaine.setText(objEmployerInfos.getEmployerDomain());
-            lblAdresse.setText(objEmployerInfos.getEmployerAddress());
-            lblSommaire.setText(objEmployerInfos.getEmployerSummary());
 
-            lblNature.setText(objEmployerInfos.getNature());
+
+
+    public void setEmployerInfos()
+    {
+
+        if (objEmployerData != null) {
+            lblNomEntreprise.setText(objEmployerData.getEmployerName());
+            lblDomaine.setText(objEmployerData.getEmployerDomain());
+            lblAdresse.setText(objEmployerData.getEmployerAddress());
+            lblSommaire.setText(objEmployerData.getEmployerSummary());
+
+            lblNature.setText(objEmployerData.getNature());
 
             //TODO: Modifier l'affichage des technologies
             String technologies = "";
-            for (ConceptData tech : objEmployerInfos.listStrTechnologies) {
+            for (ConceptData tech : objEmployerData.listStrTechnologies) {
                 technologies += "- " + tech.getConceptNom() + "<br>";
             }
             lblTechnologies.setHTML(technologies);
@@ -91,16 +107,16 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     @UiHandler("btnLike")
     public void onLikeClick(ClickEvent event) {
 
-        if (objEmployerInfos != null) {
-            homePageUiHandlers.actionOnLike(objEmployerInfos.getEmployerId());
+        if (objEmployerData != null) {
+            homePageUiHandlers.actionOnLike(objEmployerData.getEmployerId());
         }
     }
 
     @UiHandler("btnDislike")
     public void onDislikeClick(ClickEvent event) {
 
-        if (objEmployerInfos != null) {
-            homePageUiHandlers.actionOnDislike(objEmployerInfos.getEmployerId());
+        if (objEmployerData != null) {
+            homePageUiHandlers.actionOnDislike(objEmployerData.getEmployerId());
         }
     }
 

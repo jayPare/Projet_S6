@@ -11,8 +11,9 @@
         <b:Panel paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="10">
             <b:Heading size="H4" text="Sélection temporaire de l'employeur"></b:Heading>
             <b:Row>
-                <b:Column size="MD_4">
-                    <select:Select ui:field="ddSelectEmployeur"></select:Select>
+                <b:Column size="MD_4" ui:field="panelSelectEmployeur">
+                    <select:Select ui:field="ddlSelectEmployeur">
+                    </select:Select>
                 </b:Column>
                 <b:Column size="MD_2">
                     <b:Button ui:field="btnSelectEmployeur" text="Changer d'employeur"></b:Button>
