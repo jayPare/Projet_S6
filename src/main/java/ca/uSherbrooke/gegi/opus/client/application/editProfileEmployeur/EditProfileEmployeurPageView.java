@@ -63,12 +63,16 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
     @UiField
     org.gwtbootstrap3.client.ui.Panel panelTechnologies;
     @UiField
+    org.gwtbootstrap3.client.ui.Column panelSelectEmployeur;
+    @UiField
     org.gwtbootstrap3.client.ui.Button btnAjouter;
     @UiField
-    org.gwtbootstrap3.extras.select.client.ui.Select ddSelectEmployeur;
+    org.gwtbootstrap3.extras.select.client.ui.Select ddlSelectEmployeur;
 
     EmployerData objEmployerInfos;
     EmployerInfo objEmployerUpdate = new EmployerInfo();
+
+
 
     @UiHandler("btnModifier")
     public void onClick(ClickEvent event)
@@ -124,6 +128,26 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
         }
     };
 
+    private AsyncCallback<EmployerInfoResult> getAllEmployerAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
+        @Override
+        public void onSuccess(EmployerInfoResult result)
+        {
+            for (EmployerData employeur : result.getEmployerInfosListObject())
+            {
+                org.gwtbootstrap3.extras.select.client.ui.Option option1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
+
+                option1.setText(employeur.getEmployerName());
+                ddlSelectEmployeur.add(option1);
+                ddlSelectEmployeur.refresh();
+
+            }
+        }
+        @Override
+        public void onFailure(Throwable throwable) {
+            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
+        }
+    };
+
     public void setEmployerInfosObject(EmployerData objEmployerInf)
     {
         this.objEmployerInfos = objEmployerInf;
@@ -138,10 +162,11 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
     public void onClickBtnSelectEmployeur(ClickEvent event)
     {
         //TODO: Modify according to the object with all employer
-        /*String selected  = ddSelectEmployeur.getSelectedItem().getValue();
+        String selected  = ddlSelectEmployeur.getSelectedItem().getValue();
 
-        i = 0;
-        while (objTousLesEmployeurs.getEmployer(i).employerName != selected)
+        int i = 0;
+        objEmployerUpdate.getAllEmployer(true);
+        /*while (objEmployerUpdate.getEmployer().employerName != selected)
         {
             i++;
         }
@@ -156,15 +181,8 @@ public class EditProfileEmployeurPageView extends ViewImpl implements EditProfil
 
     public void setEmployerInfos()
     {
-        //TODO: Ajouter les employeurs au dropdown.
-        /*for (UnEmployeur unEmployeur : objTousLesEmployeurs)
-        {
-            org.gwtbootstrap3.extras.select.client.ui.Option employeur1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
-
-            employeur1.setText(unEmployeur.getNameEmployer());
-
-            ddSelectEmployeur.add(employeur1);
-        }*/
+        objEmployerUpdate.getAllEmployer(true);
+        dispatchAsync.execute(objEmployerUpdate, getAllEmployerAsyncCallback);
 
         tbNom.setText(objEmployerInfos.getEmployerName());
         tbDomaine.setText(objEmployerInfos.getEmployerDomain());

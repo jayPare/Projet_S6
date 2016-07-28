@@ -97,11 +97,9 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
             employeur1.setText(emp.getEmployerName());
 
             ddSelectEmployeur.add(employeur1);
+            ddSelectEmployeur.refresh();
+
         }
-
-        //ddSelectEmployeur.setSelectedItem(1);
-
-        //setEmployerID(1);
     }
     public void setUserInfos()
     {
