@@ -42,6 +42,9 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
     public void setMatches(boolean bIsEmployer) {
         if (bIsEmployer == true) {
             for (MatchData match : objMatchData) {
+
+                panelMatches.clear();
+
                 org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
                 org.gwtbootstrap3.client.ui.Heading header = new org.gwtbootstrap3.client.ui.Heading(HeadingSize.H4);
 

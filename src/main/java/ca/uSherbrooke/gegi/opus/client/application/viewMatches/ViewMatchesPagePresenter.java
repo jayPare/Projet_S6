@@ -75,7 +75,7 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
     public void getMatches() {
         if (bIsEmployer == true) { // If stagaire
             MatchInfo objMatches = new MatchInfo();
-            objMatches.getMatchStudent(2, true);
+            objMatches.getMatchStudent(1, true);
             dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
         }else{
             MatchInfo objMatches = new MatchInfo();

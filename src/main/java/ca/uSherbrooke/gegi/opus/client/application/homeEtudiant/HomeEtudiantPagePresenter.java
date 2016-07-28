@@ -123,7 +123,8 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         }
     };
 
-    private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
+    private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>()
+    {
         @Override
         public void onSuccess(EmployerInfoResult result) {
             getView().setEmployerInfoListObject(result.getEmployerInfosListObject());
