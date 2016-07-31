@@ -5,11 +5,11 @@
 
 package ca.uSherbrooke.gegi.opus.client.application;
 
-import ca.uSherbrooke.gegi.opus.client.application.editProfileEmployeur.EditProfileEmployeurModule;
-import ca.uSherbrooke.gegi.opus.client.application.homeEmployeur.HomeEmployeurModule;
-import ca.uSherbrooke.gegi.opus.client.application.homeEtudiant.HomeEtudiantModule;
-import ca.uSherbrooke.gegi.opus.client.application.editProfileEtudiant.EditProfileEtudiantModule;
-import ca.uSherbrooke.gegi.opus.client.application.viewMatches.ViewMatchesModule;
+import ca.uSherbrooke.gegi.opus.client.application.employer.employerEditProfile.employerEditProfileModule;
+import ca.uSherbrooke.gegi.opus.client.application.student.consultEmployer.consultEmployerModule;
+import ca.uSherbrooke.gegi.opus.client.application.employer.consultStudent.consultStudentModule;
+import ca.uSherbrooke.gegi.opus.client.application.student.studentEditProfile.studentEditProfileModule;
+import ca.uSherbrooke.gegi.opus.client.application.common.matches.matchesModule;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class OpusModule extends AbstractPresenterModule
@@ -17,10 +17,10 @@ public class OpusModule extends AbstractPresenterModule
     @Override
     protected void configure()
     {
-        install(new HomeEtudiantModule());
-        install(new HomeEmployeurModule());
-        install(new EditProfileEtudiantModule());
-        install(new EditProfileEmployeurModule());
-        install(new ViewMatchesModule());
+        install(new consultStudentModule());
+        install(new consultEmployerModule());
+        install(new studentEditProfileModule());
+        install(new employerEditProfileModule());
+        install(new matchesModule());
     }
 }
