@@ -28,13 +28,8 @@ import javax.inject.Inject;
 
 public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePresenter.MyView, HomeEmployeurPagePresenter.MyProxy> implements HomeEmployeurPageUiHandlers {
 
-    public int _stagiaireID = 0;
-    public int _employerID = 0;
-    public boolean _bIsEmployer = false;
-    public String _cip = "";
-    private Boolean answerFromServer = null;
+    public int _stagiaireID = 1;
 
-    public static final Slot SLOT_USERS = new Slot();
     @Inject
     SideMenuPresenter sideMenuPresenter;
     @Inject
@@ -87,40 +82,11 @@ public class HomeEmployeurPagePresenter extends Presenter<HomeEmployeurPagePrese
         sideMenuPresenter.refreshList();
 
         getNextEmployer();
-        //getCurrentUser();
     }
 
-    public void getCurrentUser() {
-        CurrentUserInfo currentUser = new CurrentUserInfo();
-        dispatchAsync.execute(currentUser, currentUserInfosAsyncCallback);
-        /*while (answerFromServer == null) {
-
-        }*/
-    }
-    private AsyncCallback<CurrentUserInfoResult> currentUserInfosAsyncCallback = new AsyncCallback<CurrentUserInfoResult>() {
-        @Override
-        public void onSuccess(CurrentUserInfoResult result) {
-            if (result.getUserObject() != null) {
-                _stagiaireID = result.getUserObject().getStagiaireID();
-                _cip = result.getUserObject().getCIP();
-                _bIsEmployer = false;
-            } else if (result.getEmployerObject() != null) {
-                _employerID = result.getEmployerObject().getEmployerId();
-                _cip = result.getEmployerObject().getCIP();
-                _bIsEmployer = true;
-            }
-            answerFromServer = true;
-        }
-
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
-            answerFromServer = false;
-        }
-    };
     public void getNextEmployer() {
         EmployerInfo objEmployerInfo = new EmployerInfo();
-        objEmployerInfo.getNextEmployer(true);
+        objEmployerInfo.getNextEmployer(true,_stagiaireID);
         dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
 

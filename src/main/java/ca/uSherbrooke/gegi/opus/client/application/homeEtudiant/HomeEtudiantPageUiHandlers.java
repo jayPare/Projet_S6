@@ -13,4 +13,5 @@ public interface HomeEtudiantPageUiHandlers extends UiHandlers {
     public void actionOnLike(int nStagiaireID, int employerID);
     public void actionOnDislike(int nStagiaireID, int employerID);
     public void actionOnRefresh();
+    public void setPresenterEmployerID(int employerID);
 }

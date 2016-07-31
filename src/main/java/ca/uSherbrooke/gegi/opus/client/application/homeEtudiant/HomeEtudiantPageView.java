@@ -9,6 +9,7 @@ import ca.uSherbrooke.gegi.opus.shared.entity.ConceptData;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.query.client.Console;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -24,8 +25,7 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     UserInfoData objUserInfos;
     HomeEtudiantPageUiHandlers homePageUiHandlers;
     List<EmployerData> objEmployerListInfos;
-    int  idEmployer;
-
+    int idEmployer;
     @UiField
     org.gwtbootstrap3.client.ui.Panel panelProfil;
     @UiField
@@ -52,59 +52,61 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
     org.gwtbootstrap3.extras.select.client.ui.Select ddSelectEmployeur;
 
     @Override
-    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers)
-    {
+    public void setUiHandlers(HomeEtudiantPageUiHandlers homePageUiHandlers) {
         this.homePageUiHandlers = homePageUiHandlers;
     }
 
-    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView>
-    {
+    public interface Binder extends UiBinder<Widget, HomeEtudiantPageView> {
 
     }
 
-    public void setEmployerID()
-    {
-        String selectedEmployerName  = ddSelectEmployeur.getSelectedItem().getValue();
+    public void setEmployerID() {
+        String selectedEmployerName = ddSelectEmployeur.getSelectedItem().getValue();
 
-        for (EmployerData emp : objEmployerListInfos)
-        {
-            if(emp.getEmployerName() == selectedEmployerName){
+        for (EmployerData emp : objEmployerListInfos) {
+            if (emp.getEmployerName() == selectedEmployerName) {
                 idEmployer = emp.getEmployerId();
+                setPresenterEmployerID(idEmployer);
             }
         }
     }
 
     @UiHandler("btnSelectEmployeur")
-    public void onClickBtnSelectEmployeur(ClickEvent event)
-    {
+    public void onClickBtnSelectEmployeur(ClickEvent event) {
         setEmployerID();
     }
 
-    public void setUserInfosObject(UserInfoData objUserInfos)
-    {
+    public void setUserInfosObject(UserInfoData objUserInfos) {
         this.objUserInfos = objUserInfos;
     }
-    public void setEmployerInfoListObject(List<EmployerData> objEmployerListInfos)
-    {
+
+    public void setEmployerInfoListObject(List<EmployerData> objEmployerListInfos) {
         this.objEmployerListInfos = objEmployerListInfos;
     }
 
-    public void setEmployerInfos(){
-        for (EmployerData emp : objEmployerListInfos)
-        {
+    public void setEmployerInfos() {
+        int index = 0;
+        for (EmployerData emp : objEmployerListInfos) {
+            if (index == 0) {
+                idEmployer = emp.getEmployerId();
+                setPresenterEmployerID(idEmployer);
+            }
             org.gwtbootstrap3.extras.select.client.ui.Option employeur1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
 
             employeur1.setText(emp.getEmployerName());
 
             ddSelectEmployeur.add(employeur1);
             ddSelectEmployeur.refresh();
-
+            index++;
         }
     }
-    public void setUserInfos()
-    {
-        if (objUserInfos != null)
-        {
+
+    public void setUserInfos() {
+        if (objUserInfos != null) {
+
+            panelProfil.setVisible(true);
+            panelNoMoreProfile.setVisible(false);
+
             lblNom.setText(objUserInfos.getFirstName() + " " + objUserInfos.getLastName());
             lblProgrammeEtude.setText(objUserInfos.getDepartementNom());
             lblStage.setText("Stage: " + Integer.toString(objUserInfos.getNumeroStage()));
@@ -113,24 +115,19 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
             List<ConceptData> listeInterets = objUserInfos.getInteret();
 
             for (int i = 0; i < listeCompetences.size(); i++) {
-                if(i == 1)
-                {
+                if (i == 1) {
                     pbCompetence1.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
                     pbCompetence1.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
 
                     pbInteret1.setPercent(listeInterets.get(i).getNiveauSur5() * 20);
                     pbInteret1.setText(Integer.toString(listeInterets.get(i).getNiveauSur5()));
-                }
-                else if (i == 2)
-                {
+                } else if (i == 2) {
                     pbCompetence2.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
                     pbCompetence2.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
 
                     pbInteret2.setPercent(listeInterets.get(i).getNiveauSur5() * 20);
                     pbInteret2.setText(Integer.toString(listeInterets.get(i).getNiveauSur5()));
-                }
-                else if (i == 3)
-                {
+                } else if (i == 3) {
                     pbCompetence3.setPercent(listeCompetences.get(i).getNiveauSur5() * 20);
                     pbCompetence3.setText(Integer.toString(listeCompetences.get(i).getNiveauSur5()));
 
@@ -139,52 +136,46 @@ public class HomeEtudiantPageView extends ViewImpl implements HomeEtudiantPagePr
                 }
 
             }
-        }
-        else
-        {
+        } else {
             panelProfil.setVisible(false);
             panelNoMoreProfile.setVisible(true);
         }
     }
-    
-    public void onRefresh(ClickEvent event)
-    {
+
+    public void onRefresh(ClickEvent event) {
         homePageUiHandlers.actionOnRefresh();
     }
 
     @UiHandler("btnLike")
-    public void onLikeClick(ClickEvent event)
-    {
-        if (objUserInfos != null)
-        {
+    public void onLikeClick(ClickEvent event) {
+        if (objUserInfos != null) {
             homePageUiHandlers.actionOnLike(objUserInfos.getStagiaireID(), idEmployer);
         }
     }
 
     @UiHandler("btnRefresh")
-    public void onRefreshClick(ClickEvent event)
-    {
+    public void onRefreshClick(ClickEvent event) {
         this.onRefresh(event);
     }
 
     @UiHandler("btnDislike")
-    public void onDislikeClick(ClickEvent event)
-    {
-        if (objUserInfos != null)
-        {
+    public void onDislikeClick(ClickEvent event) {
+        if (objUserInfos != null) {
             homePageUiHandlers.actionOnDislike(objUserInfos.getStagiaireID(), idEmployer);
         }
     }
 
+    public void setPresenterEmployerID(int employerID) {
+        homePageUiHandlers.setPresenterEmployerID(idEmployer);
+    }
+
     @Inject
-    public HomeEtudiantPageView(final Binder binder)
-    {
+    public HomeEtudiantPageView(final Binder binder) {
         widget = binder.createAndBindUi(this);
     }
 
     @Override
-    public Widget asWidget()
-    {
+    public Widget asWidget() {
         return widget;
     }
 }

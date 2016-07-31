@@ -37,7 +37,7 @@ import java.util.List;
 
 public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresenter.MyView, HomeEtudiantPagePresenter.MyProxy> implements HomeEtudiantPageUiHandlers {
 
-    public static final Slot SLOT_USERS = new Slot();
+    public int _employerID;
     @Inject
     SideMenuPresenter sideMenuPresenter;
     @Inject
@@ -61,8 +61,15 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
     }
 
     @Override
+    public void setPresenterEmployerID(int employerID)
+    {
+        _employerID = employerID;
+        getNextStagiaire(_employerID);
+    }
+
+    @Override
     public void actionOnRefresh() {
-        getNextStagiaire();
+        getNextStagiaire(_employerID);
     }
 
     public interface MyView extends View, HasUiHandlers<HomeEtudiantPageUiHandlers> {
@@ -94,7 +101,6 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         sideMenuPresenter.getView().addToApplicationPresenter();
         sideMenuPresenter.refreshList();
 
-        getNextStagiaire();
         getAllEmployer();
     }
 
@@ -114,7 +120,7 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
     private AsyncCallback<MatchInfoResult> matchInfosAsyncCallback = new AsyncCallback<MatchInfoResult>() {
         @Override
         public void onSuccess(MatchInfoResult result) {
-            getNextStagiaire();
+            getNextStagiaire(_employerID);
         }
 
         @Override
@@ -137,9 +143,9 @@ public class HomeEtudiantPagePresenter extends Presenter<HomeEtudiantPagePresent
         }
     };
 
-    public void getNextStagiaire() {
+    public void getNextStagiaire(int employerID) {
         UserInfo objUserInfo = new UserInfo();
-        objUserInfo.getNextStudent(true);
+        objUserInfo.getNextStudent(true,_employerID);
         dispatchAsync.execute(objUserInfo, userInfosAsyncCallback);
     }
 

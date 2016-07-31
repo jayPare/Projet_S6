@@ -32,12 +32,12 @@ import java.util.List;
 
 public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter.MyView, ViewMatchesPagePresenter.MyProxy> implements ViewMatchesPageUiHandlers {
 
-    public static final Slot SLOT_USERS = new Slot();
     @Inject
     SideMenuPresenter sideMenuPresenter;
     @Inject
     DispatchAsync dispatchAsync;
     boolean bIsEmployer = true;
+
     @Override
     public void actionOnRefresh() {
         getMatches();
@@ -77,7 +77,7 @@ public class ViewMatchesPagePresenter extends Presenter<ViewMatchesPagePresenter
             MatchInfo objMatches = new MatchInfo();
             objMatches.getMatchStudent(1, true);
             dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);
-        }else{
+        } else {
             MatchInfo objMatches = new MatchInfo();
             objMatches.getMatchEmployer(3, true);
             dispatchAsync.execute(objMatches, MatchInfosResultAsyncCallback);

@@ -40,10 +40,9 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
     }
 
     public void setMatches(boolean bIsEmployer) {
+        panelMatches.clear();
         if (bIsEmployer == true) {
             for (MatchData match : objMatchData) {
-
-                panelMatches.clear();
 
                 org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
                 org.gwtbootstrap3.client.ui.Heading header = new org.gwtbootstrap3.client.ui.Heading(HeadingSize.H4);
@@ -80,7 +79,7 @@ public class ViewMatchesPageView extends ViewImpl implements ViewMatchesPagePres
                 org.gwtbootstrap3.client.ui.Panel panel = new org.gwtbootstrap3.client.ui.Panel();
                 org.gwtbootstrap3.client.ui.Heading header = new org.gwtbootstrap3.client.ui.Heading(HeadingSize.H4);
 
-                header.setText(match.getFirstNameStudent() + " " + match.getLastNameStudent() );
+                header.setText(match.getFirstNameStudent() + " " + match.getLastNameStudent());
 
                 org.gwtbootstrap3.client.ui.PanelHeader panelHeader = new org.gwtbootstrap3.client.ui.PanelHeader();
                 panelHeader.setDataToggle(Toggle.COLLAPSE);

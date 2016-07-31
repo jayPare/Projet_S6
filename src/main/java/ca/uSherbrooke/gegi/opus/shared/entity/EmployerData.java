@@ -32,12 +32,12 @@ import java.util.List;
         @NamedNativeQuery(name = "get_employer",
                 query = "SELECT * " +
                         "FROM recrusimple.employeur " +
-                        "WHERE employeur_id = #employerID",
+                        "WHERE employeur_id = #employerID LIMIT 1",
                 resultClass = EmployerData.class),
         @NamedNativeQuery(name = "get_employer_with_cip",
                 query = "SELECT * " +
                         "FROM recrusimple.employeur " +
-                        "WHERE administrative_user_id = #strCIP",
+                        "WHERE administrative_user_id = #strCIP LIMIT 1",
                 resultClass = EmployerData.class),
         @NamedNativeQuery(name = "get_next_employer",
                 query = "SELECT * " +

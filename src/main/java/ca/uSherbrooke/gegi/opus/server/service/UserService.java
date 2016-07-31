@@ -96,7 +96,9 @@ public class UserService {
     public UserInfoData getNextUserInfos(UserInfo user) throws UserSessionActionException {
         UserInfoData objResult = null;
         try {
-            objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_next_user").setParameter("stagiaireID", user.getEmployerID()).getSingleResult());
+            System.out.print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            System.out.print(user.getEmployerID());
+            objResult = (UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_next_user").setParameter("employerID", user.getEmployerID()).getSingleResult());
             objResult.setCompetence((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_competences").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
             objResult.setInteret((List<ConceptData>) this.dao.getEntityManager().createNamedQuery("get_interets").setParameter("stagiaireID", objResult.getStagiaireID()).getResultList());
         } catch (Exception e) {

@@ -29,7 +29,6 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     HomeEmployeurPageUiHandlers homePageUiHandlers;
 
 
-
     @UiField
     org.gwtbootstrap3.client.ui.Heading lblNomEntreprise;
     @UiField
@@ -56,8 +55,7 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     public interface Binder extends UiBinder<Widget, HomeEmployeurPageView> {
     }
 
-    public interface checkUiHandlers extends UiHandlers
-    {
+    public interface checkUiHandlers extends UiHandlers {
         void onCheck();
     }
 
@@ -66,12 +64,12 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
     }
 
 
-
-
-    public void setEmployerInfos()
-    {
-
+    public void setEmployerInfos() {
         if (objEmployerData != null) {
+
+            panelProfile.setVisible(true);
+            panelNoMoreProfile.setVisible(false);
+
             lblNomEntreprise.setText(objEmployerData.getEmployerName());
             lblDomaine.setText(objEmployerData.getEmployerDomain());
             lblAdresse.setText(objEmployerData.getEmployerAddress());
@@ -85,22 +83,18 @@ public class HomeEmployeurPageView extends ViewImpl implements HomeEmployeurPage
                 technologies += "- " + tech.getConceptNom() + "<br>";
             }
             lblTechnologies.setHTML(technologies);
-        }
-        else
-        {
+        } else {
             panelProfile.setVisible(false);
             panelNoMoreProfile.setVisible(true);
         }
     }
 
     @UiHandler("btnRefresh")
-    public void onRefreshClick(ClickEvent event)
-    {
+    public void onRefreshClick(ClickEvent event) {
         this.onRefresh(event);
     }
 
-    public void onRefresh(ClickEvent event)
-    {
+    public void onRefresh(ClickEvent event) {
         homePageUiHandlers.actionOnRefresh();
     }
 
