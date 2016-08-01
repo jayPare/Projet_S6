@@ -276,21 +276,40 @@ public class UserService {
         return true;
     }
 
-    public CurrentUserInfoResult getUserWithCIP(CurrentUserInfo currentUser) throws UserSessionActionException {
+    /*public CurrentUserInfoResult getUserWithCIP(CurrentUserInfo currentUser) throws UserSessionActionException {
         CurrentUserInfoResult objResult = null;
         try {
             objResult.setUserObject((UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
-                    .setParameter("strCIP", currentUser.m_strCIP).getSingleResult()));
+                    .setParameter("strCIP", currentUser.getUserCIP()).getSingleResult()));
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage() + "-> Trying for an employer!");
             try {
                 objResult.setEmployerObject((EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
-                        .setParameter("strCIP", currentUser.m_strCIP).getSingleResult()));
+                        .setParameter("strCIP", currentUser.getUserCIP()).getSingleResult()));
             } catch (Exception ex) {
                 System.out.println("Error message: " + ex.getMessage());
                 this.dao.clearEntityManager();
                 objResult = null;
             }
+        }
+        return objResult;
+    }*/
+
+    private CurrentUserInfoResult getUserWithCIP(String cip) throws UserSessionActionException {
+        CurrentUserInfoResult objResult = new CurrentUserInfoResult();
+        try {
+            objResult.setUserObject((UserInfoData) (this.dao.getEntityManager().createNamedQuery("get_user_with_cip")
+                    .setParameter("strCIP", cip).getSingleResult()));
+        } catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+            /*try {
+                objResult.setEmployerObject((EmployerData) (this.dao.getEntityManager().createNamedQuery("get_employer_with_cip")
+                        .setParameter("strCIP", cip).getSingleResult()));
+            } catch (Exception ex) {
+                System.out.println("Error message: " + ex.getMessage());
+                this.dao.clearEntityManager();
+                objResult = null;
+            }*/
         }
         return objResult;
     }
@@ -307,6 +326,30 @@ public class UserService {
             this.dao.clearEntityManager();
         }
         return objListResult;
+    }
+
+    //TODO: Verify if it works
+    public CurrentUserInfoResult getConnectedUserInfo() throws UserSessionActionException
+    {
+        CurrentUserInfoResult objCurrentUser = null;
+        CurrentUserInfoResult result;
+        try
+        {
+            objCurrentUser = new CurrentUserInfoResult();
+            objCurrentUser.setUserCIP(userSession.getAdministrativeUserId());
+            result = this.getUserWithCIP(userSession.getAdministrativeUserId());
+
+            if(result.getEmployerObject() != null)
+                objCurrentUser.setEmployerID(result.getEmployerObject().getEmployerId());
+            else if (result.getUserObject() != null)
+                objCurrentUser.setStudentID(result.getUserObject().getStagiaireID());
+            else
+                System.out.println("Erreur: Aucun employeur ou étudiant trouvé");
+        }
+        catch (Exception e) {
+            System.out.println("Error message: " + e.getMessage());
+        }
+        return objCurrentUser;
     }
 
     public void setConcepts(UserInfo user) {

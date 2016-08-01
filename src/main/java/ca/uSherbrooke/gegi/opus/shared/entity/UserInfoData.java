@@ -35,13 +35,8 @@ import java.util.List;
                         "WHERE stagiaire_id = #stagiaireID LIMIT 1",
                 resultClass = UserInfoData.class),
         @NamedNativeQuery(name = "get_user_with_cip",
-                query = "SELECT stagiaire_id," +
-                        "       first_name," +
-                        "       last_name," +
-                        "       departement_nom," +
-                        "       numero_stage," +
-                        "       administrative_user_id " +
-                        "FROM recrusimple.release_stagiaire " +
+                query = "SELECT * " +
+                        "FROM recrusimple.stagiaire " +
                         "WHERE administrative_user_id = #strCIP LIMIT 1",
                 resultClass = UserInfoData.class),
         @NamedNativeQuery(name = "get_next_user",

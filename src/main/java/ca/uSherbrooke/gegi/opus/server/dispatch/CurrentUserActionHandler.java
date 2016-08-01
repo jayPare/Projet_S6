@@ -9,23 +9,30 @@ import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 public class CurrentUserActionHandler implements ActionHandler<CurrentUserInfo, CurrentUserInfoResult> {
+
     @Inject
     UserService userService;
 
-    @Override
-    public CurrentUserInfoResult execute(CurrentUserInfo currentUserInfo, ExecutionContext context) throws ActionException {
-        //HttpServletRequest request = getThreadLocalRequest();
-        //UserSessionImpl session = new UserSessionImpl(request);
-        currentUserInfo.setUserCIP("degs2601"); // should not be hardcoded
-        return userService.getUserWithCIP(currentUserInfo);
+    @Inject
+    public CurrentUserActionHandler() {
+
     }
 
     @Override
-    public void undo(CurrentUserInfo action, CurrentUserInfoResult result, ExecutionContext context) throws ActionException {
+    public CurrentUserInfoResult execute(CurrentUserInfo currentUserInfo, ExecutionContext executionContext) throws ActionException
+    {
+        CurrentUserInfoResult currentUserInfoResult = userService.getConnectedUserInfo();
+        return currentUserInfoResult;
     }
 
     @Override
     public Class<CurrentUserInfo> getActionType() {
         return CurrentUserInfo.class;
+    }
+
+    @Override
+    public void undo(CurrentUserInfo currentUserInfo, CurrentUserInfoResult currentUserInfoResult, ExecutionContext executionContext) throws ActionException
+    {
+
     }
 }
