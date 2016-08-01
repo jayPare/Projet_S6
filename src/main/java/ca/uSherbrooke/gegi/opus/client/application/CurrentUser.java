@@ -9,7 +9,9 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
  * Created by Genie on 10/juil./2016.
  */
 public class CurrentUser {
-    //--> Pretty sure it is server-side, but not sure how...
+
+    //TODO: Delete
+    /*//--> Pretty sure it is server-side, but not sure how...
     //--> Check CurrentUserInfoResult to manage that
 
     //HttpServletRequest _request = getThreadLocalRequest();
@@ -34,7 +36,7 @@ public class CurrentUser {
         dispatchAsync.execute(currentUser, currentUserInfosAsyncCallback);
         /*while (answerFromServer == null) {
 
-        }*/
+        }
     }
 
     private AsyncCallback<CurrentUserInfoResult> currentUserInfosAsyncCallback = new AsyncCallback<CurrentUserInfoResult>() {
@@ -57,5 +59,5 @@ public class CurrentUser {
             AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
             answerFromServer = false;
         }
-    };
+    };*/
 }

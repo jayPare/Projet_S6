@@ -9,9 +9,10 @@ import javax.inject.Inject;
 
 import ca.uSherbrooke.gegi.commons.core.client.presenter.application.ApplicationPresenter;
 import ca.uSherbrooke.gegi.commons.core.client.utils.AsyncCallbackFailed;
-
+import ca.uSherbrooke.gegi.commons.core.server.utils.UserSession;
 import ca.uSherbrooke.gegi.opus.client.application.common.sideMenu.SideMenuPresenter;
 import ca.uSherbrooke.gegi.opus.client.place.NameTokens;
+import ca.uSherbrooke.gegi.opus.server.service.UserService;
 import ca.uSherbrooke.gegi.opus.shared.dispatch.*;
 import ca.uSherbrooke.gegi.opus.shared.entity.EmployerData;
 import ca.uSherbrooke.gegi.opus.shared.entity.UserInfoData;
@@ -37,9 +38,9 @@ public class consultStudentPagePresenter extends Presenter<consultStudentPagePre
     public int _employerID;
     @Inject
     SideMenuPresenter sideMenuPresenter;
+
     @Inject
     DispatchAsync dispatchAsync;
-
 
     @Override
     public void actionOnDislike(int nStagiaireID, int employerID) {

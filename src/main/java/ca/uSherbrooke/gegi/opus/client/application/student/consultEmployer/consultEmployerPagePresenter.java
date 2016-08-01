@@ -28,7 +28,7 @@ import javax.inject.Inject;
 public class consultEmployerPagePresenter extends Presenter<consultEmployerPagePresenter.MyView, consultEmployerPagePresenter.MyProxy> implements consultEmployerPageUiHandlers
 {
 
-    public int _stagiaireID = 1;
+    public int studentID = -1;
 
     @Inject
     SideMenuPresenter sideMenuPresenter;
@@ -39,16 +39,30 @@ public class consultEmployerPagePresenter extends Presenter<consultEmployerPageP
     public void actionOnDislike(int nEmployeurID) {
         MatchInfo match = new MatchInfo();
         //TODO use the good stagiaireID which should be from the gatekeeper instead of 1
-        match.saveEmployerMatch(true, nEmployeurID, 1, false);
-        dispatchAsync.execute(match, matchInfosAsyncCallback);
+        if (studentID != -1)
+        {
+            match.saveEmployerMatch(true, nEmployeurID, studentID, false);
+            dispatchAsync.execute(match, matchInfosAsyncCallback);
+        }
+        else
+        {
+            //TODO: Error
+        }
     }
 
     @Override
     public void actionOnLike(int nEmployeurID) {
         MatchInfo match = new MatchInfo();
+        if (studentID != -1)
+        {
+            match.saveEmployerMatch(true, nEmployeurID, studentID, true);
+            dispatchAsync.execute(match, matchInfosAsyncCallback);
+        }
+        else
+        {
+            //TODO: Error
+        }
         //TODO use the good stagiaireID which should be from the gatekeeper  instead of 1
-        match.saveEmployerMatch(true, nEmployeurID, 1, true);
-        dispatchAsync.execute(match, matchInfosAsyncCallback);
     }
 
     @Override
@@ -77,7 +91,8 @@ public class consultEmployerPagePresenter extends Presenter<consultEmployerPageP
     @Override
     protected void onReset() {
         super.onReset();
-
+        CurrentUserInfo user = new CurrentUserInfo();
+        dispatchAsync.execute(user,connectedUserInfoAsyncCallback);
         sideMenuPresenter.getView().addToApplicationPresenter();
         sideMenuPresenter.refreshList();
 
@@ -86,9 +101,22 @@ public class consultEmployerPagePresenter extends Presenter<consultEmployerPageP
 
     public void getNextEmployer() {
         EmployerInfo objEmployerInfo = new EmployerInfo();
-        objEmployerInfo.getNextEmployer(true,_stagiaireID);
+        objEmployerInfo.getNextEmployer(true, studentID);
         dispatchAsync.execute(objEmployerInfo, employerInfosAsyncCallback);
     }
+
+    private AsyncCallback<CurrentUserInfoResult> connectedUserInfoAsyncCallback = new AsyncCallback<CurrentUserInfoResult>() {
+        @Override
+        public void onSuccess(CurrentUserInfoResult result)
+        {
+            studentID = result.getUserID();
+        }
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
+        }
+    };
 
     private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
         @Override
