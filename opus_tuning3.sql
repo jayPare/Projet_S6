@@ -80,7 +80,7 @@ BEGIN
 	IF (SELECT EXISTS(SELECT 1 FROM recrusimple.stagiaire_interesse_par_employeur WHERE 
 		stagiaire_id = NEW.stagiaire_id AND
 		employeur_id = NEW.employeur_id AND
-		interet = TRUE)) AND NEW.interet = FALSE THEN
+		interet = TRUE)) AND NEW.interet = TRUE THEN
 		INSERT INTO recrusimple.match(stagiaire_id, employeur_id) SELECT NEW.stagiaire_id, NEW.employeur_id;
 	END IF;
 
