@@ -87,6 +87,7 @@ INSERT INTO recrusimple.employeur_interesse_par_stagiaire(stagiaire_id, employeu
 INSERT INTO recrusimple.stagiaire_interesse_par_employeur(stagiaire_id, employeur_id, interet) VALUES (2, 3, TRUE);
 INSERT INTO recrusimple.employeur_interesse_par_stagiaire(stagiaire_id, employeur_id, interet) VALUES (3, 5, TRUE);
 INSERT INTO recrusimple.stagiaire_interesse_par_employeur(stagiaire_id, employeur_id, interet) VALUES (3, 5, TRUE);
-INSERT INTO recrusimple.employeur_interesse_par_stagiaire(stagiaire_id, employeur_id, interet) VALUES (3, 6, TRUE);
 INSERT INTO recrusimple.stagiaire_interesse_par_employeur(stagiaire_id, employeur_id, interet) VALUES (3, 6, TRUE);
+INSERT INTO recrusimple.employeur_interesse_par_stagiaire(stagiaire_id, employeur_id, interet) VALUES (3, 6, TRUE);
+
  
