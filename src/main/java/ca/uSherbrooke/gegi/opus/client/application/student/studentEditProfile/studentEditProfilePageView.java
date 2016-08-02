@@ -126,7 +126,7 @@ public class studentEditProfilePageView extends ViewImpl implements studentEditP
         objStudentUpdate.m_objListCompetence = listeCompetencesUpdate;
         objStudentUpdate.m_objListInteret = listeInteretsUpdate;
 
-        //TODO: Prendre l'ID de l'employeur connecté
+        //TODO: Prendre l'ID de l'etudiant connecté
         objStudentUpdate.updateStudent(1,true);
         dispatchAsync.execute(objStudentUpdate, studentInfosAsyncCallback);
     }

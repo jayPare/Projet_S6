@@ -29,6 +29,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import org.gwtbootstrap3.extras.notify.client.ui.Notify;
 
 import java.util.List;
 
@@ -131,6 +132,9 @@ public class consultStudentPagePresenter extends Presenter<consultStudentPagePre
     {
         @Override
         public void onSuccess(EmployerInfoResult result) {
+
+
+
             getView().setEmployerInfoListObject(result.getEmployerInfosListObject());
             getView().setEmployerInfos();
         }
