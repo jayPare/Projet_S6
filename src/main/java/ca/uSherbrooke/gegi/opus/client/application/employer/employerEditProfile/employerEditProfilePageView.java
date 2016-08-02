@@ -21,6 +21,10 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.ColumnSize;
+import org.gwtbootstrap3.extras.notify.client.ui.Notify;
+import org.gwtbootstrap3.extras.notify.client.ui.NotifySettings;
+
+import java.util.List;
 
 
 public class employerEditProfilePageView extends ViewImpl implements employerEditProfilePagePresenter.MyView
@@ -35,11 +39,14 @@ public class employerEditProfilePageView extends ViewImpl implements employerEdi
     @javax.inject.Inject
     DispatchAsync dispatchAsync;
 
+    employerEditProfilePageUiHandlers homePageUiHandlers;
+
     @Override
     public void setUiHandlers(employerEditProfilePageUiHandlers homePageUiHandlers)
     {
-
+        this.homePageUiHandlers = homePageUiHandlers;
     }
+
 
     public interface Binder extends UiBinder<Widget, employerEditProfilePageView>
     {
@@ -67,7 +74,8 @@ public class employerEditProfilePageView extends ViewImpl implements employerEdi
 
     EmployerData objEmployerInfos;
     EmployerInfo objEmployerUpdate = new EmployerInfo();
-
+    int idEmployer;
+    List<EmployerData> objEmployerListInfos;
 
 
     @UiHandler("btnModifier")
@@ -98,6 +106,33 @@ public class employerEditProfilePageView extends ViewImpl implements employerEdi
         panelTechnologies.add(sbTechs);
     }
 
+    @UiHandler("btnSelectEmployeur")
+    public void onClickBtnSelectEmployeur(ClickEvent event)
+    {
+        String selected  = ddlSelectEmployeur.getSelectedItem().getValue();
+
+        int i = 0;
+
+        for (EmployerData emp : this.objEmployerListInfos)
+        {
+            i++;
+
+            if (emp.getEmployerName() == selected)
+            {
+                updateEmployerInfosObject(this.objEmployerInfos = emp);
+                break;
+            }
+        }
+
+        setEmployerInfos();
+    }
+
+    public void setEmployerInfoListObject(List<EmployerData> objEmployerListInfos)
+    {
+        this.objEmployerListInfos = objEmployerListInfos;
+
+    }
+
     public void updateEmployer()
     {
         objEmployerUpdate.m_strName = tbNom.getText();
@@ -107,36 +142,17 @@ public class employerEditProfilePageView extends ViewImpl implements employerEdi
         //TODO : the user only can choose between a list of technologies
         objEmployerUpdate.m_strSummary = tbSommaire.getText();
         objEmployerUpdate.updateEmployer(objEmployerInfos.getEmployerId(),true);
-        dispatchAsync.execute(objEmployerUpdate, employerInfosAsyncCallback);
+
+        dispatchAsync.execute(objEmployerUpdate, updateEmployerAsyncCallback);
 
         //TODO: Verifier pourquoi la modification fail.
     }
 
-    private AsyncCallback<EmployerInfoResult> employerInfosAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
+    private AsyncCallback<EmployerInfoResult> updateEmployerAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
         @Override
         public void onSuccess(EmployerInfoResult result)
         {
-            //TODO: Quelque chose à rajouter ici pour dire que la modification est effectué.
-        }
-        @Override
-        public void onFailure(Throwable throwable) {
-            AsyncCallbackFailed.asyncCallbackFailed(throwable, "Action n'a pas pu être effectuée");
-        }
-    };
-
-    private AsyncCallback<EmployerInfoResult> getAllEmployerAsyncCallback = new AsyncCallback<EmployerInfoResult>() {
-        @Override
-        public void onSuccess(EmployerInfoResult result)
-        {
-            for (EmployerData employeur : result.getEmployerInfosListObject())
-            {
-                org.gwtbootstrap3.extras.select.client.ui.Option option1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
-
-                option1.setText(employeur.getEmployerName());
-                ddlSelectEmployeur.add(option1);
-                ddlSelectEmployeur.refresh();
-
-            }
+            Notify.notify("Modification effectué avec succès.");
         }
         @Override
         public void onFailure(Throwable throwable) {
@@ -154,37 +170,16 @@ public class employerEditProfilePageView extends ViewImpl implements employerEdi
         this.objEmployerInfos = objEmployerInf;
     }
 
-    @UiHandler("btnSelectEmployeur")
-    public void onClickBtnSelectEmployeur(ClickEvent event)
-    {
-        //TODO: Modify according to the object with all employer
-        String selected  = ddlSelectEmployeur.getSelectedItem().getValue();
-
-        int i = 0;
-        objEmployerUpdate.getAllEmployer(true);
-        /*while (objEmployerUpdate.getEmployer().employerName != selected)
-        {
-            i++;
-        }
-
-        if (objTousLesEmployeurs.getEmployer(i).employerName == selected)
-        {
-            updateEmployerInfosObject(objTousLesEmployeurs.getEmployer(i));
-        }
-
-        setEmployerInfos();*/
-    }
 
     public void setEmployerInfos()
     {
-        objEmployerUpdate.getAllEmployer(true);
-        dispatchAsync.execute(objEmployerUpdate, getAllEmployerAsyncCallback);
 
         tbNom.setText(objEmployerInfos.getEmployerName());
         tbDomaine.setText(objEmployerInfos.getEmployerDomain());
         tbVille.setText(objEmployerInfos.getEmployerAddress());
 
         tbSommaire.setText(objEmployerInfos.getEmployerSummary());
+        tbNature.setText(objEmployerInfos.getNature());
 
         panelTechnologies.remove(btnAjouter);
 
@@ -215,7 +210,25 @@ public class employerEditProfilePageView extends ViewImpl implements employerEdi
         }
 
         panelTechnologies.add(btnAjouter);
-        tbNature.setText(objEmployerInfos.getNature());
+    }
+
+    public void populateDropdownEmployer()
+    {
+
+        int index = 0;
+
+        ddlSelectEmployeur.clear();
+
+        for (EmployerData emp : objEmployerListInfos)
+        {
+            org.gwtbootstrap3.extras.select.client.ui.Option employeur1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
+
+            employeur1.setText(emp.getEmployerName());
+
+            ddlSelectEmployeur.add(employeur1);
+            ddlSelectEmployeur.refresh();
+            index++;
+        }
     }
 
     @Inject

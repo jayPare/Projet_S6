@@ -83,19 +83,23 @@ public class consultStudentPageView extends ViewImpl implements consultStudentPa
         this.objEmployerListInfos = objEmployerListInfos;
     }
 
-    public void setEmployerInfos() {
+    public void setEmployerInfos()
+    {
         int index = 0;
 
         ddSelectEmployeur.clear();
 
-        for (EmployerData emp : objEmployerListInfos) {
-            if (index == 0) {
-                idEmployer = emp.getEmployerId();
-                setPresenterEmployerID(idEmployer);
-            }
+        for (EmployerData empl : objEmployerListInfos)
+        {
             org.gwtbootstrap3.extras.select.client.ui.Option employeur1 = new org.gwtbootstrap3.extras.select.client.ui.Option();
 
-            employeur1.setText(emp.getEmployerName());
+            if (index == 0)
+            {
+                idEmployer = empl.getEmployerId();
+                setPresenterEmployerID(idEmployer);
+            }
+
+            employeur1.setText(empl.getEmployerName());
 
             ddSelectEmployeur.add(employeur1);
             ddSelectEmployeur.refresh();

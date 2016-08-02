@@ -11,4 +11,5 @@ import com.gwtplatform.mvp.client.UiHandlers;
  */
 public interface employerEditProfilePageUiHandlers extends UiHandlers {
     public void displayUserInfo(Integer groupId);
+    public void setPresenterEmployerID(int employerID);
 }
